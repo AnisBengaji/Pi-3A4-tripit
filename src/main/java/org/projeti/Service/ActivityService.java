@@ -1,6 +1,7 @@
-package org.projeti.Service;
+ /*$package org.projeti.Service;
 
 import org.projeti.entites.Activity;
 
 public class ActivityService implements CRUD<Activity> {
 }
+*/

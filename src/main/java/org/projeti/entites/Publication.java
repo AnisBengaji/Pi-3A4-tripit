@@ -1,23 +1,26 @@
 package org.projeti.entites;
 
+import java.sql.Date;
+import java.util.Objects;
+
 public class Publication {
     private int id_publication;
     private String title;
-    private String contenue;
-    private String date_publication;
+    private String contenu;
+    private Date date_publication;
     private String author;
-    private String visiblity;
+    private String visibility;
     private  String image;
     private Categorie categorie;  // Une seule catégorie pour chaque publication
 
 
-    public Publication(int id_publication, String title, String contenue, String date_publication, String author, String visiblity, String image) {
+    public Publication(int id_publication, String title, String contenu, Date date_publication, String author, String visibility, String image) {
         this.id_publication = id_publication;
         this.title = title;
-        this.contenue = contenue;
-        this.date_publication = date_publication;
+        this.contenu = contenu;
+        this.date_publication = (Date) date_publication;
         this.author = author;
-        this.visiblity = visiblity;
+        this.visibility = visibility;
         this.image = image;
     }
     public Publication() {}
@@ -43,30 +46,30 @@ public class Publication {
     }
 
     public String getVisiblity() {
-        return visiblity;
+        return visibility;
     }
 
     public void setVisiblity(String visiblity) {
-        this.visiblity = visiblity;
+        this.visibility = visiblity;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getContenue() {
-        return contenue;
+    public String getContenu() {
+        return contenu;
     }
 
-    public void setContenue(String contenue) {
-        this.contenue = contenue;
+    public void setContenu(String contenu) {
+        this.contenu = contenu;
     }
 
-    public String getDate_publication() {
+    public Date getDate_publication() {
         return date_publication;
     }
 
-    public void setDate_publication(String date_publication) {
+    public void setDate_publication(Date date_publication) {
         this.date_publication = date_publication;
     }
 
@@ -78,12 +81,12 @@ public class Publication {
         this.author = author;
     }
 
-    public String getvisiblity() {
-        return visiblity;
+    public String getVisibility() {
+        return visibility;
     }
 
-    public void setvisiblity(String visiblity) {
-        visiblity = visiblity;
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
     }
 
     public String getImage() {
@@ -93,4 +96,34 @@ public class Publication {
     public void setImage(String image) {
         this.image = image;
     }
+    @java.lang.Override
+
+    public String toString() {
+        return "Publication{" +
+                "id_publication=" + id_publication +
+                ", title='" + title + '\'' +
+                ", contenue='" + contenu + '\'' +
+                ", date_publication='" + date_publication + '\'' +
+                ", author='" + author + '\'' +
+                ", visiblity='" + visibility + '\'' +
+                ", image='" + image + '\'' +
+                ", categorie=" + categorie +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Publication that = (Publication) object;
+        return getId_publication() == that.getId_publication() && Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getContenu(), that.getContenu()) && Objects.equals(getDate_publication(), that.getDate_publication()) && Objects.equals(getAuthor(), that.getAuthor()) && Objects.equals(getVisibility(), that.getVisibility()) && Objects.equals(getImage(), that.getImage()) && Objects.equals(getCategorie(), that.getCategorie());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + id_publication;
+        return result;
+    }
+
 }

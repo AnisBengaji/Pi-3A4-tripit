@@ -17,6 +17,7 @@ public class Database {
     //2ND STEP
     private Database(){
         try {
+
             cnx = DriverManager.getConnection(URL, USER, PWD);
             System.out.println("Connection Etablie !");
         } catch (SQLException e) {
