@@ -1,17 +1,22 @@
 package org.projeti.Test;
 
+import org.projeti.Service.DestinationService;
+import org.projeti.entites.Destination;
+import org.projeti.utils.Database;
+
+import java.sql.SQLException;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        Destination dest = new Destination("tunisie","bizerte",7894,30.123f,10.23f);
+        DestinationService destService = new DestinationService();
+        try {
+            destService.delete(1);
+            System.out.println(destService.showAll());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

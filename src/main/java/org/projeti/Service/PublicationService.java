@@ -2,6 +2,6 @@ package org.projeti.Service;
 
 import org.projeti.entites.Publication;
 
-public class PublicationService implements CRUD<Publication> {
+public class PublicationService  {
 
 }

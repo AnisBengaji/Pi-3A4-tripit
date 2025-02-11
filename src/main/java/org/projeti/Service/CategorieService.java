@@ -2,5 +2,5 @@ package org.projeti.Service;
 
 import org.projeti.entites.Categorie;
 
-public class CategorieService implements CRUD<Categorie> {
+public class CategorieService  {
 }
