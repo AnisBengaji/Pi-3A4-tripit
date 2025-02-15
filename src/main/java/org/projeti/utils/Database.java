@@ -5,32 +5,36 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private final String USER = "root";
-    private final String PWD = "";
-    private final String URL = "jdbc:mysql://localhost:3306/projet";
+        private final String USER = "root";
+        private final String PWD = "";
+        private final String URL = "jdbc:mysql://localhost:3306/pi";
 
-    //1st STEP
-    public static Database instance;
+        //1st STEP
+        public static Database instance;
 
-    private Connection cnx;
+        private Connection cnx;
 
-    //2ND STEP
-    private Database(){
-        try {
-            cnx = DriverManager.getConnection(URL, USER, PWD);
-            System.out.println("Connection Etablie !");
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
+        //2ND STEP
+        private Database() {
+            try {
+                // Charger le driver explicitement
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                cnx = DriverManager.getConnection(URL, USER, PWD);
+                System.out.println("Connection établie !");
+            } catch (SQLException | ClassNotFoundException e) {
+                System.err.println("Échec de la connexion à la base de données !");
+                e.printStackTrace();
+            }
+        }
+
+        //3RD STEP
+        public static Database getInstance(){
+            if (instance == null) instance = new Database();
+            return instance;
+        }
+
+        public Connection getCnx(){
+            return cnx;
         }
     }
 
-    //3RD STEP
-    public static Database getInstance(){
-        if (instance == null) instance = new Database();
-        return instance;
-    }
-
-    public Connection getCnx(){
-        return cnx;
-    }
-}
