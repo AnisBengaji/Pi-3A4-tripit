@@ -1,5 +1,6 @@
 package org.projeti.entites;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Evenement {
     public Evenement(int id_Evenement, String type, String date_Evenement, String lieu, String Description, float price) {
         this.id_Evenement = id_Evenement;
         Type = type;
-        Date_Evenement = date_Evenement;
+        this.Date_Evenement = date_Evenement;
         this.lieu = lieu;
         this.Description = Description;
         this.price = price;
@@ -45,8 +46,8 @@ public class Evenement {
         return Date_Evenement;
     }
 
-    public void setDate_Evenement(String date_Evenement) {
-        Date_Evenement = date_Evenement;
+    public void setDate_Evenement(String Date_Evenement) {
+        this.Date_Evenement = Date_Evenement;
     }
 
     public String getLieu() {

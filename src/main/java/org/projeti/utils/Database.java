@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Database {
         private final String USER = "root";
         private final String PWD = "";
-        private final String URL = "jdbc:mysql://localhost:3306/pi";
+        private final String URL = "jdbc:mysql://localhost:3306/projet";
 
         //1st STEP
         public static Database instance;

@@ -4,20 +4,20 @@ public class Reservation {
     private int id_reservation;
     private Status status;
     private float price_total;
-    private String Mode_paiment;
+    private ModePaiement Mode_paiment;
     private User user;
     private Evenement evenement; // Référence à l'événement auquel cette réservation appartient
 
 // Référence à l'utilisateur auquel la réservation appartient
 
 
-    public Reservation(int id_reservation, Status status, float price_total, String mode_paiment, Object o) {
+    public Reservation(int id_reservation, Status status, float price_total, ModePaiement mode_paiment) {
         this.id_reservation = id_reservation;
-        this.status = status;
+        this.status = status;  // Status directement
         this.price_total = price_total;
-        Mode_paiment = mode_paiment;
+        this.Mode_paiment = mode_paiment;
     }
-    public Reservation(){};
+    public Reservation(int idReservation, String status, float price, String modePaiment){};
 
     public int getId_reservation() {
         return id_reservation;
@@ -69,11 +69,11 @@ public class Reservation {
         this.price_total = price;
     }
 
-    public String getMode_paiment() {
+    public ModePaiement getMode_paiment() {
         return Mode_paiment;
     }
 
-    public void setMode_paiment(String mode_paiment) {
+    public void setMode_paiment(ModePaiement mode_paiment) {
         Mode_paiment = mode_paiment;
     }
 

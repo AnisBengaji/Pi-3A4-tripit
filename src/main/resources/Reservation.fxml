@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.Controlleurs.ReservationController">
+    <children>
+        <!-- Titre -->
+        <Label text="Réservation" layoutX="20" layoutY="20" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <!-- Label et champ ID Réservation -->
+        <Label text="ID Réservation:" layoutX="20" layoutY="60"/>
+        <TextField fx:id="idReservationField" layoutX="150" layoutY="60" promptText="ID Réservation"  editable="false"/>
+
+        <!-- Label et ComboBox pour Status -->
+        <Label text="Statut:" layoutX="20" layoutY="100"/>
+        <ComboBox fx:id="statusComboBox" layoutX="150" layoutY="100">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="EN_ATTENTE"/>
+                    <String fx:value="CONFIRMEE"/>
+                    <String fx:value="ANNULEE"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Label et champ Prix -->
+        <Label text="Prix total:" layoutX="20" layoutY="140"/>
+        <TextField fx:id="priceField" layoutX="150" layoutY="140" promptText="Prix total"/>
+
+        <!-- Label et ComboBox pour Mode de Paiement -->
+        <Label text="Mode de paiement:" layoutX="20" layoutY="180"/>
+        <ComboBox fx:id="modePaiementComboBox" layoutX="150" layoutY="180">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="CARTE"/>
+                    <String fx:value="ESPECES"/>
+                    <String fx:value="VIREMENT"/>
+                    <String fx:value="PAYPAL"/>
+                    <String fx:value="CHEQUE"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Boutons d'action -->
+        <HBox spacing="10" layoutX="150" layoutY="220">
+            <Button text="Ajouter" onAction="#handleAddReservation"/>
+            <Button text="Mettre à jour" onAction="#handleUpdateReservation"/>
+            <Button text="Supprimer" onAction="#handleDeleteReservation"/>
+        </HBox>
+
+        <!-- ListView pour afficher les réservations -->
+        <ListView fx:id="reservationListView" layoutX="20" layoutY="260" prefHeight="200" prefWidth="500"/>
+    </children>
+</AnchorPane>

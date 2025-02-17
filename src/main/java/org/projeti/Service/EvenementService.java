@@ -14,18 +14,28 @@ public  class EvenementService implements CRUD<Evenement> {
         this.conn = conn;
     }
 
+    public EvenementService() {
+
+    }
+
     @Override
     public void add(Evenement evenement) {
-        String query = "INSERT INTO evenement (id_evenement, type, date_evenement, lieu, description, price) VALUES (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, evenement.getId_Evenement());
-            stmt.setString(2, evenement.getType());
-            stmt.setString(3, evenement.getDate_Evenement());
-            stmt.setString(4, evenement.getLieu());
-            stmt.setString(5, evenement.getDescription());
-            stmt.setFloat(6, evenement.getPrice());
+        String query = "INSERT INTO evenement (type, date_evenement, lieu, description, price) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            // Insérer les données dans la base de données
+            stmt.setString(1, evenement.getType());
+            stmt.setDate(2, java.sql.Date.valueOf(evenement.getDate_Evenement()));  // Convertir LocalDate en Date
+            stmt.setString(3, evenement.getLieu());
+            stmt.setString(4, evenement.getDescription());
+            stmt.setFloat(5, evenement.getPrice());
             stmt.executeUpdate();
-            System.out.println("Événement ajouté à la base de données : " + evenement);
+
+            // Récupérer la clé générée (id de l'événement)
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                evenement.setId_Evenement(generatedKeys.getInt(1));
+            }
+            System.out.println("Événement ajouté avec succès : " + evenement);
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'ajout de l'événement : " + e.getMessage());
         }
@@ -35,12 +45,14 @@ public  class EvenementService implements CRUD<Evenement> {
     public void update(Evenement evenement) {
         String query = "UPDATE evenement SET type = ?, date_evenement = ?, lieu = ?, description = ?, price = ? WHERE id_evenement = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            // Mettre à jour les données dans la base de données
             stmt.setString(1, evenement.getType());
-            stmt.setString(2, evenement.getDate_Evenement());
+            stmt.setDate(2, java.sql.Date.valueOf(evenement.getDate_Evenement()));  // Convertir LocalDate en Date
             stmt.setString(3, evenement.getLieu());
             stmt.setString(4, evenement.getDescription());
             stmt.setFloat(5, evenement.getPrice());
             stmt.setInt(6, evenement.getId_Evenement());
+
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Événement mis à jour : " + evenement);
@@ -56,6 +68,7 @@ public  class EvenementService implements CRUD<Evenement> {
     public void delete(int id) {
         String query = "DELETE FROM evenement WHERE id_evenement = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            // Supprimer l'événement de la base de données
             stmt.setInt(1, id);
             int rowsDeleted = stmt.executeUpdate();
             if (rowsDeleted > 0) {
@@ -72,13 +85,14 @@ public  class EvenementService implements CRUD<Evenement> {
     public Evenement getById(int id) {
         String query = "SELECT * FROM evenement WHERE id_evenement = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            // Récupérer l'événement par ID
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Evenement(
                         rs.getInt("id_evenement"),
                         rs.getString("type"),
-                        rs.getString("date_evenement"),
+                        rs.getString("date_evenement"), // Convertir Date en LocalDate
                         rs.getString("lieu"),
                         rs.getString("description"),
                         rs.getFloat("price")
@@ -98,11 +112,12 @@ public  class EvenementService implements CRUD<Evenement> {
         List<Evenement> evenements = new ArrayList<>();
         String query = "SELECT * FROM evenement";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            // Récupérer tous les événements de la base de données
             while (rs.next()) {
                 Evenement evenement = new Evenement(
                         rs.getInt("id_evenement"),
                         rs.getString("type"),
-                        rs.getString("date_evenement"),
+                        rs.getString("date_evenement"), // Convertir Date en LocalDate
                         rs.getString("lieu"),
                         rs.getString("description"),
                         rs.getFloat("price")
@@ -115,4 +130,3 @@ public  class EvenementService implements CRUD<Evenement> {
         return evenements;
     }
 }
-

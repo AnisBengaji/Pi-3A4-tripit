@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.projeti.Controlleurs.EvenementController">
+    <!-- Label pour l'en-tête -->
+    <Label text="Liste des Événements" layoutX="14" layoutY="14" style="-fx-font-size: 16px;"/>
+
+    <!-- VBox pour organiser la liste et le formulaire -->
+    <VBox spacing="10" layoutX="14" layoutY="50" prefWidth="600">
+        <!-- Formulaire d'ajout ou de modification -->
+        <VBox spacing="10">
+            <!-- Type -->
+            <HBox spacing="10">
+                <Label text="Type" prefWidth="100"/>
+                <TextField fx:id="typeField" promptText="Entrez le type de l'événement" prefWidth="200"/>
+            </HBox>
+
+            <!-- Date -->
+            <HBox spacing="10">
+                <Label text="Date" prefWidth="100"/>
+                <TextField fx:id="dateField" promptText="AAAA-MM-JJ" prefWidth="200"/>
+            </HBox>
+
+            <!-- Lieu -->
+            <HBox spacing="10">
+                <Label text="Lieu" prefWidth="100"/>
+                <TextField fx:id="lieuField" promptText="Entrez le lieu" prefWidth="200"/>
+            </HBox>
+
+            <!-- Description -->
+            <HBox spacing="10">
+                <Label text="Description" prefWidth="100"/>
+                <TextField fx:id="descriptionField" promptText="Entrez la description" prefWidth="200"/>
+            </HBox>
+
+            <!-- Prix -->
+            <HBox spacing="10">
+                <Label text="Prix" prefWidth="100"/>
+                <TextField fx:id="priceField" promptText="Entrez le prix" prefWidth="200"/>
+            </HBox>
+        </VBox>
+
+        <!-- Boutons pour actions -->
+        <HBox spacing="10">
+            <Button fx:id="addButton" text="Ajouter" onAction="#handleAddEvent" prefWidth="100"/>
+            <Button fx:id="updateButton" text="Mettre à jour" onAction="#handleUpdateEvent" prefWidth="100"/>
+            <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="100"/>
+        </HBox>
+
+        <!-- ListView pour afficher les événements -->
+        <ListView fx:id="evenementList" prefWidth="600" prefHeight="300"/>
+    </VBox>
+</AnchorPane>
