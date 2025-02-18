@@ -10,8 +10,18 @@ import org.projeti.utils.Database;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 public class ReservationController {
     @FXML
@@ -46,6 +56,20 @@ public class ReservationController {
         }
     }
 
+    private boolean fieldsAreValid() {
+        try {
+            float price_total = Float.parseFloat(priceField.getText());
+            if (price_total < 0) {
+                showAlert("Erreur", "Le prix ne peut pas être négatif.", Alert.AlertType.ERROR);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Erreur", "Veuillez entrer un prix valide.", Alert.AlertType.ERROR);
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     private void handleAddReservation() {
         try {
@@ -58,13 +82,8 @@ public class ReservationController {
             Status status = Status.valueOf(statusString); // Convertir en enum
 
             // Validation du prix
-            float price = 0;
-            try {
-                price = Float.parseFloat(priceField.getText());
-            } catch (NumberFormatException e) {
-                showAlert("Erreur", "Veuillez entrer un prix valide.", Alert.AlertType.ERROR);
-                return;
-            }
+            if (!fieldsAreValid()) return;
+            float price_total = Float.parseFloat(priceField.getText());
 
             // Validation du mode de paiement
             ModePaiement modePaiement = modePaiementComboBox.getValue(); // Récupère la valeur de la ComboBox
@@ -81,7 +100,7 @@ public class ReservationController {
             evenement.setId_Evenement(1); // Remplacez par l'ID réel de l'événement
 
             // Créer la réservation avec un ID auto-incrémenté (0 pour indiquer qu'il sera généré)
-            Reservation reservation = new Reservation(0, status, price, modePaiement);
+            Reservation reservation = new Reservation(0, status, price_total, modePaiement);
             reservation.setUser(user);
             reservation.setEvenement(evenement);
 
@@ -111,12 +130,8 @@ public class ReservationController {
                 selected.setStatus(Status.valueOf(statusString)); // Mettre à jour le statut
 
                 // Validation du prix
-                try {
-                    selected.setPrice_total(Float.parseFloat(priceField.getText()));
-                } catch (NumberFormatException e) {
-                    showAlert("Erreur", "Le prix doit être un nombre valide.", Alert.AlertType.ERROR);
-                    return;
-                }
+                if (!fieldsAreValid()) return;
+                selected.setPrice_total(Float.parseFloat(priceField.getText()));
 
                 // Mettre à jour le mode de paiement
                 ModePaiement modePaiement = modePaiementComboBox.getValue(); // Récupérer le mode de paiement sélectionné
@@ -134,6 +149,7 @@ public class ReservationController {
             showAlert("Aucune sélection", "Sélectionnez une réservation à modifier", Alert.AlertType.WARNING);
         }
     }
+
     @FXML
     private void handleDeleteReservation() {
         Reservation selected = reservationListView.getSelectionModel().getSelectedItem();
@@ -150,7 +166,6 @@ public class ReservationController {
             showAlert("Aucune sélection", "Sélectionnez une réservation à supprimer", Alert.AlertType.WARNING);
         }
     }
-
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         // Afficher une alerte pour l'utilisateur

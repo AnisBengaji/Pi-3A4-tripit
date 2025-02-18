@@ -9,53 +9,64 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.projeti.Controlleurs.EvenementController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.projeti.Controlleurs.EvenementController" stylesheets="@style.css">
     <!-- Label pour l'en-tête -->
-    <Label text="Liste des Événements" layoutX="14" layoutY="14" style="-fx-font-size: 16px;"/>
+    <Label text="Liste des Événements" layoutX="14" layoutY="14" styleClass="header-label"/>
 
     <!-- VBox pour organiser la liste et le formulaire -->
-    <VBox spacing="10" layoutX="14" layoutY="50" prefWidth="600">
+    <VBox spacing="10" layoutX="14" layoutY="50" prefWidth="600" styleClass="main-container">
+
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+
         <!-- Formulaire d'ajout ou de modification -->
-        <VBox spacing="10">
+        <VBox spacing="10" styleClass="form-container">
             <!-- Type -->
-            <HBox spacing="10">
-                <Label text="Type" prefWidth="100"/>
-                <TextField fx:id="typeField" promptText="Entrez le type de l'événement" prefWidth="200"/>
+            <HBox spacing="10" styleClass="form-row">
+                <Label text="Type" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="typeField" promptText="Entrez le type de l'événement" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
-            <!-- Date -->
-            <HBox spacing="10">
-                <Label text="Date" prefWidth="100"/>
-                <TextField fx:id="dateField" promptText="AAAA-MM-JJ" prefWidth="200"/>
+            <!-- Date de départ -->
+            <HBox spacing="10" styleClass="form-row">
+                <Label text="Date Départ" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="dateDepartField" promptText="AAAA-MM-JJ" prefWidth="200" styleClass="form-input"/>
+            </HBox>
+
+            <!-- Date d'arrivée -->
+            <HBox spacing="10" styleClass="form-row">
+                <Label text="Date Arrivée" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="dateArriverField" promptText="AAAA-MM-JJ" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
             <!-- Lieu -->
-            <HBox spacing="10">
-                <Label text="Lieu" prefWidth="100"/>
-                <TextField fx:id="lieuField" promptText="Entrez le lieu" prefWidth="200"/>
+            <HBox spacing="10" styleClass="form-row">
+                <Label text="Lieu" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="lieuField" promptText="Entrez le lieu" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
             <!-- Description -->
-            <HBox spacing="10">
-                <Label text="Description" prefWidth="100"/>
-                <TextField fx:id="descriptionField" promptText="Entrez la description" prefWidth="200"/>
+            <HBox spacing="10" styleClass="form-row">
+                <Label text="Description" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="descriptionField" promptText="Entrez la description" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
             <!-- Prix -->
-            <HBox spacing="10">
-                <Label text="Prix" prefWidth="100"/>
-                <TextField fx:id="priceField" promptText="Entrez le prix" prefWidth="200"/>
+            <HBox spacing="10" styleClass="form-row">
+                <Label text="Prix" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="priceField" promptText="Entrez le prix" prefWidth="200" styleClass="form-input"/>
             </HBox>
         </VBox>
 
         <!-- Boutons pour actions -->
-        <HBox spacing="10">
-            <Button fx:id="addButton" text="Ajouter" onAction="#handleAddEvent" prefWidth="100"/>
-            <Button fx:id="updateButton" text="Mettre à jour" onAction="#handleUpdateEvent" prefWidth="100"/>
-            <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="100"/>
+        <HBox spacing="10" styleClass="button-container">
+            <Button fx:id="addButton" text="Ajouter" onAction="#handleAddEvent" prefWidth="130" styleClass="action-button"/>
+            <Button fx:id="updateButton" text="update" onAction="#handleUpdateEvent" prefWidth="130" styleClass="action-button"/>
+            <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="130" styleClass="delete-button"/>
         </HBox>
 
         <!-- ListView pour afficher les événements -->
-        <ListView fx:id="evenementList" prefWidth="600" prefHeight="300"/>
+        <ListView fx:id="evenementList" prefWidth="600" prefHeight="300" styleClass="event-list"/>
     </VBox>
 </AnchorPane>

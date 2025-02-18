@@ -6,7 +6,7 @@
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.Controlleurs.ReservationController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.Controlleurs.ReservationController" stylesheets="@style.css">
     <children>
         <!-- Titre -->
         <Label text="Réservation" layoutX="20" layoutY="20" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
@@ -47,12 +47,13 @@
 
         <!-- Boutons d'action -->
         <HBox spacing="10" layoutX="150" layoutY="220">
-            <Button text="Ajouter" onAction="#handleAddReservation"/>
-            <Button text="Mettre à jour" onAction="#handleUpdateReservation"/>
-            <Button text="Supprimer" onAction="#handleDeleteReservation"/>
+            <Button text="Ajouter" onAction="#handleAddReservation" styleClass="action-button"/>
+            <Button text="Mettre à jour" onAction="#handleUpdateReservation" styleClass="action-button"/>
+            <Button text="Supprimer" onAction="#handleDeleteReservation" styleClass="delete-button"/>
         </HBox>
 
         <!-- ListView pour afficher les réservations -->
         <ListView fx:id="reservationListView" layoutX="20" layoutY="260" prefHeight="200" prefWidth="500"/>
     </children>
 </AnchorPane>
+
