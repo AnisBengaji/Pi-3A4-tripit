@@ -1,4 +1,4 @@
-package org.projeti.Controlleurs;
+/*package org.projeti.Controlleurs;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -17,7 +17,7 @@ import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-public class EvenementController {
+/*public class EvenementController {
 
     @FXML
     private TextField txtType;
@@ -172,4 +172,4 @@ public class EvenementController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-}
+}*/

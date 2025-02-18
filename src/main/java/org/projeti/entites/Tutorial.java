@@ -1,11 +1,13 @@
 package org.projeti.entites;
 
+import java.sql.Date;
+
 public class Tutorial {
     private String nom_tutorial;
     private String Date_debutTutorial;
     private String Date_finTutorial;
     private float prix_tutorial;
-    private Offre offre;
+    private String offre;
 
     public Tutorial(String nom_tutorial, String date_debutTutorial, String date_finTutorial, float prix_tutorial) {
         this.nom_tutorial = nom_tutorial;
@@ -16,6 +18,11 @@ public class Tutorial {
 
     }
     public Tutorial() {}
+    public Tutorial(String tekaya, String date, String date1, float i, String admin) {
+    }
+
+    public Tutorial(String tekaya, String date, float i, String date1, String admin) {
+    }
 
     public String getNom_tutorial() {
         return nom_tutorial;
@@ -25,24 +32,16 @@ public class Tutorial {
         this.nom_tutorial = nom_tutorial;
     }
 
-    public String getDate_debutTutorial() {
-        return Date_debutTutorial;
-    }
-
-    public Offre getOffre() {
-        return offre;
-    }
-
-    public void setOffre(Offre offre) {
-        this.offre = offre;
+    public Date getDate_debutTutorial() {
+        return Date.valueOf(Date_debutTutorial);
     }
 
     public void setDate_debutTutorial(String date_debutTutorial) {
         Date_debutTutorial = date_debutTutorial;
     }
 
-    public String getDate_finTutorial() {
-        return Date_finTutorial;
+    public Date getDate_finTutorial() {
+        return Date.valueOf(Date_finTutorial);
     }
 
     public void setDate_finTutorial(String date_finTutorial) {
@@ -56,6 +55,15 @@ public class Tutorial {
     public void setPrix_tutorial(float prix_tutorial) {
         this.prix_tutorial = prix_tutorial;
     }
+
+    public String getOffre() {
+        return offre;
+    }
+
+    public void setOffre(String offre) {
+        this.offre = offre;
+    }
+
 
     @Override
     public String toString() {

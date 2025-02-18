@@ -1,4 +1,4 @@
-package org.projeti.Service;
+//package org.projeti.Service;
 
 import org.projeti.entites.Evenement;
 import org.projeti.entites.Reservation;
@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationService implements CRUD<Reservation> {
+/*public class ReservationService implements CRUD<Reservation> {
     private Connection connection;
 
     public ReservationService(Connection connection) {
@@ -98,6 +98,6 @@ public class ReservationService implements CRUD<Reservation> {
 
         return reservation;
     }
-}
+}*/
 
 
