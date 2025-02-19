@@ -9,19 +9,13 @@ public class Tutorial {
     private float prix_tutorial;
     private String offre;
 
-    public Tutorial(String nom_tutorial, String date_debutTutorial, String date_finTutorial, float prix_tutorial) {
+    public Tutorial() {}
+    public Tutorial(String nom_tutorial, String date_debutTutorial, String date_finTutorial, float prix_tutorial, String offre) {
         this.nom_tutorial = nom_tutorial;
         Date_debutTutorial = date_debutTutorial;
         Date_finTutorial = date_finTutorial;
         this.prix_tutorial = prix_tutorial;
-
-
-    }
-    public Tutorial() {}
-    public Tutorial(String tekaya, String date, String date1, float i, String admin) {
-    }
-
-    public Tutorial(String tekaya, String date, float i, String date1, String admin) {
+        this.offre = offre;
     }
 
     public String getNom_tutorial() {
@@ -32,16 +26,16 @@ public class Tutorial {
         this.nom_tutorial = nom_tutorial;
     }
 
-    public Date getDate_debutTutorial() {
-        return Date.valueOf(Date_debutTutorial);
+    public String getDate_debutTutorial() {
+        return Date_debutTutorial;
     }
 
     public void setDate_debutTutorial(String date_debutTutorial) {
         Date_debutTutorial = date_debutTutorial;
     }
 
-    public Date getDate_finTutorial() {
-        return Date.valueOf(Date_finTutorial);
+    public String getDate_finTutorial() {
+        return Date_finTutorial;
     }
 
     public void setDate_finTutorial(String date_finTutorial) {
@@ -64,7 +58,6 @@ public class Tutorial {
         this.offre = offre;
     }
 
-
     @Override
     public String toString() {
         return "Tutorial{" +
@@ -72,6 +65,7 @@ public class Tutorial {
                 ", Date_debutTutorial='" + Date_debutTutorial + '\'' +
                 ", Date_finTutorial='" + Date_finTutorial + '\'' +
                 ", prix_tutorial=" + prix_tutorial +
+                ", offre='" + offre + '\'' +
                 '}';
     }
 }

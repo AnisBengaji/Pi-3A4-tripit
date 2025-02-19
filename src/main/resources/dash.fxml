@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.Controlleurs.MainController">
+
+    <!-- Menu latéral -->
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #F8F9FA; -fx-padding: 20px;">
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #006D77;" text="Trippin" />
+            <Button style="-fx-background-color: #006D77; -fx-text-fill: white;" text="Offres" />
+            <ListView style="-fx-background-color: #F8F9FA;">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Home" />
+                        <String fx:value="All trips" />
+                        <String fx:value="Travels" />
+                        <String fx:value="Rooms" />
+                        <String fx:value="Transport" />
+                        <String fx:value="Events" />
+                    </FXCollections>
+                </items>
+            </ListView>
+            <Label style="-fx-text-fill: #006D77; -fx-font-weight: bold;" text="18° Rome" />
+        </VBox>
+    </left>
+
+    <!-- Contenu principal -->
+    <center>
+        <VBox spacing="15" style="-fx-padding: 20px;">
+            <HBox spacing="10">
+                <TextField promptText="Search..." style="-fx-background-color: #E9ECEF; -fx-text-fill: #333;" />
+                <Button style="-fx-background-color: #006D77; -fx-text-fill: white;" text="🔍" />
+            </HBox>
+            <GridPane hgap="15" vgap="15">
+                <children>
+                    <VBox style="-fx-background-color: #006D77; -fx-padding: 10px; -fx-border-radius: 10px;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <ImageView fitHeight="100" fitWidth="150" />
+                        <Label style="-fx-text-fill: white;" text="Mount Bromo" />
+                        <Label style="-fx-text-fill: #FFD700;" text="⭐ 4.9" />
+                        <Label style="-fx-text-fill: white;" text="Start from $150/pax" />
+                        <Button style="-fx-background-color: #3D2N; -fx-text-fill: white;" text="Voir l'offre" />
+                    </VBox>
+
+                    <VBox style="-fx-background-color: #006D77; -fx-padding: 10px; -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <ImageView fitHeight="100" fitWidth="150" />
+                        <Label style="-fx-text-fill: white;" text="Labengki Sombori" />
+                        <Label style="-fx-text-fill: #FFD700;" text="⭐ 4.8" />
+                        <Label style="-fx-text-fill: white;" text="Start from $250/pax" />
+                        <Button style="-fx-background-color: #3D2N; -fx-text-fill: white;" text="3D2N" />
+                    </VBox>
+
+                    <VBox style="-fx-background-color: #006D77; -fx-padding: 10px; -fx-border-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <ImageView fitHeight="100" fitWidth="150" />
+                        <Label style="-fx-text-fill: white;" text="Sailing Komodo" />
+                        <Label style="-fx-text-fill: #FFD700;" text="⭐ 4.8" />
+                        <Label style="-fx-text-fill: white;" text="Start from $200/pax" />
+                        <Button style="-fx-background-color: #3D2N; -fx-text-fill: white;" text="3D2N" />
+                    </VBox>
+                </children>
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+        </VBox>
+    </center>
+
+    <!-- Timeline -->
+    <right>
+        <VBox spacing="10" style="-fx-background-color: #E9ECEF; -fx-padding: 20px;">
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #006D77;" text="Timeline" />
+            <DatePicker />
+            <ListView style="-fx-background-color: white;">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Taxi transfer 18:30 - 19:00" />
+                        <String fx:value="Check into a hotel 19:00 - 20:00" />
+                    </FXCollections>
+                </items>
+            </ListView>
+        </VBox>
+    </right>
+</BorderPane>

@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.projeti.Controlleurs.AjouterOffre"
-            prefHeight="400.0" prefWidth="600.0">
-    <VBox alignment="CENTER" spacing="20" prefWidth="400" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.Controlleurs.AjouterOffre">
+    <VBox alignment="CENTER" prefWidth="400" spacing="20" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100" AnchorPane.topAnchor="50">
         <!-- Titre de l'interface -->
-        <Label text="Ajouter une nouvelle offre" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" text="Ajouter une nouvelle offre" />
 
         <!-- Formulaire de saisie -->
         <VBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;">
-            <!-- Titre de l'offre -->
-            <Label text="Titre de l'offre:" style="-fx-font-size: 14px; -fx-text-fill: #555555;"/>
-            <TextField fx:id="titreField" promptText="Entrez le titre de l'offre" style="-fx-font-size: 14px; -fx-pref-width: 300px;"/>
+            <Label style="-fx-font-size: 14px; -fx-text-fill: #555555;" text="Titre de l'offre:" />
+            <TextField fx:id="titreField" promptText="Entrez le titre de l'offre" style="-fx-font-size: 14px; -fx-pref-width: 300px;" />
 
-            <!-- Description de l'offre -->
-            <Label text="Description:" style="-fx-font-size: 14px; -fx-text-fill: #555555;"/>
-            <TextField fx:id="descriptionField" promptText="Entrez la description" style="-fx-font-size: 14px; -fx-pref-width: 300px;"/>
+            <Label style="-fx-font-size: 14px; -fx-text-fill: #555555;" text="Description:" />
+            <TextField fx:id="descriptionField" promptText="Entrez la description" style="-fx-font-size: 14px; -fx-pref-width: 300px;" />
 
-            <!-- Prix de l'offre -->
-            <Label text="Prix:" style="-fx-font-size: 14px; -fx-text-fill: #555555;"/>
-            <TextField fx:id="prixField" promptText="Entrez le prix" style="-fx-font-size: 14px; -fx-pref-width: 300px;"/>
+            <Label style="-fx-font-size: 14px; -fx-text-fill: #555555;" text="Prix:" />
+            <TextField fx:id="prixField" promptText="Entrez le prix" style="-fx-font-size: 14px; -fx-pref-width: 300px;" />
 
-            <!-- ID de la destination -->
-            <Label text="Tutorial:" style="-fx-font-size: 14px; -fx-text-fill: #555555;"/>
-            <TextField fx:id="tutorialField" promptText="Entrez le tutorial" style="-fx-font-size: 14px; -fx-pref-width: 300px;"/>
+            <Label style="-fx-font-size: 14px; -fx-text-fill: #555555;" text="Tutorial:" />
+            <TextField fx:id="tutorialField" promptText="Entrez le tutorial" style="-fx-font-size: 14px; -fx-pref-width: 300px;" />
 
-            <!-- ID de la destination -->
-            <Label text="Destination:" style="-fx-font-size: 14px; -fx-text-fill: #555555;"/>
-            <TextField fx:id="destinationField" promptText="Entrez le destination" style="-fx-font-size: 14px; -fx-pref-width: 300px;"/>
+            <Label style="-fx-font-size: 14px; -fx-text-fill: #555555;" text="Destination:" />
+            <TextField fx:id="destinationField" promptText="Entrez la destination" style="-fx-font-size: 14px; -fx-pref-width: 300px;" />
         </VBox>
+        <Button onAction="#sauvegarderOffre" style="-fx-font-size: 14px; -fx-background-color: #006D77; -fx-text-fill: white;" text="sauvegarder l'offre" />
 
-        <!-- Bouton pour sauvegarder l'offre -->
-        <Button text="Sauvegarder l'offre" onAction="#sauvegarderOffre" style="-fx-font-size: 14px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 20; -fx-background-radius: 5;"/>
+        <Button text="Afficher Offres" onAction="#afficherOffres" style="-fx-background-color: #006D77; -fx-text-fill: white;" />
+        <!-- Boutons d'action -->
+
     </VBox>
 </AnchorPane>

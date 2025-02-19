@@ -1,4 +1,4 @@
-package org.projeti.Test;
+/*package org.projeti.Test;
 
 import org.projeti.Service.OffreService;
 import org.projeti.Service.TutorialService;
@@ -40,3 +40,4 @@ public class MainTest {
         }
     }
 }
+*/

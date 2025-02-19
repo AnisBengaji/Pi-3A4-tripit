@@ -22,8 +22,8 @@ public  class TutorialService implements CRUD<Tutorial>{
         String req = " INSERT INTO tutorial(nom_tutorial, Date_debutTutorial, Date_finTutorial, prix_tutorial, offre) VALUES (?,?,?,?,?)";
         ps = cnx.prepareStatement(req);
         ps.setString(1, tutorial.getNom_tutorial());
-        ps.setDate(2, tutorial.getDate_debutTutorial());
-        ps.setDate(3, tutorial.getDate_finTutorial());
+        ps.setString(2, tutorial.getDate_debutTutorial());
+        ps.setString(3, tutorial.getDate_finTutorial());
         ps.setFloat(4, tutorial.getPrix_tutorial());
         ps.setString(5, tutorial.getOffre());
         return ps.executeUpdate();
@@ -36,8 +36,8 @@ public  class TutorialService implements CRUD<Tutorial>{
 
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, tutorial.getNom_tutorial());
-        ps.setDate(2, tutorial.getDate_debutTutorial());
-        ps.setDate(3, tutorial.getDate_finTutorial());
+        ps.setString(2, tutorial.getDate_debutTutorial());
+        ps.setString(3, tutorial.getDate_finTutorial());
         ps.setFloat(4, tutorial.getPrix_tutorial());
         ps.setString(5, tutorial.getOffre());
 
@@ -55,25 +55,25 @@ public  class TutorialService implements CRUD<Tutorial>{
     }
 
     @Override
-    public List<Tutorial> showAll() throws SQLException{
-        List <Tutorial> temp = new ArrayList<Tutorial>();
-        String req = "SELECT * FROM Tutorial";
+    public List<Tutorial> showAll() throws SQLException {
+        List<Tutorial> temp = new ArrayList<>();
+        String req = "SELECT * FROM tutorial";
         st = cnx.createStatement();
         ResultSet rs = st.executeQuery(req);
-        while(rs.next()){
-            Tutorial y = new Tutorial();
-            y.setNom_tutorial(rs.getString(1));
-            y.setDate_debutTutorial(String.valueOf(rs.getDate("Date_debutTutorial")));
-            y.setDate_finTutorial(String.valueOf(rs.getDate("Date_finTutorial")));
-            y.setPrix_tutorial(rs.getFloat("prix_tutorial"));
-            y.setOffre(rs.getString("offre"));
-           // u.setDestination(rs.getString("destination"));
 
-            temp.add(y);
+        while (rs.next()) {
+            Tutorial tutorial = new Tutorial();
+            tutorial.setNom_tutorial(rs.getString("nom_tutorial"));
+            tutorial.setDate_debutTutorial(rs.getString("Date_debutTutorial"));
+            tutorial.setDate_finTutorial(rs.getString("Date_finTutorial"));
+            tutorial.setPrix_tutorial(rs.getFloat("prix_tutorial"));
+            tutorial.setOffre(rs.getString("offre"));
 
-
+            temp.add(tutorial);
         }
 
         return temp;
     }
+
+
 }

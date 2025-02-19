@@ -6,9 +6,9 @@ public class Offre {
     private String description;
     private float prix;
     private String tutorial;
-    private String destination;  // Référence à la destination
+    private String destination;
 
-     public Offre() {}
+    public Offre() {}
 
     public Offre(String titre, String description, float prix, String tutorial, String destination) {
         this.titre = titre;
@@ -82,9 +82,8 @@ public class Offre {
                 ", titre='" + titre + '\'' +
                 ", description='" + description + '\'' +
                 ", prix=" + prix +
-                ", tutorial=" + tutorial +
-                ", destination=" + destination +
+                ", tutorial='" + tutorial + '\'' +
+                ", destination='" + destination + '\'' +
                 '}';
     }
-
 }
