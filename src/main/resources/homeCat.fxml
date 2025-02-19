@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="833.0" prefWidth="1300.0" styleClass="travel-background"
+            stylesheets="@styl.css" xmlns="http://javafx.com/javafx/20.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.projeti.controllers.HomeCategoryController">
+
+    <!-- Top Section: Header with Category Management -->
+    <top>
+        <HBox prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: #1E8E6F;">
+            <children>
+                <Label text="Category Management" textFill="WHITE">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Main Content Section -->
+    <center>
+        <VBox prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER" spacing="15" style="-fx-padding: 20;">
+            <children>
+                <!-- Search Section -->
+                <HBox prefHeight="60.0" prefWidth="900.0" spacing="15">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
+                            <children>
+                                <Label prefHeight="60.0" prefWidth="221.0" text="Les Categories" textFill="#1E8E6F">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Pane prefHeight="60.0" prefWidth="500.0">
+                            <children>
+                                <TextField fx:id="categorySearchTextField" layoutX="0.0" layoutY="10.0"
+                                           prefHeight="35.0" prefWidth="200.0" promptText="Search"
+                                           styleClass="search-bar"/>
+                                <Button fx:id="btnSearch" layoutX="210.0" layoutY="10.0"
+                                        mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0"
+                                        styleClass="button-main" text="Search" textFill="WHITE"/>
+                            </children>
+                        </Pane>
+                    </children>
+                </HBox>
+
+                <!-- Switch to Publications Button -->
+                <Button fx:id="switchToPubButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0"
+                        styleClass="button-main" onAction="#switchToHomePub">
+                    <graphic>
+                        <ImageView fx:id="icon" fitHeight="30.0" fitWidth="30.0">
+                            <image>
+                                <Image url="@icons/post1.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <!-- ScrollPane with Category List -->
+                <ScrollPane prefHeight="400.0" prefWidth="900.0" VBox.vgrow="ALWAYS" style="-fx-background-color: #F5F5F5; -fx-border-radius: 10;">
+                    <content>
+                        <ListView fx:id="categoriesListView" prefHeight="400.0" prefWidth="900.0"
+                                  styleClass="category-list" />
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </center>
+
+    <!-- Right Section with Action Buttons -->
+    <right>
+        <VBox alignment="CENTER" prefWidth="220.0" spacing="25" style="-fx-padding: 20;">
+            <children>
+                <!-- Detail Button -->
+                <Button fx:id="btnDetail" onAction="#goToDetailCategory" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0"
+                        styleClass="button-main" text="Detail" textFill="WHITE" >
+                    <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/icons/detail.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <!-- Add Button -->
+                <Button fx:id="btnAjouter" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0"
+                        styleClass="button-main" text="Ajouter" textFill="WHITE" onAction="#goToAjouterCat">
+                    <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/icons/addpost.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <!-- Delete Button -->
+                <Button fx:id="btnDelete" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0"
+                        styleClass="button-main" text="Delete" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/icons/deletepost.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <!-- Update Button -->
+                <Button fx:id="btnUpdate" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0"
+                        styleClass="button-main" text="Update" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/icons/update.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+    </right>
+</BorderPane>

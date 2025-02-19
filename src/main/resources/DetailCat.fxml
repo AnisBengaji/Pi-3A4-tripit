@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.DetailCategoryController" stylesheets="@styles.css" styleClass="travel-background">
+    <children>
+        <!-- Header Section -->
+        <HBox alignment="CENTER" spacing="15" layoutX="30.0" layoutY="10.0" styleClass="header-hbox">
+            <Label text="Category Table" styleClass="title-label"/>
+
+            <!-- Buttons Container -->
+            <HBox alignment="CENTER" spacing="10">
+                <!-- Return Button -->
+                <Button fx:id="buttonreturn" text="Return" styleClass="button-main" onAction="#returnHomeCat">
+                    <graphic>
+                        <ImageView fitHeight="18" fitWidth="18">
+                            <Image url="@icons/return1.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </HBox>
+
+        <!-- TableView to display all categories and publication IDs -->
+        <TableView fx:id="categoriesTableView" layoutX="30.0" layoutY="70.0" prefHeight="500.0" prefWidth="1140.0" styleClass="publication-table">
+            <columns>
+                <!-- Category ID Column -->
+                <TableColumn fx:id="categoryIdColumn" text="Category ID" prefWidth="120.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="idCategorie" />
+                    </cellValueFactory>
+                </TableColumn>
+
+                <!-- Category Name Column -->
+                <TableColumn fx:id="categoryNameColumn" text="Category Name" prefWidth="160.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="nomCategorie" />
+                    </cellValueFactory>
+                </TableColumn>
+
+                <!-- Category Description Column -->
+                <TableColumn fx:id="descriptionColumn" text="Category Description" prefWidth="200.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="description" />
+                    </cellValueFactory>
+                </TableColumn>
+
+                <!-- Publications ID Column -->
+                <TableColumn fx:id="publicationsIdColumn" text="Publications IDs" prefWidth="240.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="publications" />
+                    </cellValueFactory>
+                </TableColumn>
+
+                <!-- Actions Column (Update and Delete Buttons) -->
+                <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="150.0">
+                    <cellFactory>
+                        <PropertyValueFactory property="actions" />
+                    </cellFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

@@ -4,25 +4,66 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+<<<<<<< HEAD
     <groupId>org.example</groupId>
     <artifactId>PI</artifactId>
+=======
+    <groupId>org.projeti</groupId>
+    <artifactId>workshopJDBC</artifactId>
+>>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<<<<<<< HEAD
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
         <!-- Driver MySQL -->
+=======
+    </properties>
+
+    <dependencies>
+        <!-- JavaFX Controls -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>20.0.2</version>
+        </dependency>
+
+        <!-- JavaFX FXML -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>20.0.2</version>
+        </dependency>
+
+        <!-- JavaFX Base (Important for JavaFX applications) -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>20.0.2</version>
+        </dependency>
+
+        <!-- JavaFX Graphics -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>20.0.2</version>
+        </dependency>
+
+        <!-- MySQL Connector -->
+>>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
 
+<<<<<<< HEAD
         <!-- JavaFX dependencies -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -44,10 +85,13 @@
             <artifactId>javafx-graphics</artifactId>
             <version>20.0.2</version>
         </dependency>
+=======
+>>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
     </dependencies>
 
     <build>
         <plugins>
+<<<<<<< HEAD
             <!-- Plugin Maven Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -60,14 +104,35 @@
             </plugin>
 
             <!-- JavaFX Maven Plugin -->
+=======
+>>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
+<<<<<<< HEAD
                     <mainClass>org.projeti.Controlleurs.Home</mainClass> <!-- Remplacer par ta classe principale -->
                 </configuration>
             </plugin>
         </plugins>
     </build>
+=======
+                    <mainClass>org.projeti.controllers.Home</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                    <include>**/*.css</include>
+                    <include>**/*.png</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+>>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
 </project>

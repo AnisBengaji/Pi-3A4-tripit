@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
+<<<<<<< HEAD
         private final String USER = "root";
         private final String PWD = "";
         private final String URL = "jdbc:mysql://localhost:3306/pi";
@@ -38,3 +39,36 @@ public class Database {
         }
     }
 
+=======
+    private final String USER = "root";
+    private final String PWD = "";
+    private final String URL = "jdbc:mysql://localhost:3306/projet";
+
+    //1st STEP
+    public static Database instance;
+
+    private Connection cnx;
+
+    //singeleton
+    //limiter les instance en 1 seule
+    private Database(){
+        try {
+
+            cnx = DriverManager.getConnection(URL, USER, PWD);
+            System.out.println("Connection Etablie !");
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    //3RD STEP
+    public static Database getInstance(){
+        if (instance == null) instance = new Database();
+        return instance;
+    }
+
+    public Connection getCnx(){
+        return cnx;
+    }
+}
+>>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)

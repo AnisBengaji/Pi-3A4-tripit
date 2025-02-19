@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.shape.Circle?>
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="833.0" prefWidth="1300.0" styleClass="travel-background" stylesheets="@styl.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.MainController">
+    <top>
+        <HBox prefHeight="125.0" prefWidth="200.0" styleClass="border-bottom" stylesheets="@styl.css" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Menu -->
+                <VBox alignment="CENTER" onMouseClicked="#showReservation" prefHeight="126.0" prefWidth="125.0" spacing="10">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/list.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Menu" textFill="#2A7F77" />
+                    </children>
+                </VBox>
+
+                <!-- Reservation -->
+                <VBox alignment="CENTER" onMouseClicked="#showReservation" prefHeight="126.0" prefWidth="125.0" spacing="10">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/reserve.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Réservation" textFill="#1E8E6F" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER"  prefHeight="123.0" prefWidth="116.0" spacing="10">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/offer.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="offre" textFill="#2A7F77" />
+                    </children>
+                </VBox>
+
+
+
+                <VBox alignment="CENTER" prefHeight="123.0" prefWidth="141.0">
+                    <children>
+                        <ImageView fitHeight="55.0" fitWidth="77.0" onMouseClicked="#showhomePub" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/post.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Pubs" textFill="#F0F0F0" />
+                    </children>
+                </VBox>
+
+                <!-- Evenement -->
+                <VBox alignment="CENTER" onMouseClicked="#showEvenement" prefHeight="123.0" prefWidth="116.0" spacing="10">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/event.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Evénements" textFill="#2A7F77" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="123.0" prefWidth="141.0">
+                    <children>
+                        <ImageView fitHeight="55.0" fitWidth="77.0"  pickOnBounds="true" preserveRatio="true" onMouseClicked="#showdesination">
+                            <image>
+                                <Image url="@icons/destination.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Destinations" textFill="#F0F0F0" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="123.0" prefWidth="141.0">
+                    <children>
+                        <ImageView fitHeight="55.0" fitWidth="77.0"  pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/profile.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="profile" textFill="#F0F0F0" />
+                    </children>
+                </VBox>
+
+                <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+                    <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/notification-bell.png" />
+                            </image>
+                        </ImageView>
+                        <Circle fill="DODGERBLUE" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </top>
+</BorderPane>

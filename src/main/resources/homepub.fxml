@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="833.0" prefWidth="1300.0" styleClass="travel-background" stylesheets="@styl.css" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.HomePublicationController">
+   <top>
+      <HBox prefHeight="125.0" prefWidth="200.0" styleClass="border-bottom" stylesheets="@styl.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/list.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="icon-label" text="Menu" textFill="#2A7F77" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/reserve.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="icon-label" text="Reservation" textFill="#1E8E6F" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/offer.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="icon-label" text="Offres" textFill="#D49E41" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/post.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="icon-label" text="Pubs" textFill="#F0F0F0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/event.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="icon-label" text="Events" textFill="#2A7F77" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/activity.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="icon-label" text="Activites" textFill="#F0F0F0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/profile.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="icon-label" text="Profile" textFill="#2A7F77" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/notification-bell.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="DODGERBLUE" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="399.0">
+                     <children>
+                        <Label prefHeight="96.0" prefWidth="221.0" text="Les Publications" textFill="#1E8E6F">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="100.0" prefWidth="330.0">
+                     <children>
+                        <TextField fx:id="titleTextField" layoutX="-12.0" layoutY="37.0" prefHeight="30.0" prefWidth="200.0" promptText="Search" styleClass="search-bar" />
+                        <Button layoutX="200.0" layoutY="38.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="button-main" stylesheets="@styl.css" text="Search" textFill="WHITE" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Button fx:id="switchToCatButton" text="Switch to Categories" onAction="#switchToHomeCat" prefHeight="40.0" prefWidth="50.0" styleClass="button-main">
+
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/category.png" /> <!-- Change to your actual icon path -->
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+
+            <ScrollPane prefHeight="165.0" prefWidth="1500.0" VBox.vgrow="ALWAYS">
+               <content>
+                  <ListView fx:id="publicationsListView" layoutX="100.0" layoutY="150.0" prefHeight="550.0" prefWidth="1025.0" styleClass="publication-list" />
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <VBox alignment="CENTER" prefWidth="200.0" spacing="20" style="-fx-padding: 20;">
+         <!-- Detail Button -->
+         <Button fx:id="btnDetail" mnemonicParsing="false" onAction="#goToDetail" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Detail" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@icons/detail.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+         <!-- Ajouter Button -->
+         <Button fx:id="btnAjouter" mnemonicParsing="false" onAction="#goToAjouterPub" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Ajouter" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@icons/addpost.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+         <!-- Delete Button -->
+         <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#goToDeletePub" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Delete" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@icons/deletepost.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+         <!-- Update Button (New) -->
+         <Button fx:id="btnUpdate" mnemonicParsing="false"  prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Update" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@icons/update.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+      </VBox>
+   </right>
+</BorderPane>
+

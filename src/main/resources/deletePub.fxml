@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.projeti.controllers.deletePubController" stylesheets="@styles.css">
+    <children>
+        <!-- Main Container -->
+        <VBox alignment="CENTER" spacing="15.0" AnchorPane.topAnchor="20.0" AnchorPane.bottomAnchor="20.0"
+              AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="main-container">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Title Label -->
+            <Label text="Delete Publication" styleClass="title-label"/>
+
+            <!-- Input Field for Publication ID -->
+            <Label text="Publication ID:"/>
+            <TextField fx:id="idTextField" promptText="Enter Publication ID"/>
+
+            <!-- Delete Button -->
+            <Button text="Delete" onAction="#deletePublication" styleClass="delete-button"/>
+
+            <!-- Return Button -->
+            <Button onAction="#goBackHome" styleClass="return-button">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/return1.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </children>
+</AnchorPane>

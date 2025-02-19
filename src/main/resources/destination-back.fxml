@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="496.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.DestinationBack">
+    <children>
+        <VBox><Button fx:id="btngoto" layoutX="219.0" layoutY="419.0" mnemonicParsing="false" onAction="#GoToActivity" text="activities" /></VBox>
+        <Button layoutX="563.0" layoutY="406.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+
+        <TableView fx:id="tabDestination" layoutX="45.0" layoutY="62.0" onMouseClicked="#fillForum" prefHeight="326.0" prefWidth="446.0">
+            <columns>
+                <TableColumn fx:id="colpays" prefWidth="75.0" text="Pays" />
+                <TableColumn fx:id="colville" prefWidth="75.0" text="Ville" />
+                <TableColumn fx:id="colcodepostal" prefWidth="111.19993591308594" text="Code postal" />
+                <TableColumn fx:id="collat" prefWidth="84.0" text="Latitude" />
+                <TableColumn fx:id="collong" prefWidth="101.60003662109375" text="Longitude" />
+            </columns>
+        </TableView>
+        <TextField fx:id="tfpays" layoutX="530.0" layoutY="88.0" promptText="Pays" />
+        <TextField fx:id="tfville" layoutX="531.0" layoutY="135.0" promptText="Ville" />
+        <TextField fx:id="tfcode_postal" layoutX="531.0" layoutY="190.0" promptText="Code postal" />
+        <TextField fx:id="tflat" layoutX="531.0" layoutY="248.0" promptText="Latitude" />
+        <TextField fx:id="tflong" layoutX="531.0" layoutY="304.0" promptText="Longitude" />
+        <Button layoutX="637.0" layoutY="406.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+        <Button fx:id="btnsup" layoutX="219.0" layoutY="419.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+
+
+        <Text layoutX="530.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays" />
+
+    </children>
+</AnchorPane>
