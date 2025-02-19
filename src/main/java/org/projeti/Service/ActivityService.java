@@ -1,11 +1,6 @@
 package org.projeti.Service;
 
 import org.projeti.entites.Activity;
-<<<<<<< HEAD
-
-//public  class ActivityService implements CRUD<Activity> {
-//}
-=======
 import org.projeti.utils.Database;
 
 import java.sql.*;
@@ -83,4 +78,3 @@ public class ActivityService implements CRUD3<Activity> {
         return user;
     }
 }
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)

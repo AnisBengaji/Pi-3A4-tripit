@@ -1,22 +1,6 @@
 package org.projeti.entites;
 
 import java.util.List;
-<<<<<<< HEAD
-
-public class Categorie {
-
-    private String nom_Categorie;
-    private String description;
-    private List<Publication> publications;  // Liste des publications associées à cette catégorie
-
-
-    public Categorie(String nom_Categorie, String description) {
-        this.nom_Categorie = nom_Categorie;
-        this.description = description;
-    }
-    public String getNom_categorie() {
-        return nom_Categorie;
-=======
 import java.util.Objects;
 
 public class Categorie {
@@ -64,7 +48,6 @@ public class Categorie {
 
     public void setDescription(String description) {
         this.description = description;
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
     }
 
     public List<Publication> getPublications() {
@@ -75,27 +58,6 @@ public class Categorie {
         this.publications = publications;
     }
 
-<<<<<<< HEAD
-    public String getNom_Categorie() {
-        return nom_Categorie;
-    }
-
-    public void setNom_Categorie(String nom_Categorie) {
-        this.nom_Categorie = nom_Categorie;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-}
-
-
-=======
 
 
     @Override
@@ -123,4 +85,3 @@ public class Categorie {
 
 
 }
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)

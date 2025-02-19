@@ -1,12 +1,6 @@
 package org.projeti.Service;
 
 import org.projeti.entites.Categorie;
-<<<<<<< HEAD
-
-/*public  class CategorieService implements CRUD<Categorie> {
-}
-*/
-=======
 import org.projeti.utils.Database;
 
 import java.sql.*;
@@ -82,4 +76,3 @@ public class CategorieService implements CRUD<Categorie> {
         return rs.next();  // If a result exists, the category name already exists
     }
 }
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)

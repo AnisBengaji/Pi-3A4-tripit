@@ -1,14 +1,5 @@
 package org.projeti.Service;
 
-<<<<<<< HEAD
-import org.projeti.entites.Publication;
-
-/*public  class PublicationService implements CRUD<Publication> {
-
-}
-
- */
-=======
 import org.projeti.entites.Categorie;
 import org.projeti.entites.Publication;
 import org.projeti.utils.Database;
@@ -129,4 +120,3 @@ public class PublicationService implements CRUD<Publication> {
 
 
 
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)

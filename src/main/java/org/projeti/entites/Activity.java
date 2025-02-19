@@ -1,26 +1,15 @@
 package org.projeti.entites;
 
-<<<<<<< HEAD
-public class Activity {
-    private int id_activity;
-=======
 import java.util.Objects;
 
 public class Activity {
     private int id_activity;
     private int idDestination;
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
     private String nom_activity;
     private String image_activity;
     private String type;
     private String description;
     private Float activity_price;
-<<<<<<< HEAD
-    private Destination destination;  // Référence vers la destination associée à l'activité
-
-
-    public Activity(int id_activity, String nom_activity, String image_activity, String type, String description, Float activity_price) {
-=======
 
     public Activity() {
     }
@@ -35,17 +24,13 @@ public class Activity {
     }
 
     public Activity(int id_activity, String nom_activity, String image_activity, String type, String description, Float activity_price, int idDestination) {
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
         this.id_activity = id_activity;
         this.nom_activity = nom_activity;
         this.image_activity = image_activity;
         this.type = type;
         this.description = description;
         this.activity_price = activity_price;
-<<<<<<< HEAD
-=======
         this.idDestination = idDestination;
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
     }
 
     public int getId_activity() {
@@ -96,16 +81,6 @@ public class Activity {
         this.activity_price = activity_price;
     }
 
-<<<<<<< HEAD
-    public Destination getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Destination destination) {
-        this.destination = destination;
-    }
-}
-=======
     public int getIdDestination() {
         return idDestination;
     }
@@ -140,4 +115,3 @@ public class Activity {
                 '}';
     }
 }
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)

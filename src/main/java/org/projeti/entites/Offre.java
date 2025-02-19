@@ -6,11 +6,7 @@ public class Offre {
     private String description;
     private float prix;
     private Tutorial tutorial;
-<<<<<<< HEAD
-    private Destination destination;  // Référence à la destination
-=======
     private Destination destination;
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
 
     public Destination getDestination() {
         return destination;

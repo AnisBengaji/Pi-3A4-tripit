@@ -1,13 +1,6 @@
 package org.projeti.Service;
 
 import org.projeti.entites.Destination;
-<<<<<<< HEAD
-
-/*public  class DestinationService implements CRUD<Destination> {
-}
-
- */
-=======
 import org.projeti.utils.Database;
 
 import java.sql.*;
@@ -92,4 +85,3 @@ public class DestinationService implements CRUD3<Destination> {
         return destination.getPays()+"-"+destination.getVille();
     }
 }
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)

@@ -1,29 +1,5 @@
 package org.projeti.entites;
 
-<<<<<<< HEAD
-public class Publication {
-    private int id_publication;
-    private String title;
-    private String contenue;
-    private String date_publication;
-    private String author;
-    private String visiblity;
-    private  String image;
-    private Categorie categorie;  // Une seule catégorie pour chaque publication
-
-
-    public Publication(int id_publication, String title, String contenue, String date_publication, String author, String visiblity, String image) {
-        this.id_publication = id_publication;
-        this.title = title;
-        this.contenue = contenue;
-        this.date_publication = date_publication;
-        this.author = author;
-        this.visiblity = visiblity;
-        this.image = image;
-    }
-    public Publication() {}
-
-=======
 import java.sql.Date;
 import java.util.Objects;
 
@@ -52,7 +28,6 @@ public class Publication {
     public Publication() {}
 
     // Getters and Setters
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
     public int getId_publication() {
         return id_publication;
     }
@@ -65,44 +40,10 @@ public class Publication {
         return title;
     }
 
-<<<<<<< HEAD
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
-
-    public String getVisiblity() {
-        return visiblity;
-    }
-
-    public void setVisiblity(String visiblity) {
-        this.visiblity = visiblity;
-    }
-
-=======
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
     public void setTitle(String title) {
         this.title = title;
     }
 
-<<<<<<< HEAD
-    public String getContenue() {
-        return contenue;
-    }
-
-    public void setContenue(String contenue) {
-        this.contenue = contenue;
-    }
-
-    public String getDate_publication() {
-        return date_publication;
-    }
-
-    public void setDate_publication(String date_publication) {
-=======
     public String getContenu() {
         return contenu;
     }
@@ -116,7 +57,6 @@ public class Publication {
     }
 
     public void setDate_publication(Date date_publication) {
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
         this.date_publication = date_publication;
     }
 
@@ -128,21 +68,12 @@ public class Publication {
         this.author = author;
     }
 
-<<<<<<< HEAD
-    public String getvisiblity() {
-        return visiblity;
-    }
-
-    public void setvisiblity(String visiblity) {
-        visiblity = visiblity;
-=======
     public String getVisibility() {
         return visibility;
     }
 
     public void setVisibility(String visibility) {
         this.visibility = visibility;
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
     }
 
     public String getImage() {
@@ -152,9 +83,6 @@ public class Publication {
     public void setImage(String image) {
         this.image = image;
     }
-<<<<<<< HEAD
-}
-=======
 
     public Categorie getCategorie() {
         return categorie;
@@ -198,4 +126,3 @@ public class Publication {
         return Objects.hash(id_publication, title, contenu, date_publication, author, visibility, image, categorie);
     }
 }
->>>>>>> b4a66e2 (intergration interface+crud+controlS reservation+publication+evenement)
