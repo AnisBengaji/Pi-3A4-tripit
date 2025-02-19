@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="833.0" prefWidth="1300.0" styleClass="travel-background" stylesheets="@styl.css" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.Controlleurs.HomeController">
+    <top>
+        <HBox prefHeight="125.0" prefWidth="200.0" styleClass="border-bottom" stylesheets="@styl.css" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Menu -->
+                <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10" onMouseClicked="#showReservation">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/list.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Menu" textFill="#2A7F77" />
+                    </children>
+                </VBox>
+
+                <!-- Reservation -->
+                <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10" onMouseClicked="#showReservation">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/reserve.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Réservation" textFill="#1E8E6F" />
+                    </children>
+                </VBox>
+
+                <!-- Offres -->
+                <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/offer.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Offres" textFill="#D49E41" />
+                    </children>
+                </VBox>
+
+                <!-- Evenement -->
+                <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10" onMouseClicked="#showEvenement">
+                    <children>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/event.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="icon-label" text="Evénements" textFill="#2A7F77" />
+                    </children>
+                </VBox>
+
+                <!-- Autres icônes ici -->
+            </children>
+        </HBox>
+    </top>
+</BorderPane>
+
