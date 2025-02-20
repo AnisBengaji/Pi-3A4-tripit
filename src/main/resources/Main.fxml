@@ -89,7 +89,7 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="123.0" prefWidth="141.0">
                     <children>
-                        <ImageView fitHeight="55.0" fitWidth="77.0"  pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="55.0" fitWidth="77.0"  pickOnBounds="true" preserveRatio="true" onMouseClicked="#goToProfile">
                             <image>
                                 <Image url="@icons/profile.png" />
                             </image>

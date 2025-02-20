@@ -1,91 +1,111 @@
 package org.projeti.entites;
 
-import java.util.List;
-
 public class User {
-    private int id;
-    private String name;
-    private String prenom;
-    private String email;
-    private String password;
-    private List<Reclamtion> reclamations;
-    private List<Reservation> reservations;
+    private int Id;
+    private String Nom;
+    private String Prenom;
+    private  int Num_tel;
+    private String Email;
+    private String MDP;
+    private String Role;
+    //private List<Reclamtion> reclamations;
+    // private List<Reservation> reservations;
 
-    public User(String name, int id, String prenom, String email, String password) {
-        this.name = name;
-        this.id = id;
-        this.prenom = prenom;
-        this.email = email;
-        this.password = password;
+    public User (){}
+
+    public User(String Nom, String Prenom, int num_tel, String Email, String MDP, String Role) {
+        this.Nom = Nom;
+        this.Prenom = Prenom;
+        Num_tel = num_tel;
+        this.Email = Email;
+        this.MDP = MDP;
+        this.Role = Role;
     }
-    public User()
-    {
 
+    public User(String nom, String prenom, String email, String MDP, String role) {
+        Nom = nom;
+        Prenom = prenom;
+        Email = email;
+        this.MDP = MDP;
+        Role = role;
+    }
+
+    public User(int id, String nom, String prenom, int num_tel, String email, String MDP, String role) {
+        Id = id;
+        Nom = nom;
+        Prenom = prenom;
+        Num_tel = num_tel;
+        Email = email;
+        this.MDP = MDP;
+        Role = role;
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNom() {
+        return Nom;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNom(String nom) {
+        Nom = nom;
     }
 
     public String getPrenom() {
-        return prenom;
+        return Prenom;
     }
 
     public void setPrenom(String prenom) {
-        this.prenom = prenom;
+        Prenom = prenom;
+    }
+
+    public int getNum_tel() {
+        return Num_tel;
+    }
+
+    public void setNum_tel(int num_tel) {
+        Num_tel = num_tel;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        Email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getMDP() {
+        return MDP;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setMDP(String MDP) {
+        this.MDP = MDP;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
+    public String getRole() {
+        return Role;
     }
 
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
+    public void setRole(String role) {
+        Role = role;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                "Id=" + Id +
+                ", Nom='" + Nom + '\'' +
+                ", Prenom='" + Prenom + '\'' +
+                ", Num_tel=" + Num_tel +
+                ", Email='" + Email + '\'' +
+                ", MDP='" + MDP + '\'' +
+                ", Role='" + Role + '\'' +
                 '}';
-    }
-    public List<Reclamtion> getReclamations() {
-        return reclamations;
-    }
-
-    public void setReclamations(List<Reclamtion> reclamations) {
-        this.reclamations = reclamations;
     }
 }

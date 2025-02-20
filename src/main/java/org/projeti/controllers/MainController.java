@@ -35,6 +35,10 @@ public class MainController {
     private void showdesination(){
         loadView("destination-back.fxml");
     }
+    @FXML
+    private void goToProfile(){
+        loadView("AjouterUser.fxml");
+    }
 
     private void loadView(String fxmlFile) {
         try {

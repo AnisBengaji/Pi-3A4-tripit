@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.projeti.controllers.DetailControllerUser">
+
+    <VBox alignment="CENTER" spacing="20"
+          AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="50"
+          AnchorPane.rightAnchor="50" AnchorPane.topAnchor="20">
+
+        <!-- Titre de l'interface -->
+        <Label text="Gestion des Utilisateurs"
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+        <!-- Table -->
+        <VBox alignment="CENTER_LEFT" spacing="10"
+              style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #cccccc;
+                     -fx-border-radius: 5; -fx-background-radius: 5;">
+            <TableView fx:id="tableView" prefHeight="300.0" prefWidth="600.0">
+                <columns>
+                    <TableColumn text="Nom" fx:id="colNom" />
+                    <TableColumn text="Prénom" fx:id="colPrenom" />
+                    <TableColumn text="Téléphone" fx:id="colTel" />
+                    <TableColumn text="Email" fx:id="colEmail" />
+                    <TableColumn text="Rôle" fx:id="colRole" />
+                    <TableColumn text="Actions" fx:id="colActions" />
+                    <TableColumn text="Modifier" fx:id="colUpdate" />
+                </columns>
+            </TableView>
+        </VBox>
+
+    </VBox>
+</AnchorPane>
