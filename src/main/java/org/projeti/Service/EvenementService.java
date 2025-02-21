@@ -5,9 +5,6 @@ import org.projeti.entites.Evenement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EvenementService implements CRUD<Evenement> {
     private Connection conn;
@@ -21,8 +18,8 @@ public class EvenementService implements CRUD<Evenement> {
         String query = "INSERT INTO evenement (type, date_evenement_depart, date_evenement_arriver, lieu, description, price) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, evenement.getType());
-            stmt.setString(2, evenement.getDate_EvenementDepart());
-            stmt.setString(3, evenement.getDate_EvenementDepart());
+            stmt.setDate(2, java.sql.Date.valueOf(evenement.getDate_EvenementDepart())); // Utilisation de setDate pour les dates
+            stmt.setDate(3, java.sql.Date.valueOf(evenement.getDate_EvenementArriver())); // Utilisation de setDate pour les dates
             stmt.setString(4, evenement.getLieu());
             stmt.setString(5, evenement.getDescription());
             stmt.setFloat(6, evenement.getPrice());
@@ -43,8 +40,8 @@ public class EvenementService implements CRUD<Evenement> {
         String query = "UPDATE evenement SET type = ?, date_evenement_depart = ?, date_evenement_arriver = ?, lieu = ?, description = ?, price = ? WHERE id_evenement = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, evenement.getType());
-            stmt.setString(2, evenement.getDate_EvenementDepart());
-            stmt.setString(3, evenement.getDate_EvenementArriver());
+            stmt.setDate(2, java.sql.Date.valueOf(evenement.getDate_EvenementDepart())); // Utilisation de setDate pour les dates
+            stmt.setDate(3, java.sql.Date.valueOf(evenement.getDate_EvenementArriver())); // Utilisation de setDate pour les dates
             stmt.setString(4, evenement.getLieu());
             stmt.setString(5, evenement.getDescription());
             stmt.setFloat(6, evenement.getPrice());
@@ -79,8 +76,8 @@ public class EvenementService implements CRUD<Evenement> {
                 return new Evenement(
                         rs.getInt("id_evenement"),
                         rs.getString("type"),
-                        rs.getString("date_evenement_depart"),
-                        rs.getString("date_evenement_arriver"),
+                        rs.getDate("date_evenement_depart").toLocalDate(), // Conversion en LocalDate
+                        rs.getDate("date_evenement_arriver").toLocalDate(), // Conversion en LocalDate
                         rs.getString("lieu"),
                         rs.getString("description"),
                         rs.getFloat("price")
@@ -102,8 +99,8 @@ public class EvenementService implements CRUD<Evenement> {
                 evenements.add(new Evenement(
                         rs.getInt("id_evenement"),
                         rs.getString("type"),
-                        rs.getString("date_evenement_depart"),
-                        rs.getString("date_evenement_arriver"),
+                        rs.getDate("date_evenement_depart").toLocalDate(), // Conversion en LocalDate
+                        rs.getDate("date_evenement_arriver").toLocalDate(), // Conversion en LocalDate
                         rs.getString("lieu"),
                         rs.getString("description"),
                         rs.getFloat("price")

@@ -10,17 +10,6 @@ import org.projeti.utils.Database;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 public class ReservationController {
@@ -54,6 +43,21 @@ public class ReservationController {
         } catch (SQLException e) {
             showAlert("Erreur", "Impossible de charger les réservations", Alert.AlertType.ERROR);
         }
+
+        // Ajouter un listener pour la sélection dans la ListView
+        reservationListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                populateFields(newValue); // Remplir les champs avec les données de la réservation sélectionnée
+            }
+        });
+    }
+
+    // Méthode pour remplir les champs avec les données de la réservation sélectionnée
+    private void populateFields(Reservation reservation) {
+        idReservationField.setText(String.valueOf(reservation.getId_reservation()));
+        statusComboBox.setValue(reservation.getStatus().toString());
+        priceField.setText(String.valueOf(reservation.getPrice_total()));
+        modePaiementComboBox.setValue(reservation.getMode_paiment());
     }
 
     private boolean fieldsAreValid() {

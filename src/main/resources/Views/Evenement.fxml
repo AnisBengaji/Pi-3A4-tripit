@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.projeti.Controlleurs.EvenementController" stylesheets="@style.css">
@@ -15,7 +16,6 @@
 
     <!-- VBox pour organiser la liste et le formulaire -->
     <VBox spacing="10" layoutX="14" layoutY="50" prefWidth="600" styleClass="main-container">
-
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
@@ -31,13 +31,13 @@
             <!-- Date de départ -->
             <HBox spacing="10" styleClass="form-row">
                 <Label text="Date Départ" prefWidth="100" styleClass="form-label"/>
-                <TextField fx:id="dateDepartField" promptText="AAAA-MM-JJ" prefWidth="200" styleClass="form-input"/>
+                <DatePicker fx:id="dateDepartField" promptText="Sélectionnez la date de départ" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
             <!-- Date d'arrivée -->
             <HBox spacing="10" styleClass="form-row">
                 <Label text="Date Arrivée" prefWidth="100" styleClass="form-label"/>
-                <TextField fx:id="dateArriverField" promptText="AAAA-MM-JJ" prefWidth="200" styleClass="form-input"/>
+                <DatePicker fx:id="dateArriverField" promptText="Sélectionnez la date d'arrivée" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
             <!-- Lieu -->
@@ -62,7 +62,7 @@
         <!-- Boutons pour actions -->
         <HBox spacing="10" styleClass="button-container">
             <Button fx:id="addButton" text="Ajouter" onAction="#handleAddEvent" prefWidth="130" styleClass="action-button"/>
-            <Button fx:id="updateButton" text="update" onAction="#handleUpdateEvent" prefWidth="130" styleClass="action-button"/>
+            <Button fx:id="updateButton" text="Mettre à jour" onAction="#handleUpdateEvent" prefWidth="130" styleClass="action-button"/>
             <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="130" styleClass="delete-button"/>
         </HBox>
 
