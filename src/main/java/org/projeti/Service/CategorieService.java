@@ -48,6 +48,7 @@ public class CategorieService implements CRUD<Categorie> {
     }
 
 
+
     @Override
     public List<Categorie> showAll() throws SQLException {
         List<Categorie> categories = new ArrayList<>();
@@ -56,14 +57,22 @@ public class CategorieService implements CRUD<Categorie> {
         ResultSet rs = st.executeQuery(req);
 
         while (rs.next()) {
-            Categorie categorie = new Categorie(
-                    rs.getString("nomCategorie"),
-                    rs.getString("description"),
-                    new ArrayList<>()
-            );
+            Categorie categorie = new Categorie();
+            categorie.setIdCategorie(rs.getInt("idCategorie")); // Set the idCategorie
+            categorie.setNomCategorie(rs.getString("nomCategorie"));
+            categorie.setDescription(rs.getString("description"));
             categories.add(categorie);
         }
 
         return categories;
+    }
+
+    public boolean exists(String nomCategorie) throws SQLException {
+        String req = "SELECT 1 FROM `categorie` WHERE nomCategorie = ?";
+        ps = cnx.prepareStatement(req);
+        ps.setString(1, nomCategorie);
+        ResultSet rs = ps.executeQuery();
+
+        return rs.next();
     }
 }

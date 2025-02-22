@@ -10,21 +10,24 @@ public class Publication {
     private Date date_publication;
     private String author;
     private String visibility;
-    private  String image;
+    private String image;
     private Categorie categorie;  // Une seule catégorie pour chaque publication
 
-
-    public Publication(int id_publication, String title, String contenu, Date date_publication, String author, String visibility, String image) {
-        this.id_publication = id_publication;
+    // Constructor with all fields
+    public Publication(String title, String contenu, Date date_publication, String author, String visibility, String image, Categorie categorie) {
         this.title = title;
         this.contenu = contenu;
-        this.date_publication = (Date) date_publication;
+        this.date_publication = date_publication;
         this.author = author;
         this.visibility = visibility;
         this.image = image;
+        this.categorie = categorie;
     }
+
+    // Default constructor
     public Publication() {}
 
+    // Getters and Setters
     public int getId_publication() {
         return id_publication;
     }
@@ -35,22 +38,6 @@ public class Publication {
 
     public String getTitle() {
         return title;
-    }
-
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
-
-    public String getVisiblity() {
-        return visibility;
-    }
-
-    public void setVisiblity(String visiblity) {
-        this.visibility = visiblity;
     }
 
     public void setTitle(String title) {
@@ -96,16 +83,24 @@ public class Publication {
     public void setImage(String image) {
         this.image = image;
     }
-    @java.lang.Override
 
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    @Override
     public String toString() {
         return "Publication{" +
                 "id_publication=" + id_publication +
                 ", title='" + title + '\'' +
-                ", contenue='" + contenu + '\'' +
-                ", date_publication='" + date_publication + '\'' +
+                ", contenu='" + contenu + '\'' +
+                ", date_publication=" + date_publication +
                 ", author='" + author + '\'' +
-                ", visiblity='" + visibility + '\'' +
+                ", visibility='" + visibility + '\'' +
                 ", image='" + image + '\'' +
                 ", categorie=" + categorie +
                 '}';
@@ -116,14 +111,18 @@ public class Publication {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Publication that = (Publication) object;
-        return getId_publication() == that.getId_publication() && Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getContenu(), that.getContenu()) && Objects.equals(getDate_publication(), that.getDate_publication()) && Objects.equals(getAuthor(), that.getAuthor()) && Objects.equals(getVisibility(), that.getVisibility()) && Objects.equals(getImage(), that.getImage()) && Objects.equals(getCategorie(), that.getCategorie());
+        return id_publication == that.id_publication &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(contenu, that.contenu) &&
+                Objects.equals(date_publication, that.date_publication) &&
+                Objects.equals(author, that.author) &&
+                Objects.equals(visibility, that.visibility) &&
+                Objects.equals(image, that.image) &&
+                Objects.equals(categorie, that.categorie);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + id_publication;
-        return result;
+        return Objects.hash(id_publication, title, contenu, date_publication, author, visibility, image, categorie);
     }
-
 }

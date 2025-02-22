@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="737.0" prefWidth="618.0" style="-fx-background-color: #FFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.ModifierTutorialController">
+
+    <VBox alignment="CENTER" layoutX="-1.0" prefHeight="737.0" prefWidth="624.0" spacing="20">
+
+        <!-- Titre -->
+        <Label text="Modifier ou Supprimer un Tutoriel" textFill="#006d77">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+
+        <!-- Champs de texte pour modification -->
+        <TextField fx:id="txtNom" prefWidth="400.0" promptText="Nom du Tutoriel" style="-fx-background-radius: 10; -fx-padding: 10; -fx-background-color: #006D77; -fx-text-fill: white; -fx-prompt-text-fill: #aaa;" />
+
+        <TextField fx:id="txtDebut" prefWidth="400.0" promptText="Date de début (YYYY-MM-DD)" style="-fx-background-radius: 10; -fx-padding: 10; -fx-background-color: #006D77; -fx-text-fill: white; -fx-prompt-text-fill: #aaa;" />
+
+        <TextField fx:id="txtFin" prefWidth="400.0" promptText="Date de fin (YYYY-MM-DD)" style="-fx-background-radius: 10; -fx-padding: 10; -fx-background-color: #006D77; -fx-text-fill: white; -fx-prompt-text-fill: #aaa;" />
+
+        <TextField fx:id="txtPrix" prefWidth="400.0" promptText="Prix (€)" style="-fx-background-radius: 10; -fx-padding: 10; -fx-background-color: #006D77; -fx-text-fill: white; -fx-prompt-text-fill: #aaa;" />
+
+        <TextField fx:id="txtOffre" prefWidth="400.0" promptText="Offre associée" style="-fx-background-radius: 10; -fx-padding: 10; -fx-background-color: #006D77; -fx-text-fill: white; -fx-prompt-text-fill: #aaa;" />
+
+        <!-- Boutons d'action -->
+        <HBox alignment="CENTER" spacing="20">
+            <Button onAction="#handleModifierTutorial" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20;" text="Modifier" />
+            <Button onAction="#handleSupprimerTutorial" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20;" text="Supprimer" />
+        </HBox>
+
+        <!-- TableView pour afficher les tutoriels -->
+        <TableView fx:id="tutorialTable" prefHeight="250.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="colNom" prefWidth="120.0" text="Nom" />
+                <TableColumn fx:id="colDebut" prefWidth="120.0" text="Date Début" />
+                <TableColumn fx:id="colFin" prefWidth="120.0" text="Date Fin" />
+                <TableColumn fx:id="colPrix" prefWidth="80.0" text="Prix (€)" />
+                <TableColumn fx:id="colOffre" prefWidth="150.0" text="Offre" />
+            </columns>
+        </TableView>
+        <Button layoutX="294.0" layoutY="405.0" onAction="#afficherAjouterOffre" style="-fx-background-color: #006D77; -fx-text-fill: white; -fx-font-size: 14px;" text="retour" />
+
+    </VBox>
+</AnchorPane>

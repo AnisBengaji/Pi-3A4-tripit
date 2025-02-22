@@ -1,4 +1,4 @@
-package org.projeti.Test;
+/*package org.projeti.Test;
 import org.projeti.Service.CategorieService;
 import org.projeti.entites.Categorie;
 import org.projeti.entites.Publication;
@@ -14,8 +14,8 @@ public class MainTest {
 
     public static void main(String[] args) {
         Database m1 = Database.getInstance();
-        Date sqlDate = Date.valueOf("2001-12-21");
-        // Publication p1 = new Publication(12,"contenu","janvier",sqlDate,"online","image url","aa");
+        Date sqlDate = Date.valueOf("1987-12-21");
+       //  Publication p1 = new Publication("new","w",sqlDate,"t","f","c:/");
         //Publication p2 = new Publication(12,"Jery","fev",sqlDate,"ahmed","visible","url2");
 
         PublicationService publicationService = new PublicationService();
@@ -57,7 +57,7 @@ public class MainTest {
             publicationUpdate.setContenu("contenu 200");
             publicationUpdate.setDate_publication(java.sql.Date.valueOf("2025-02-10"));
             publicationUpdate.setAuthor("anis bengaji");
-            publicationUpdate.setVisiblity("public");
+            publicationUpdate.setVisibility("public");
             publicationUpdate.setImage("new_image_url.jpg22");
 
             int rowsUpdated = publicationService.update(publicationUpdate);
@@ -128,7 +128,7 @@ public class MainTest {
     }}
 
 
-
+*/
 
 
 

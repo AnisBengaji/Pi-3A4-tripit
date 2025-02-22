@@ -14,7 +14,8 @@ public class Database {
 
     private Connection cnx;
 
-    //2ND STEP
+    //singeleton
+    //limiter les instance en 1 seule
     private Database(){
         try {
 

@@ -5,31 +5,26 @@ public class Offre {
     private String titre;
     private String description;
     private float prix;
-    private Tutorial tutorial;
-    private Destination destination;  // Référence à la destination
+    private String tutorial;
+    private String destination;
 
-    public Destination getDestination() {
-        return destination;
-    }
+    public Offre() {}
 
-    public void setDestination(Destination destination) {
+    public Offre(String titre, String description, float prix, String tutorial, String destination) {
+        this.titre = titre;
+        this.description = description;
+        this.prix = prix;
+        this.tutorial = tutorial;
         this.destination = destination;
     }
 
-    public Offre(int idOffre, String description, String titre, float prix) {
+    public Offre(int idOffre, String titre, String description, float prix, String tutorial, String destination) {
         this.idOffre = idOffre;
-        this.description = description;
         this.titre = titre;
+        this.description = description;
         this.prix = prix;
-    }
-    public Offre() {}
-
-    public Tutorial getTutorial() {
-        return tutorial;
-    }
-
-    public void setTutorial(Tutorial tutorial) {
         this.tutorial = tutorial;
+        this.destination = destination;
     }
 
     public int getIdOffre() {
@@ -60,7 +55,26 @@ public class Offre {
         return prix;
     }
 
-    public void setPrix(float prix) {
-        this.prix = prix;
+    public String getTutorial() {
+        return "";
     }
+
+    public String getDestination() {
+        return "";
+    }
+
+    public void setPrix(float v) {
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setTutorial(String tutorial) {
+        this.tutorial = tutorial;
+    }
+
+
 }
+
+

@@ -1,25 +1,23 @@
 package org.projeti.entites;
 
-import java.util.List;
-
 public class Reservation {
     private int id_reservation;
-    private String Status;
+    private Status status;
     private float price_total;
-    private String Mode_paiment;
+    private ModePaiement Mode_paiment;
     private User user;
     private Evenement evenement; // Référence à l'événement auquel cette réservation appartient
 
 // Référence à l'utilisateur auquel la réservation appartient
 
 
-    public Reservation(int id_reservation, String status, float price_total, String mode_paiment) {
+    public Reservation(int id_reservation, Status status, float price_total, ModePaiement mode_paiment) {
         this.id_reservation = id_reservation;
-        Status = status;
+        this.status = status;  // Status directement
         this.price_total = price_total;
-        Mode_paiment = mode_paiment;
+        this.Mode_paiment = mode_paiment;
     }
-    public Reservation(){};
+    public Reservation(int idReservation, String status, float price, String modePaiment){};
 
     public int getId_reservation() {
         return id_reservation;
@@ -31,8 +29,8 @@ public class Reservation {
 
 
 
-    public String getStatus() {
-        return Status;
+    public Status getStatus() {
+        return status;
     }
 
     public float getPrice_total() {
@@ -59,8 +57,8 @@ public class Reservation {
         this.evenement = evenement;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public float getPrice() {
@@ -71,11 +69,11 @@ public class Reservation {
         this.price_total = price;
     }
 
-    public String getMode_paiment() {
+    public ModePaiement getMode_paiment() {
         return Mode_paiment;
     }
 
-    public void setMode_paiment(String mode_paiment) {
+    public void setMode_paiment(ModePaiement mode_paiment) {
         Mode_paiment = mode_paiment;
     }
 
@@ -83,7 +81,7 @@ public class Reservation {
     public String toString() {
         return "Reservation{" +
                 "id_reservation=" + id_reservation +
-                ", Status='" + Status + '\'' +
+                ", status='" + status + '\'' +
                 ", price=" + price_total +
                 ", Mode_paiment='" + Mode_paiment + '\'' +
                 '}';

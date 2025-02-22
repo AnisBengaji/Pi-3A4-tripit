@@ -5,17 +5,16 @@ public class Tutorial {
     private String Date_debutTutorial;
     private String Date_finTutorial;
     private float prix_tutorial;
-    private Offre offre;
+    private String offre;
 
-    public Tutorial(String nom_tutorial, String date_debutTutorial, String date_finTutorial, float prix_tutorial) {
+    public Tutorial() {}
+    public Tutorial(String nom_tutorial, String date_debutTutorial, String date_finTutorial, float prix_tutorial, String offre) {
         this.nom_tutorial = nom_tutorial;
         Date_debutTutorial = date_debutTutorial;
         Date_finTutorial = date_finTutorial;
         this.prix_tutorial = prix_tutorial;
-
-
+        this.offre = offre;
     }
-    public Tutorial() {}
 
     public String getNom_tutorial() {
         return nom_tutorial;
@@ -27,14 +26,6 @@ public class Tutorial {
 
     public String getDate_debutTutorial() {
         return Date_debutTutorial;
-    }
-
-    public Offre getOffre() {
-        return offre;
-    }
-
-    public void setOffre(Offre offre) {
-        this.offre = offre;
     }
 
     public void setDate_debutTutorial(String date_debutTutorial) {
@@ -57,6 +48,14 @@ public class Tutorial {
         this.prix_tutorial = prix_tutorial;
     }
 
+    public String getOffre() {
+        return offre;
+    }
+
+    public void setOffre(String offre) {
+        this.offre = offre;
+    }
+
     @Override
     public String toString() {
         return "Tutorial{" +
@@ -64,6 +63,7 @@ public class Tutorial {
                 ", Date_debutTutorial='" + Date_debutTutorial + '\'' +
                 ", Date_finTutorial='" + Date_finTutorial + '\'' +
                 ", prix_tutorial=" + prix_tutorial +
+                ", offre='" + offre + '\'' +
                 '}';
     }
 }

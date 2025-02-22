@@ -1,0 +1,144 @@
+/* General Styles */
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-color: linear-gradient(to bottom right,
+    #f0f4f8, /* Very light blue-gray */
+    #e3f2fd, /* Light blue */
+    #f3e5f5, /* Light lavender */
+    #fff3e0); /* Light peach */
+}
+
+/* Menu Button Styles */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2A7F77; /* Dark teal */
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 20px 25px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-graphic-text-gap: 15px;
+}
+
+.menu-button:hover {
+    -fx-background-color: rgba(42, 127, 119, 0.1); /* Light teal with transparency */
+    -fx-cursor: hand;
+}
+
+/* ScrollPane Styles */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* ImageView Styles */
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+}
+
+/* Poster Image Styling */
+#posterImage {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 15, 0, 0, 0);
+    -fx-transition: all 0.3s ease;
+}
+
+#posterImage:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+
+/* Explore Button Styles */
+.explore-button {
+    -fx-background-color: #2A7F77; /* Dark teal */
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.explore-button:hover {
+    -fx-background-color: #1E8E6F; /* Slightly darker teal */
+    -fx-text-fill: white;
+}
+
+/* Team Member Card Styles */
+.team-member {
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+    -fx-transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    -fx-background-color: rgba(255, 255, 255, 1); /* Fully white on hover */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+
+/* Circular Team Member Images */
+.team-image {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-border-width: 3px;
+    -fx-border-color: #2A7F77; /* Dark teal */
+}
+
+/* Social Media Button Styles */
+.social-button {
+    -fx-background-color: transparent;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+    -fx-transition: all 0.3s ease;
+}
+
+.social-button:hover {
+    -fx-background-color: rgba(42, 127, 119, 0.1); /* Light teal with transparency */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand;
+}
+
+/* Text and Label Styles */
+.label {
+    -fx-text-fill: #2A7F77; /* Dark teal */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Search Bar Styles */
+.search-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+}
+
+/* Button Main Styles */
+.button-main {
+    -fx-background-color: #2A7F77; /* Dark teal */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.button-main:hover {
+    -fx-background-color: #1E8E6F; /* Slightly darker teal */
+    -fx-text-fill: white;
+}

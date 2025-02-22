@@ -15,6 +15,16 @@ public class Categorie {
         this.description = description;
         this.publications = publications;
     }
+
+    public Categorie(int idCategorie) {
+        this.idCategorie = idCategorie;
+    }
+
+    public Categorie(int idCategorie, String nomCategorie) {
+        this.idCategorie = idCategorie;
+        this.nomCategorie = nomCategorie;
+    }
+
     public Categorie(){}
     public int getIdCategorie() {
         return idCategorie;
@@ -47,6 +57,7 @@ public class Categorie {
     public void setPublications(List<Publication> publications) {
         this.publications = publications;
     }
+
 
 
     @Override
