@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import java.net.URL?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.PublicationController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+
+    <!-- Navigation Bar -->
+    <HBox styleClass="nav-bar" layoutX="0" layoutY="0" prefWidth="800" prefHeight="60">
+        <Label text="Social Media App" styleClass="app-title" />
+        <Button text="Home" styleClass="nav-button" />
+        <Button text="Profile" styleClass="nav-button" />
+        <Button text="Settings" styleClass="nav-button" />
+    </HBox>
+
+    <!-- Main Container for Posts -->
+    <VBox fx:id="postContainer" layoutX="50" layoutY="70" spacing="20" prefWidth="700" />
+</AnchorPane>

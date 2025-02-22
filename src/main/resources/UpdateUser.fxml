@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="803.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.projeti.controllers.UpdateUser">
+
+    <VBox alignment="CENTER" prefWidth="600" spacing="20"
+          AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="50"
+          AnchorPane.rightAnchor="50" AnchorPane.topAnchor="20">
+
+        <!-- Titre de l'interface -->
+        <Label text="Modifier un Utilisateur"
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+        <!-- Formulaire de modification -->
+        <VBox alignment="CENTER_LEFT" spacing="10"
+              style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #cccccc;
+                     -fx-border-radius: 5; -fx-background-radius: 5;">
+            <Label text="Nom :" />
+            <TextField fx:id="nomField" promptText="Entrez le nom" />
+
+            <Label text="Prénom :" />
+            <TextField fx:id="prenomField" promptText="Entrez le prénom" />
+
+            <Label text="Numéro de Téléphone :" />
+            <TextField fx:id="numTelField" promptText="Entrez le numéro de téléphone" />
+
+            <Label text="Email :" />
+            <TextField fx:id="emailField" promptText="Entrez l'email" />
+
+            <Label text="Rôle :" />
+            <TextField fx:id="roleField" promptText="Entrez le rôle" />
+        </VBox>
+
+        <!-- Bouton de mise à jour -->
+        <Button text="Mettre à Jour l'Utilisateur" onAction="#handleUpdateUser"
+                style="-fx-font-size: 14px; -fx-background-color: #2196F3; -fx-text-fill: white;" />
+
+    </VBox>
+
+</AnchorPane>

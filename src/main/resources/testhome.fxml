@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.FontWeight?>
+<?import java.net.URL?>
+
+<AnchorPane fx:id="root" prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.travelapp">
+    <!-- Apply CSS stylesheet -->
+    <stylesheets>
+        <URL value="@styles2.css" />
+    </stylesheets>
+
+    <!-- Background Image -->
+    <ImageView fx:id="backgroundImage" fitHeight="800" fitWidth="1200">
+        <image>
+            <Image url="@icons/background.jpg" />
+        </image>
+    </ImageView>
+
+    <!-- Left Side Menu -->
+    <VBox fx:id="menu" prefWidth="250" prefHeight="800" style="-fx-background-color: rgba(0, 0, 0, 0.7);" translateX="-250">
+        <!-- Logo -->
+        <Label text="Trip It" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold; -fx-padding: 30px;" alignment="CENTER">
+            <font>
+                <Font name="Arial" size="28" />
+            </font>
+        </Label>
+
+        <!-- Menu Items -->
+        <Button fx:id="homeButton" text="Home" styleClass="menu-button">
+            <graphic>
+                <ImageView fitWidth="28" fitHeight="28">
+                    <image>
+                        <Image url="@icons/home.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="destinationsButton" text="Destinations" styleClass="menu-button" onMouseClicked="#showdesination">
+            <graphic>
+                <ImageView fitWidth="28" fitHeight="28">
+                    <image>
+                        <Image url="@icons/destination.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="bookingsButton" text="Reservation" styleClass="menu-button" onMouseClicked="#showReservation">
+            <graphic>
+                <ImageView fitWidth="28" fitHeight="28">
+                    <image>
+                        <Image url="@icons/reserve.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="galleryButton" text="offre" styleClass="menu-button" onMouseClicked="#goToAjouterOffre">
+            <graphic>
+                <ImageView fitWidth="28" fitHeight="28">
+                    <image>
+                        <Image url="@icons/offer.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="tipsButton" text="Publications" styleClass="menu-button" onMouseClicked="#showhomePub">
+            <graphic>
+                <ImageView fitWidth="28" fitHeight="28">
+                    <image>
+                        <Image url="@icons/post1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="eventbutton" text="evenement" styleClass="menu-button" onMouseClicked="#showEvenement">
+            <graphic>
+                <ImageView fitWidth="28" fitHeight="28">
+                    <image>
+                        <Image url="@icons/event.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="contactButton" text="profile" styleClass="menu-button" onMouseClicked="#goToProfile">
+            <graphic>
+                <ImageView fitWidth="28" fitHeight="28">
+                    <image>
+                        <Image url="@icons/profile.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </VBox>
+
+    <!-- Main Content Area -->
+    <ScrollPane fx:id="contentArea" layoutX="250" layoutY="0" prefWidth="950" prefHeight="800" style="-fx-background-color: transparent;">
+        <VBox fx:id="mainContent" spacing="30" style="-fx-padding: 30px;">
+            <!-- Welcome Section -->
+            <Label fx:id="welcomeLabel" text="Welcome to TripIt" style="-fx-text-fill: white; -fx-font-size: 42px; -fx-font-weight: bold;" opacity="0">
+                <font>
+                    <Font name="Arial" size="42" />
+                </font>
+            </Label>
+            <Label fx:id="subtitleLabel" text="Your ultimate travel companion for exploring the world!" style="-fx-text-fill: white; -fx-font-size: 20px;" opacity="0" />
+
+            <!-- App Description -->
+            <Label fx:id="aboutLabel" text="About TripIt" style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;" opacity="0" />
+            <Label fx:id="descriptionLabel" text="TripIt is your ultimate travel and business companion, designed to simplify your journey."
+                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-wrap-text: true;" opacity="0" />
+
+            <!-- Poster/Image Section -->
+            <Button fx:id="exploreButton" text="Explore TripIt" styleClass="explore-button" onAction="#handleExploreButton" opacity="0">
+                <font>
+                    <Font name="Arial" size="32" />
+                </font>
+            </Button>
+        </VBox>
+    </ScrollPane>
+</AnchorPane>

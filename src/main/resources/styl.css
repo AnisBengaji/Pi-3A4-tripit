@@ -1,0 +1,215 @@
+.travel-background{
+    -fx-background-color: #E9F5F3;
+}
+
+.border-bottom{
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #6DBF8E;
+}
+
+.button-main{
+    -fx-background-color: #1E8E6F;
+    -fx-background-radius: 30;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+}
+
+.button-main:hover{
+    -fx-background-color: #155f8b;
+}
+
+.search-bar{
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #555555;
+    -fx-border-color: #B2D8D1;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+}
+
+.label{
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+.icon-image{
+    -fx-fit-height: 45px;
+    -fx-fit-width: 110px;
+}
+
+.vbox-item{
+    -fx-alignment: CENTER;
+    -fx-spacing: 5px;
+}
+
+.vbox-item-label{
+    -fx-font-size: 14px;
+    -fx-text-fill: #1E8E6F;
+}
+
+.vbox-item-label-alt{
+    -fx-font-size: 14px;
+    -fx-text-fill: #D49E41;
+}
+
+.publication-table {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #6DBF8E;
+    -fx-border-radius: 10px;
+    -fx-padding: 5px;
+}
+
+/* Styling for the table headers */
+.publication-table .column-header-background {
+    -fx-background-color: #1E8E6F;
+    -fx-background-radius: 10px 10px 0px 0px;
+}
+
+.publication-table .column-header {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Row styling */
+.publication-table .table-row-cell {
+    -fx-background-color: #E9F5F3;
+    -fx-border-color: #6DBF8E;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 5px;
+}
+
+/* Alternating row colors for better readability */
+.publication-table .table-row-cell:odd {
+    -fx-background-color: #CDECE1;
+}
+
+.publication-table .table-row-cell:selected {
+    -fx-background-color: #1E8E6F;
+    -fx-text-fill: white;
+}
+
+/* Text inside the cells */
+.publication-table .table-cell {
+    -fx-font-size: 13px;
+    -fx-text-fill: #444444;
+    -fx-padding: 5px;
+}
+
+/* When hovering over a row */
+.publication-table .table-row-cell:hover {
+    -fx-background-color: #6DBF8E;
+    -fx-text-fill: white;
+}
+/* Global Styles */
+* {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+}
+
+.root {
+    -fx-background-color: #F0F0F0; /* Light gray background for the root container */
+}
+
+/* Top Section */
+.top {
+    -fx-background-color: #1E8E6F; /* Main color for the top section */
+    -fx-padding: 15px;
+}
+
+.top Label {
+    -fx-font-size: 26px;
+    -fx-text-fill: white;
+}
+
+/* Search Bar */
+.search-bar {
+    -fx-background-color: white;
+    -fx-border-radius: 5px;
+    -fx-border-color: #1E8E6F;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Buttons */
+.button-main {
+    -fx-background-color: #1E8E6F;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border: none;
+    -fx-cursor: hand;
+}
+
+.button-main:hover {
+    -fx-background-color: #17A36E; /* Slightly darker green for hover effect */
+}
+
+.button-main:pressed {
+    -fx-background-color: #155D47; /* Even darker green on click */
+}
+
+.button-main .graphic {
+    -fx-spacing: 10px; /* Space between icon and text */
+}
+
+/* ListView Styling */
+.category-list {
+    -fx-background-color: #FFFFFF; /* White background for the ListView */
+    -fx-border-radius: 10px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+}
+
+.category-list .cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.category-list .cell:hover {
+    -fx-background-color: #E0E0E0; /* Slight hover effect on each list item */
+}
+
+/* ScrollPane */
+.scroll-pane {
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 10px;
+}
+
+/* VBox and HBox */
+.vbox {
+    -fx-spacing: 20px;
+}
+
+.hbox {
+    -fx-spacing: 10px;
+}
+
+/* Right Section */
+.right {
+    -fx-background-color: #FFFFFF; /* White background for right panel */
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
+}
+
+/* Label inside VBox */
+.right Label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #1E8E6F;
+}
+
+/* Adjust margins and paddings */
+.vbox > .button-main,
+.hbox > .button-main {
+    -fx-margin: 5px;
+}
+
+/* ScrollPane Content */
+.scroll-pane .content {
+    -fx-padding: 20px;
+}

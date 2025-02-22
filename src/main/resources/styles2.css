@@ -1,0 +1,196 @@
+/* General Styles */
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-color: linear-gradient(to bottom right,
+    rgb(30, 60, 90),
+    rgb(70, 130, 180),
+    rgb(255, 215, 0),
+    rgb(255, 140, 0));
+}
+
+/* Menu Button Styles */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 20px 25px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-graphic-text-gap: 15px;
+}
+
+.menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-cursor: hand;
+}
+
+/* ScrollPane Styles */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* ImageView Styles */
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+/* Poster Image Styling */
+#posterImage {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 15, 0, 0, 0);
+    -fx-transition: all 0.3s ease;
+}
+
+#posterImage:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+/* Explore Button Styles */
+.explore-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.explore-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #ffd700; /* Golden color on hover */
+}
+/* General Styles */
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-color: linear-gradient(to bottom right,
+    rgb(30, 60, 90),
+    rgb(70, 130, 180),
+    rgb(255, 215, 0),
+    rgb(255, 140, 0));
+}
+
+/* Team Member Card Styles */
+.team-member {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+    -fx-transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+
+/* Circular Team Member Images */
+.team-image {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-border-width: 3px;
+    -fx-border-color: white;
+}
+/* Social Media Button Styles */
+.social-button {
+    -fx-background-color: transparent;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+    -fx-transition: all 0.3s ease;
+}
+
+.social-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand;
+}
+
+/* Button Main Style */
+.button-main {
+    -fx-background-color: linear-gradient(to bottom, #4a90e2, #357abd); /* Blue gradient */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.button-main:hover {
+    -fx-background-color: linear-gradient(to bottom, #5aa0f0, #4688d1); /* Lighter blue gradient */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 8, 0, 0, 3);
+}
+
+/* Pressed Effect */
+.button-main:pressed {
+    -fx-background-color: linear-gradient(to bottom, #357abd, #4a90e2); /* Reverse gradient */
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+/* Image View Style */
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+/* Search Bar Style */
+.search-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+    -fx-border-color: #1E8E6F; /* Green border */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #E0E0E0; /* Light gray text */
+    -fx-prompt-text-fill: rgba(224, 224, 224, 0.7); /* Light gray prompt text */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 1); /* Subtle shadow */
+}
+
+.search-bar:focused {
+    -fx-border-color: #2ABD8E; /* Lighter green border when focused */
+    -fx-background-color: rgba(255, 255, 255, 0.3); /* Slightly brighter background when focused */
+}
+
+/* Button Main Style */
+.button-main {
+    -fx-background-color: #1E8E6F; /* Green background */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2); /* Subtle shadow */
+    -fx-transition: all 0.3s ease; /* Smooth transition */
+}
+
+.button-main:hover {
+    -fx-background-color: #2ABD8E; /* Lighter green on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 8, 0, 0, 3); /* Stronger shadow on hover */
+}
+
+.button-main:pressed {
+    -fx-background-color: #1A7A5F; /* Darker green when pressed */
+    -fx-scale-x: 0.95; /* Slightly scale down */
+    -fx-scale-y: 0.95;
+}
