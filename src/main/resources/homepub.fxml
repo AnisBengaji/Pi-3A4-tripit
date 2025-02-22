@@ -152,7 +152,7 @@
             </content>
          </ScrollPane>
 
-         <!-- Detail and Ajouter Buttons -->
+         <!-- Detail, Ajouter, and Translate Buttons -->
          <HBox alignment="CENTER" spacing="20">
             <Button fx:id="btnDetail" mnemonicParsing="false" onAction="#goToDetail" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Detail" textFill="WHITE">
                <graphic>
@@ -172,6 +172,27 @@
                   </ImageView>
                </graphic>
             </Button>
+            <!-- Translate Button and Language ComboBox -->
+            <Button fx:id="btnTranslate" mnemonicParsing="false" onAction="#translatePublication" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Translate" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+                     <image>
+                        <Image url="@icons/translate.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ComboBox fx:id="languageComboBox" prefHeight="30.0" prefWidth="150.0" promptText="Select Language">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="English" />
+                     <String fx:value="French" />
+                     <String fx:value="Spanish" />
+                     <String fx:value="German" />
+                     <String fx:value="Arabic" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
          </HBox>
       </VBox>
    </ScrollPane>
