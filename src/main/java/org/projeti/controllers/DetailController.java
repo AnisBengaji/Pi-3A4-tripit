@@ -17,6 +17,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.apache.poi.ss.usermodel.Cell;
 import org.projeti.Service.PublicationService;
 import org.projeti.entites.Publication;
 import org.projeti.entites.Categorie;
@@ -27,6 +29,21 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import javafx.scene.control.TableView;
+import javafx.stage.FileChooser;
+import java.io.File;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javafx.scene.control.TableView;
+import javafx.stage.FileChooser;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 public class DetailController {
 
@@ -40,6 +57,7 @@ public class DetailController {
     @FXML private TableColumn<Publication, String> imageColumn;
     @FXML private TableColumn<Publication, String> idCategorie;
     @FXML private TableColumn<Publication, Void> actionColumn;
+
 
     @FXML private Button buttonreturn;
 
@@ -268,5 +286,140 @@ public class DetailController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+
+    @FXML
+    private void downloadPdf() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try (PDDocument document = new PDDocument()) {
+                PDPage page = new PDPage();
+                document.addPage(page);
+
+                try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+                    // Load the logo/image
+                    PDImageXObject logo = PDImageXObject.createFromFile("src/main/resources/icons/iconTripit.png", document);
+
+                    // Draw the logo and app name
+                    contentStream.drawImage(logo, 50, 700, 100, 50); // Adjust position and size
+                    contentStream.beginText();
+                    contentStream.setFont(PDType1Font.HELVETICA_BOLD, 24);
+                    contentStream.newLineAtOffset(160, 730); // Adjust position
+                    contentStream.showText("Trip It - Publications Report");
+                    contentStream.endText();
+
+                    // Add a separator line
+                    contentStream.setLineWidth(1);
+                    contentStream.moveTo(50, 690);
+                    contentStream.lineTo(550, 690);
+                    contentStream.stroke();
+
+                    // Table headers
+                    contentStream.beginText();
+                    contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                    contentStream.newLineAtOffset(50, 670);
+                    contentStream.showText("ID");
+                    contentStream.newLineAtOffset(50, 0);
+                    contentStream.showText("Title");
+                    contentStream.newLineAtOffset(150, 0);
+                    contentStream.showText("Author");
+                    contentStream.newLineAtOffset(100, 0);
+                    contentStream.showText("Date");
+                    contentStream.newLineAtOffset(100, 0);
+                    contentStream.showText("Visibility");
+                    contentStream.endText();
+
+                    // Table content
+                    int y = 650;
+                    for (Publication publication : publicationsTableView.getItems()) {
+                        contentStream.beginText();
+                        contentStream.setFont(PDType1Font.HELVETICA, 10);
+                        contentStream.newLineAtOffset(50, y);
+                        contentStream.showText(String.valueOf(publication.getId_publication()));
+                        contentStream.newLineAtOffset(50, 0);
+                        contentStream.showText(publication.getTitle());
+                        contentStream.newLineAtOffset(150, 0);
+                        contentStream.showText(publication.getAuthor());
+                        contentStream.newLineAtOffset(100, 0);
+                        contentStream.showText(publication.getDate_publication().toString());
+                        contentStream.newLineAtOffset(100, 0);
+                        contentStream.showText(publication.getVisibility());
+                        contentStream.endText();
+
+                        // Draw a line under each row
+                        contentStream.setLineWidth(0.5f);
+                        contentStream.moveTo(50, y - 5);
+                        contentStream.lineTo(550, y - 5);
+                        contentStream.stroke();
+
+                        y -= 20;
+                    }
+
+                    // Footer
+                    contentStream.beginText();
+                    contentStream.setFont(PDType1Font.HELVETICA_OBLIQUE, 10);
+                    contentStream.newLineAtOffset(50, 30);
+                    contentStream.showText("Thank you for using Trip It!");
+                    contentStream.endText();
+                }
+
+                document.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    private void downloadExcel() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Excel");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try (Workbook workbook = new XSSFWorkbook()) {
+                Sheet sheet = workbook.createSheet("Publications");
+
+                // Create header row
+                Row headerRow = sheet.createRow(0);
+                String[] columns = {"ID", "Title", "Content", "Author", "Date", "Visibility", "Image URL", "Category"};
+                for (int i = 0; i < columns.length; i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(columns[i]);
+                }
+
+                // Fill data rows
+                int rowNum = 1;
+                for (Publication publication : publicationsTableView.getItems()) {
+                    Row row = sheet.createRow(rowNum++);
+                    row.createCell(0).setCellValue(publication.getId_publication());
+                    row.createCell(1).setCellValue(publication.getTitle());
+                    row.createCell(2).setCellValue(publication.getContenu());
+                    row.createCell(3).setCellValue(publication.getAuthor());
+                    row.createCell(4).setCellValue(publication.getDate_publication().toString());
+                    row.createCell(5).setCellValue(publication.getVisibility());
+                    row.createCell(6).setCellValue(publication.getImage());
+                    row.createCell(7).setCellValue(publication.getCategorie().getIdCategorie());
+                }
+
+                // Auto-size columns
+                for (int i = 0; i < columns.length; i++) {
+                    sheet.autoSizeColumn(i);
+                }
+
+                // Write to file
+                try (FileOutputStream fileOut = new FileOutputStream(file)) {
+                    workbook.write(fileOut);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

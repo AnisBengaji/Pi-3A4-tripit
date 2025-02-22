@@ -32,6 +32,24 @@
                         </ImageView>
                     </graphic>
                 </Button>
+
+                <!-- Download PDF Button -->
+                <Button fx:id="downloadPdfButton" text="Download PDF" onAction="#downloadPdf" styleClass="button-main">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20">
+                            <Image url="@icons/pdf.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <!-- Download Excel Button -->
+                <Button fx:id="downloadExcelButton" text="Download Excel" onAction="#downloadExcel" styleClass="button-main">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20">
+                            <Image url="@icons/excel.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
         </HBox>
 
