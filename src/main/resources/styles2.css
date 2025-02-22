@@ -194,3 +194,53 @@
     -fx-scale-x: 0.95; /* Slightly scale down */
     -fx-scale-y: 0.95;
 }
+/* ComboBox Styling */
+.combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-padding: 5px 10px; /* Padding */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 1); /* Subtle shadow */
+    -fx-cursor: hand; /* Hand cursor on hover */
+}
+
+/* ComboBox Arrow Button */
+.combo-box .arrow-button {
+    -fx-background-color: transparent; /* Transparent background */
+}
+
+.combo-box .arrow {
+    -fx-background-color: white; /* White arrow */
+}
+
+/* ComboBox Popup List */
+.combo-box .list-view {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 1); /* Subtle shadow */
+}
+
+/* ComboBox List Cell */
+.combo-box .list-cell {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 5px 10px; /* Padding */
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+}
+
+.combo-box .list-cell:selected {
+    -fx-background-color: #4A90E2; /* Blue background for selected item */
+    -fx-text-fill: white; /* White text for selected item */
+}
+
+/* ComboBox Prompt Text */
+.combo-box .prompt-text {
+    -fx-text-fill: rgba(255, 255, 255, 0.7); /* Light gray prompt text */
+}
