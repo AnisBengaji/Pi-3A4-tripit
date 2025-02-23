@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700" prefWidth="900" stylesheets="@styleSignin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <!-- Background Image -->
+        <ImageView fitHeight="750" fitWidth="900" pickOnBounds="true" preserveRatio="false" styleClass="background-image" />
+
+              <VBox alignment="CENTER" layoutX="214.0" layoutY="76.0" prefHeight="491.0" prefWidth="472.0" spacing="15" styleClass="signin-container">
+            <children>
+                <Label styleClass="title" text="Let's Trip you in." />
+                <Label prefHeight="37.0" prefWidth="265.0" styleClass="subtitle" text="Discover the World with Every Sign In">
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="14.0" />
+               </font></Label>
+
+                      <TextField promptText="Email or Phone Number" styleClass="text-field" />
+                <PasswordField promptText="Password" styleClass="text-field" />
+
+                      <Hyperlink styleClass="forgot-password" text="Forgot password?" />
+
+                      <Button prefHeight="45.0" prefWidth="374.0" styleClass="sign-in-button" text="Sign In" />
+
+                      <Label styleClass="or-label" text="or sign in with" />
+
+                      <HBox alignment="CENTER" spacing="20">
+                    <ImageView fx:id="googleIcon" fitHeight="40" fitWidth="40" pickOnBounds="true" preserveRatio="true" styleClass="social-icon">
+                        <image>
+                            <Image url="@images/google.png" />
+                        </image>
+               </ImageView>
+                    <ImageView fx:id="facebookIcon" fitHeight="40" fitWidth="40" pickOnBounds="true" preserveRatio="true" styleClass="social-icon">
+                        <image>
+                            <Image url="@images/facebook.png" />
+                        </image>
+               </ImageView>
+                </HBox>
+
+                      <Hyperlink styleClass="no-account" text="I don’t have an account?" />
+            </children>
+        </VBox>
+      <VBox alignment="CENTER" layoutX="30.0" layoutY="672.0" prefWidth="370" spacing="15" />
+      <Button layoutX="247.0" layoutY="608.0" prefHeight="47.0" prefWidth="407.0" styleClass="sign-up-button" text="Sign Up" />
+        
+          </children>
+</AnchorPane>

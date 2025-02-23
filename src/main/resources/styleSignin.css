@@ -1,0 +1,79 @@
+/* Background */
+AnchorPane {
+    -fx-background-color: linear-gradient(to bottom, #007991, #78ffd6);
+}
+.background-image {
+    -fx-image: url("images/background.png");
+}
+
+/* Sign-in container */
+.signin-container {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+}
+
+/* Title and subtitle */
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #007A8C;
+}
+
+.subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #336749;
+}
+
+/* Text fields */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+}
+
+
+/* Buttons */
+.sign-in-button {
+    -fx-background-color: #007A8C;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 10 130;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+
+}
+
+.sign-in-button:hover {
+    -fx-background-color: #005f5f;
+}
+.signin-container {
+    -fx-spacing: 20;
+}
+
+.sign-up-button {
+    -fx-background-color: white;
+    -fx-text-fill: #008080;
+    -fx-background-radius: 20;
+    -fx-padding: 10 130;
+    -fx-font-size: 16px;
+}
+
+
+
+/* Social icons */
+.social-icon {
+    -fx-cursor: hand;
+}
+
+/* Hyperlinks */
+.forgot-password {
+    -fx-alignment: CENTER_RIGHT;
+    -fx-text-fill: #ff6600;
+}
+.no-account {
+
+    -fx-text-fill: #ff6600;
+}
