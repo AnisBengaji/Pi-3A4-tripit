@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+<<<<<<< HEAD
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+=======
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Pi-3A4-tripit" vcs="Git" />
+>>>>>>> 4de3aa3d98a5189a235f9fa9b51285f18cb82da3
   </component>
 </project>

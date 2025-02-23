@@ -4,6 +4,7 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
@@ -12,6 +13,12 @@
     <resource url=" http://javafx.com/fxml" location="$PROJECT_DIR$" />
     <resource url=" http://javafx.com/javafx" location="$PROJECT_DIR$" />
   </component>
+=======
+        <option value="$PROJECT_DIR$/Pi-3A4-tripit/pom.xml" />
+      </list>
+    </option>
+  </component>
+>>>>>>> 4de3aa3d98a5189a235f9fa9b51285f18cb82da3
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
