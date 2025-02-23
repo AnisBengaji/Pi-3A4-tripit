@@ -1,37 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.projeti.controllers.DetailControllerUser">
+<AnchorPane prefHeight="750" prefWidth="1200" stylesheets="@styleSignin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.DetailControllerUser">
 
-    <VBox alignment="CENTER" spacing="20"
-          AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="50"
-          AnchorPane.rightAnchor="50" AnchorPane.topAnchor="20">
+    <children>
+        <!-- Background Image -->
+        <ImageView fitHeight="750" fitWidth="1200" pickOnBounds="true" preserveRatio="false" styleClass="background-image">
+            <image>
+                <Image url="@images/background.png" />
+            </image>
+        </ImageView>
 
-        <!-- Titre de l'interface -->
-        <Label text="Gestion des Utilisateurs"
-               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+        <!-- Left Side (User Table) -->
+        <VBox alignment="CENTER" layoutX="14.0" layoutY="74.0" prefHeight="632.0" prefWidth="734.0" spacing="15" styleClass="signin-container">
+            <children>
+                <!-- Title -->
+                <Label styleClass="title" text="User Management" />
 
-        <!-- Table -->
-        <VBox alignment="CENTER_LEFT" spacing="10"
-              style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #cccccc;
-                     -fx-border-radius: 5; -fx-background-radius: 5;">
-            <TableView fx:id="tableView" prefHeight="300.0" prefWidth="600.0">
-                <columns>
-                    <TableColumn text="Nom" fx:id="colNom" />
-                    <TableColumn text="Prénom" fx:id="colPrenom" />
-                    <TableColumn text="Téléphone" fx:id="colTel" />
-                    <TableColumn text="Email" fx:id="colEmail" />
-                    <TableColumn text="Rôle" fx:id="colRole" />
-                    <TableColumn text="Actions" fx:id="colActions" />
-                    <TableColumn text="Modifier" fx:id="colUpdate" />
-                </columns>
-            </TableView>
+                <!-- TableView -->
+                <TableView fx:id="tableView" prefHeight="454.0" prefWidth="729.0">
+                    <columns>
+                        <TableColumn fx:id="colNom" prefWidth="87.0" text="Name" />
+                        <TableColumn fx:id="colPrenom" prefWidth="97.0" text="Last Name" />
+                        <TableColumn fx:id="colTel" prefWidth="75.0" text="Phone" />
+                        <TableColumn fx:id="colEmail" prefWidth="138.0" text="Email" />
+                        <TableColumn fx:id="colRole" prefWidth="82.0" text="Role" />
+                        <TableColumn fx:id="colActions" prefWidth="97.0" text="Actions" />
+                        <TableColumn fx:id="colUpdate" prefWidth="91.0" text="Modify" />
+                    </columns>
+                </TableView>
+            </children>
         </VBox>
 
-    </VBox>
+        <!-- Right Side (Illustration) -->
+        <VBox alignment="CENTER" layoutX="757.0" layoutY="35.0" prefHeight="680.0" prefWidth="435.0" spacing="20" styleClass="illustration-container">
+            <children>
+                <ImageView fitHeight="599.0" fitWidth="358.0" pickOnBounds="true" preserveRatio="true" styleClass="illustration">
+                    <image>
+                        <Image url="@images/login.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

@@ -68,7 +68,13 @@ public class DetailControllerUser {
             private final Button btnDelete = new Button("Supprimer");
 
             {
-                btnDelete.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px 20px; -fx-background-radius: 5px;");
+                btnDelete.setStyle("-fx-background-color: linear-gradient(to bottom, #FF742C, #FF9E6B); " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 12px; " +  // Smaller font size
+                        "-fx-font-weight: normal; " + // Normal font weight
+                        "-fx-padding: 8px 16px; " + // Reduced padding
+                        "-fx-background-radius: 5px;");
+
                 btnDelete.setOnAction(event -> {
                     User user = getTableView().getItems().get(getIndex());
                     deleteUser(user);
@@ -90,7 +96,14 @@ public class DetailControllerUser {
             private final Button btnUpdate = new Button("Modifier");
 
             {
-                btnUpdate.setStyle("-fx-background-color: #3399ff; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px 20px; -fx-background-radius: 5px;");
+                btnUpdate.setStyle("-fx-background-color: linear-gradient(to bottom, #007A8C, #66b2b2); " +
+                        "-fx-text-fill: white; " +
+                        "-fx-font-size: 12px; " +  // Same smaller font size as btnDelete
+                        "-fx-font-weight: normal; " + // Normal font weight like btnDelete
+                        "-fx-padding: 8px 16px; " + // Same reduced padding as btnDelete
+                        "-fx-background-radius: 5px;"); // Same background radius
+
+
                 btnUpdate.setOnAction(event -> {
                     User user = getTableView().getItems().get(getIndex());
                     openUpdateWindow(user);

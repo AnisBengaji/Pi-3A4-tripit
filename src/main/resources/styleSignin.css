@@ -77,3 +77,58 @@ AnchorPane {
 
     -fx-text-fill: #ff6600;
 }
+/* TableView - General Styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+/* Table Header */
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to bottom, #007A8C, #66b2b2);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+}
+
+/* Table Header Borders */
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: none;
+}
+
+
+/* Rows - Alternate Colors */
+.table-row-cell {
+    -fx-background-color: #f9f9f9;
+}
+.table-row-cell:odd {
+    -fx-background-color: #e6f7ff;
+}
+
+/* Hover Effect */
+.table-row-cell:hover {
+    -fx-background-color: #cceeff;
+}
+
+/* Selected Row */
+.table-row-cell:filled:selected {
+    -fx-background-color: #007991;
+    -fx-text-fill: white;
+}
+
+/* Buttons inside Table (for actions) */
+.action-button {
+    -fx-background-color: #ff6600;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+.action-button:hover {
+    -fx-background-color: #e65c00;
+}
