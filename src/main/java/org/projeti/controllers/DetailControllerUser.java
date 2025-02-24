@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.projeti.Service.UserService;
 import org.projeti.entites.User;
-
+import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -51,6 +52,19 @@ public class DetailControllerUser {
         addDeleteButtonToTable();
         addUpdateButtonToTable();
         loadUsers();
+    }
+    @FXML
+    private void handleBackToMain(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
+            Parent mainPage = loader.load();
+            Scene mainScene = new Scene(mainPage);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(mainScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadUsers() {
@@ -138,6 +152,8 @@ public class DetailControllerUser {
             showAlert("Erreur", "Impossible de charger la page de modification.");
         }
     }
+
+
 
     private void deleteUser(User user) {
         try {

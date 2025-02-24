@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="820.0" prefWidth="1300.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.AdminInterfaceController">
+
+    <!-- Sidebar (Left) -->
+    <VBox fx:id="sidebar" layoutX="14.0" layoutY="21.0" prefHeight="778.0" prefWidth="265.0" styleClass="sidebar" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="21.0">
+        <children>
+            <ImageView fitHeight="60.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/logo.png" />
+                </image>
+            </ImageView>
+            <VBox spacing="30" />
+            <VBox spacing="15" styleClass="menu-container">
+                <children>
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                            <image>
+                                <Image url="@images/user_icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="dashboardLabel" styleClass="menu-label" text="Dashboard" />
+                    </HBox>
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                            <image>
+                                <Image url="@images/user_icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="userManagementLabel" styleClass="menu-label" text="User Management" />
+                    </HBox>
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                            <image>
+                                <Image url="@images/user_icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="reportsLabel" styleClass="menu-label" text="Reports" />
+                    </HBox>
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                            <image>
+                                <Image url="@images/user_icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="settingsLabel" styleClass="menu-label" text="Settings" />
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </VBox>
+
+    <!-- Navbar (Top) -->
+    <HBox fx:id="navbar" alignment="CENTER_RIGHT" layoutX="336.0" layoutY="14.0" prefHeight="66.0" prefWidth="938.0" spacing="15" styleClass="navbar" AnchorPane.leftAnchor="336.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0">
+        <children>
+            <TextField fx:id="searchBar" prefHeight="42.0" prefWidth="400.0" promptText="Search" styleClass="search-bar" />
+            <ImageView fx:id="userIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="user-icon">
+                <image>
+                    <Image url="@images/user_icon.png" />
+                </image>
+            </ImageView>
+        </children>
+    </HBox>
+
+    <!-- Main Content -->
+    <VBox fx:id="content" layoutX="343.0" layoutY="110.0" prefHeight="682.0" prefWidth="938.0" spacing="20" styleClass="content-container" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="343.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="110.0">
+        <children>
+            <Label styleClass="header" text="Admin Dashboard" />
+            <HBox spacing="20">
+                <VBox prefHeight="200.0" prefWidth="300.0" styleClass="card">
+                    <Label styleClass="card-title" text="Users" />
+                    <Label styleClass="card-value" text="150" />
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="300.0" styleClass="card">
+                    <Label styleClass="card-title" text="Reports" />
+                    <Label styleClass="card-value" text="24" />
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="300.0" styleClass="card">
+                    <Label styleClass="card-title" text="Active Sessions" />
+                    <Label styleClass="card-value" text="89" />
+                </VBox>
+            </HBox>
+        </children>
+    </VBox>
+
+</AnchorPane>

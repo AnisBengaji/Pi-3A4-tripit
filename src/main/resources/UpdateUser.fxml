@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="803.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.projeti.controllers.UpdateUser">
+<AnchorPane prefHeight="750" prefWidth="1200" stylesheets="@styleSignin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.UpdateUser">
+    <children>
+        <!-- Background Image -->
+        <ImageView fitHeight="750" fitWidth="1200" pickOnBounds="true" preserveRatio="false" styleClass="background-image">
+            <image>
+                <Image url="@images/background.png" />
+            </image>
+        </ImageView>
 
-    <VBox alignment="CENTER" prefWidth="600" spacing="20"
-          AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="50"
-          AnchorPane.rightAnchor="50" AnchorPane.topAnchor="20">
+        <!-- Left Side (Form) -->
+        <VBox alignment="CENTER" layoutX="59.0" layoutY="64.0" prefHeight="609.0" prefWidth="469.0" spacing="15" styleClass="signin-container">
+            <children>
+                <!-- Title -->
+                <Label styleClass="title" text="Update User" />
 
-        <!-- Titre de l'interface -->
-        <Label text="Modifier un Utilisateur"
-               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+                <!-- Form Fields -->
+                <TextField fx:id="nomField" prefHeight="39.0" prefWidth="473.0" promptText="Nom" styleClass="text-field" />
+                <TextField fx:id="prenomField" promptText="Prénom" styleClass="text-field" />
+                <TextField fx:id="numTelField" promptText="Numéro de Téléphone" styleClass="text-field" />
+                <TextField fx:id="emailField" promptText="Email" styleClass="text-field" />
+                <TextField fx:id="roleField" promptText="Rôle" styleClass="text-field" />
 
-        <!-- Formulaire de modification -->
-        <VBox alignment="CENTER_LEFT" spacing="10"
-              style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #cccccc;
-                     -fx-border-radius: 5; -fx-background-radius: 5;">
-            <Label text="Nom :" />
-            <TextField fx:id="nomField" promptText="Entrez le nom" />
-
-            <Label text="Prénom :" />
-            <TextField fx:id="prenomField" promptText="Entrez le prénom" />
-
-            <Label text="Numéro de Téléphone :" />
-            <TextField fx:id="numTelField" promptText="Entrez le numéro de téléphone" />
-
-            <Label text="Email :" />
-            <TextField fx:id="emailField" promptText="Entrez l'email" />
-
-            <Label text="Rôle :" />
-            <TextField fx:id="roleField" promptText="Entrez le rôle" />
+                <!-- Update Button -->
+                <Button onAction="#handleUpdateUser" prefHeight="45.0" prefWidth="445.0" styleClass="sign-in-button" text="Upadate" />
+            </children>
         </VBox>
 
-        <!-- Bouton de mise à jour -->
-        <Button text="Mettre à Jour l'Utilisateur" onAction="#handleUpdateUser"
-                style="-fx-font-size: 14px; -fx-background-color: #2196F3; -fx-text-fill: white;" />
-
-    </VBox>
-
+        <!-- Right Side (Illustration) -->
+        <VBox alignment="CENTER" layoutX="672.0" layoutY="37.0" prefHeight="688.0" prefWidth="500.0" spacing="20" styleClass="illustration-container">
+            <children>
+                <ImageView fitHeight="641.0" fitWidth="613.0" pickOnBounds="true" preserveRatio="true" styleClass="illustration">
+                    <image>
+                        <Image url="@images/login.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

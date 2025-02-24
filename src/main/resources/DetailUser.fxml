@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -19,7 +20,7 @@
         </ImageView>
 
         <!-- Left Side (User Table) -->
-        <VBox alignment="CENTER" layoutX="14.0" layoutY="74.0" prefHeight="632.0" prefWidth="734.0" spacing="15" styleClass="signin-container">
+        <VBox alignment="CENTER" layoutX="14.0" layoutY="74.0" prefHeight="559.0" prefWidth="734.0" spacing="15" styleClass="signin-container">
             <children>
                 <!-- Title -->
                 <Label styleClass="title" text="User Management" />
@@ -49,5 +50,6 @@
                 </ImageView>
             </children>
         </VBox>
+      <Button fx:id="signUpButton" layoutX="19.0" layoutY="655.0" onAction="#handleBackToMain" prefHeight="50.0" prefWidth="725.0" styleClass="sign-up-button" text="Back " />
     </children>
 </AnchorPane>
