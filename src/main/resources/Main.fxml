@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="820.0" prefWidth="1300.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.MainController">
 
     <!-- Sidebar (Left) -->
-    <VBox fx:id="sidebar" prefHeight="820.0" prefWidth="250.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <VBox fx:id="sidebar" layoutX="14.0" layoutY="21.0" prefHeight="778.0" prefWidth="250.0" styleClass="sidebar" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="21.0">
         <children>
             <!-- Logo -->
             <ImageView fitHeight="60.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
@@ -85,10 +85,10 @@
     </VBox>
 
     <!-- Navbar (Top) -->
-    <HBox fx:id="navbar" alignment="CENTER_RIGHT" layoutX="277.0" layoutY="14.0" maxWidth="1050.0" prefHeight="70.0" prefWidth="997.0" spacing="15" styleClass="navbar" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0">
+    <HBox fx:id="navbar" alignment="CENTER_RIGHT" layoutX="284.0" layoutY="14.0" maxWidth="1050.0" prefHeight="66.0" prefWidth="990.0" spacing="15" styleClass="navbar" AnchorPane.leftAnchor="284.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0">
         <children>
-            <HBox prefHeight="50.0" prefWidth="792.0" HBox.hgrow="ALWAYS" />
-            <TextField promptText="Search" styleClass="search-bar" />
+            <HBox prefHeight="42.0" prefWidth="626.0" HBox.hgrow="ALWAYS" />
+            <TextField prefHeight="42.0" prefWidth="433.0" promptText="Search" styleClass="search-bar" />
             <ImageView fitHeight="40.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" styleClass="user-icon">
                 <image>
                     <Image url="@images/user_icon.png" />
@@ -98,11 +98,11 @@
     </HBox>
 
     <!-- Main Content -->
-    <VBox fx:id="content" layoutX="250.0" layoutY="79.0" prefHeight="750.0" prefWidth="1050.0" spacing="20" styleClass="content-container" AnchorPane.bottomAnchor="-9.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="79.0">
+    <VBox fx:id="content" layoutX="282.0" layoutY="110.0" prefHeight="682.0" prefWidth="999.0" spacing="20" styleClass="content-container" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="110.0">
         <children>
             <!-- Trip Section -->
-            <HBox spacing="20">
-                <VBox prefHeight="322.0" prefWidth="876.0" styleClass="trip-card">
+            <HBox prefHeight="267.0" prefWidth="915.0" spacing="20">
+                <VBox prefHeight="267.0" prefWidth="870.0" styleClass="trip-card">
                     <Label styleClass="trip-title" text="Santorini" />
                     <ImageView fitHeight="154.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -110,34 +110,23 @@
                         </image>
                     </ImageView>
                 </VBox>
-                <VBox styleClass="trip-details">
-                    <Label styleClass="trip-info" text="Travel Date: 9 days" />
-                    <Label styleClass="trip-info" text="People: 2 Adults" />
-                    <Label styleClass="trip-info" text="Destination: Rome, Greece" />
-                </VBox>
             </HBox>
 
-            <HBox layoutX="10.0" layoutY="10.0" spacing="20">
-                <children>
-                    <VBox prefHeight="193.0" prefWidth="848.0" styleClass="trip-card">
-                        <children>
-                            <Label styleClass="trip-title" text="Santorini" />
-                            <ImageView fitHeight="154.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@images/santorini_banner.png" />
-                                </image>
-                            </ImageView>
-                        </children>
-                    </VBox>
-                    <VBox styleClass="trip-details">
-                        <children>
-                            <Label styleClass="trip-info" text="Travel Date: 9 days" />
-                            <Label styleClass="trip-info" text="People: 2 Adults" />
-                            <Label styleClass="trip-info" text="Destination: Rome, Greece" />
-                        </children>
-                    </VBox>
-                </children>
-            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" spacing="20" />
+         <HBox layoutX="34.0" layoutY="34.0" prefHeight="267.0" prefWidth="915.0" spacing="20">
+            <children>
+               <VBox prefHeight="267.0" prefWidth="870.0" styleClass="trip-card">
+                  <children>
+                     <Label styleClass="trip-title" text="Santorini" />
+                     <ImageView fitHeight="154.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@images/santorini_banner.png" />
+                        </image>
+                     </ImageView>
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
         </children>
     </VBox>
 
