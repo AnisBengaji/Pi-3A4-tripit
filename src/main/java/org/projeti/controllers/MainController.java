@@ -2,8 +2,7 @@ package org.projeti.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,6 +16,8 @@ import java.io.IOException;
 import java.net.URL;
 
 public class MainController {
+
+    private Node sidebar;
 
     @FXML
     private void showReservation() {
@@ -38,6 +39,32 @@ public class MainController {
     @FXML
     private void goToProfile(){
         loadView("AjouterUser.fxml");
+    }
+    @FXML
+    private void handleSignOut() {
+        try {
+            // Load the Sign-In Page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/signIn.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage for Sign-In
+            Stage signInStage = new Stage();
+            signInStage.setScene(new Scene(root));
+            signInStage.show();
+
+            // Close the current window (Main.fxml) using all windows
+            Stage currentStage = (Stage) Stage.getWindows().stream()
+                    .filter(window -> window.isShowing())
+                    .findFirst()
+                    .orElse(null);
+
+            if (currentStage != null) {
+                currentStage.close();  // Close the main stage
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadView(String fxmlFile) {
@@ -63,5 +90,6 @@ public class MainController {
             System.err.println("Erreur lors du chargement de " + fxmlFile + " : " + e.getMessage());
             e.printStackTrace();
         }
+
     }
 }

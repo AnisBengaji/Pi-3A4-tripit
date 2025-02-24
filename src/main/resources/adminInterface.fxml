@@ -24,7 +24,7 @@
                     <HBox spacing="15" styleClass="menu-item">
                         <ImageView fitHeight="24.0" fitWidth="24.0">
                             <image>
-                                <Image url="@images/user_icon.png" />
+                                <Image url="@images/dashboard_icon.png" />
                             </image>
                         </ImageView>
                         <Label fx:id="dashboardLabel" styleClass="menu-label" text="Dashboard" />
@@ -32,7 +32,7 @@
                     <HBox spacing="15" styleClass="menu-item">
                         <ImageView fitHeight="24.0" fitWidth="24.0">
                             <image>
-                                <Image url="@images/user_icon.png" />
+                                <Image url="@images/user_manegment_icon.png" />
                             </image>
                         </ImageView>
                         <Label fx:id="userManagementLabel" styleClass="menu-label" text="User Management" />
@@ -40,7 +40,7 @@
                     <HBox spacing="15" styleClass="menu-item">
                         <ImageView fitHeight="24.0" fitWidth="24.0">
                             <image>
-                                <Image url="@images/user_icon.png" />
+                                <Image url="@images/reclam_icon.png" />
                             </image>
                         </ImageView>
                         <Label fx:id="reportsLabel" styleClass="menu-label" text="Reports" />
@@ -48,11 +48,24 @@
                     <HBox spacing="15" styleClass="menu-item">
                         <ImageView fitHeight="24.0" fitWidth="24.0">
                             <image>
-                                <Image url="@images/user_icon.png" />
+                                <Image url="@images/settins_icon.png" />
                             </image>
                         </ImageView>
                         <Label fx:id="settingsLabel" styleClass="menu-label" text="Settings" />
                     </HBox>
+               <HBox layoutX="10.0" layoutY="436.0" spacing="15" styleClass="menu-item" />
+               <HBox layoutX="10.0" layoutY="365.0" spacing="15" styleClass="menu-item" />
+               <HBox layoutX="10.0" layoutY="223.0" spacing="15" styleClass="menu-item" />
+                    <!-- Add the Sign Out button to your sidebar menu -->
+                    <HBox onMouseClicked="#handleSignOut" spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                            <image>
+                                <Image url="@images/logout_icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="menu-label" text="Sign Out" />
+                    </HBox>
+
                 </children>
             </VBox>
         </children>

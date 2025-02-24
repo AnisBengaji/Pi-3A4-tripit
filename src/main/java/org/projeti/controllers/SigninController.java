@@ -1,6 +1,134 @@
 package org.projeti.controllers;
 
+
 import org.projeti.Service.UserService;
+import org.projeti.utils.Database;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.sql.*;
+
+public class SigninController {
+
+    @FXML
+    private TextField emailField;  // Email input field
+
+    @FXML
+    private PasswordField passwordField;  // Password input field
+
+    private UserService userService = new UserService();  // User service instance
+
+    private Connection cnx = Database.getInstance().getCnx(); // Database connection
+
+    @FXML
+    private void handleSignUp(ActionEvent event) throws IOException {
+        // Open the sign-up form
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
+
+    @FXML
+    private void handleForgotPassword(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forgin.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load the forgot password page.");
+        }
+    }
+
+    @FXML
+    private void handleSignIn(ActionEvent event) {
+        String email = emailField.getText();
+        String password = passwordField.getText();
+
+        // Fetch user role based on email and password
+        String role = getUserRole(email, password);
+
+        if (role == null) {
+            showAlert("Login Failed", "Invalid email or password.");
+            return;
+        }
+
+        String fxmlFile;
+        if ("admin".equalsIgnoreCase(role)) {
+            fxmlFile = "/adminInterface.fxml";
+        } else {
+            fxmlFile = "/Main.fxml";
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Close the login window
+            Stage currentStage = (Stage) emailField.getScene().getWindow();
+            currentStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load the page.");
+        }
+    }
+
+    private String getUserRole(String email, String password) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            String query = "SELECT Role FROM user WHERE Email = ? AND MDP = ?";
+            ps = cnx.prepareStatement(query);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("Role"); // Return the role of the user
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Error", "Database error: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null; // Return null if the user is not found
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+}
+
+/*import org.projeti.Service.UserService;
 import org.projeti.utils.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -125,7 +253,7 @@ public class SigninController {
         alert.showAndWait();
     }
 }
-
+*/
 
 
 
