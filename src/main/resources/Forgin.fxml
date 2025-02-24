@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="750" prefWidth="1200" stylesheets="@styleSignin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.ForginController">
+    <children>
+        <!-- Background Image -->
+        <ImageView fitHeight="750" fitWidth="1200" pickOnBounds="true" preserveRatio="false" styleClass="background-image">
+            <image>
+                <Image url="@images/background.png" />
+            </image>
+        </ImageView>
+
+        <!-- Left Side (Forgot Password Form) -->
+        <VBox alignment="CENTER" layoutX="87.0" layoutY="120.0" prefHeight="450.0" prefWidth="457.0" spacing="15" styleClass="signin-container">
+            <children>
+                <Label styleClass="title" text="Forgot Password?" />
+                <Label prefWidth="300.0" styleClass="subtitle" text="Enter your email to reset your password" />
+                <TextField fx:id="emailField" promptText="Email Address" styleClass="text-field" />
+                <Button onAction="#handleResetPassword" prefHeight="45.0" prefWidth="395.0" styleClass="sign-in-button" text="Reset Password" />
+                <Hyperlink onAction="#handleBackToSignIn" styleClass="forgot-password" text="Back to Sign In" />
+            </children>
+        </VBox>
+
+        <!-- Right Side (Illustration & Branding) -->
+        <VBox alignment="CENTER" layoutX="672.0" layoutY="37.0" prefHeight="688.0" prefWidth="500.0" spacing="20" styleClass="illustration-container">
+            <children>
+                <ImageView fitHeight="641.0" fitWidth="613.0" pickOnBounds="true" preserveRatio="true" styleClass="illustration">
+                    <image>
+                        <Image url="@images/login.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

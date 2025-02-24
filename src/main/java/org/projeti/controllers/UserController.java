@@ -33,6 +33,20 @@ public class UserController {
     // Email validation regex pattern
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
 
+
+    @FXML
+    private void handleBackToLogIn(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Signin.fxml"));  // Retour à la connexion
+            Parent root = loader.load();
+            Stage stage = (Stage) emailField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load the sign-in page.");
+        }
+    }
+
     @FXML
     void handleSaveUser(ActionEvent event) {
         String nom = nomField.getText().trim();
