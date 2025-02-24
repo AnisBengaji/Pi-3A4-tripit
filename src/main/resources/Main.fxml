@@ -1,117 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.shape.Circle?>
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="833.0" prefWidth="1300.0" styleClass="travel-background" stylesheets="@styl.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.MainController">
-    <top>
-        <HBox prefHeight="125.0" prefWidth="200.0" styleClass="border-bottom" stylesheets="@styl.css" BorderPane.alignment="CENTER">
-            <children>
-                <!-- Menu -->
-                <VBox alignment="CENTER" onMouseClicked="#showReservation" prefHeight="126.0" prefWidth="125.0" spacing="10">
-                    <children>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@icons/list.png" />
-                            </image>
-                        </ImageView>
-                        <Label styleClass="icon-label" text="Menu" textFill="#2A7F77" />
-                    </children>
-                </VBox>
+<AnchorPane prefHeight="820.0" prefWidth="1300.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.MainController">
 
-                <!-- Reservation -->
-                <VBox alignment="CENTER" onMouseClicked="#showReservation" prefHeight="126.0" prefWidth="125.0" spacing="10">
-                    <children>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@icons/reserve.png" />
-                            </image>
-                        </ImageView>
-                        <Label styleClass="icon-label" text="Réservation" textFill="#1E8E6F" />
-                    </children>
-                </VBox>
-                <VBox alignment="CENTER"  prefHeight="123.0" prefWidth="116.0" spacing="10">
-                    <children>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@icons/offer.png" />
-                            </image>
-                        </ImageView>
-                        <Label styleClass="icon-label" text="offre" textFill="#2A7F77" />
-                    </children>
-                </VBox>
+    <!-- Sidebar (Left) -->
+    <VBox fx:id="sidebar" prefHeight="820.0" prefWidth="250.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+            <!-- Logo -->
+            <ImageView fitHeight="60.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/logo.png" />
+                </image>
+            </ImageView>
 
+            <!-- Espacement -->
+            <VBox spacing="30" />
 
+            <!-- Menu Items -->
+            <VBox spacing="15" styleClass="menu-container">
+                <children>
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                            <image>
+                                <Image url="@images/Home_Icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="menu-label" text="Home" />
+                    </HBox>
 
-                <VBox alignment="CENTER" prefHeight="123.0" prefWidth="141.0">
-                    <children>
-                        <ImageView fitHeight="55.0" fitWidth="77.0" onMouseClicked="#showhomePub" pickOnBounds="true" preserveRatio="true">
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
                             <image>
-                                <Image url="@icons/post.png" />
+                                <Image url="@images/All_trips_Icon.png" />
                             </image>
-                            <VBox.margin>
-                                <Insets />
-                            </VBox.margin>
                         </ImageView>
-                        <Label styleClass="icon-label" text="Pubs" textFill="#F0F0F0" />
-                    </children>
-                </VBox>
+                        <Label styleClass="menu-label" text="All trips" />
+                    </HBox>
 
-                <!-- Evenement -->
-                <VBox alignment="CENTER" onMouseClicked="#showEvenement" prefHeight="123.0" prefWidth="116.0" spacing="10">
-                    <children>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
                             <image>
-                                <Image url="@icons/event.png" />
+                                <Image url="@images/Transport_Icon.png" />
                             </image>
                         </ImageView>
-                        <Label styleClass="icon-label" text="Evénements" textFill="#2A7F77" />
-                    </children>
-                </VBox>
-                <VBox alignment="CENTER" prefHeight="123.0" prefWidth="141.0">
-                    <children>
-                        <ImageView fitHeight="55.0" fitWidth="77.0"  pickOnBounds="true" preserveRatio="true" onMouseClicked="#showdesination">
-                            <image>
-                                <Image url="@icons/destination.png" />
-                            </image>
-                            <VBox.margin>
-                                <Insets />
-                            </VBox.margin>
-                        </ImageView>
-                        <Label styleClass="icon-label" text="Destinations" textFill="#F0F0F0" />
-                    </children>
-                </VBox>
-                <VBox alignment="CENTER" prefHeight="123.0" prefWidth="141.0">
-                    <children>
-                        <ImageView fitHeight="55.0" fitWidth="77.0"  pickOnBounds="true" preserveRatio="true" onMouseClicked="#goToProfile">
-                            <image>
-                                <Image url="@icons/profile.png" />
-                            </image>
-                            <VBox.margin>
-                                <Insets />
-                            </VBox.margin>
-                        </ImageView>
-                        <Label styleClass="icon-label" text="profile" textFill="#F0F0F0" />
-                    </children>
-                </VBox>
+                        <Label styleClass="menu-label" text="Travels" />
+                    </HBox>
 
-                <VBox alignment="CENTER" prefHeight="126.0" prefWidth="125.0" spacing="10">
-                    <children>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
                             <image>
-                                <Image url="@icons/notification-bell.png" />
+                                <Image url="@images/Rooms_Icon.png" />
                             </image>
                         </ImageView>
-                        <Circle fill="DODGERBLUE" radius="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                    </children>
+                        <Label styleClass="menu-label" text="Rooms" />
+                    </HBox>
+
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                            <image>
+                                <Image url="@images/Transport_Icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="menu-label" text="Transport" />
+                    </HBox>
+
+                    <HBox spacing="15" styleClass="menu-item">
+                        <ImageView fitHeight="24.0" fitWidth="24.0">
+                            <image>
+                                <Image url="@images/Attractions_Icon.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="menu-label" text="Events" />
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </VBox>
+
+    <!-- Navbar (Top) -->
+    <HBox fx:id="navbar" alignment="CENTER_RIGHT" layoutX="277.0" layoutY="14.0" maxWidth="1050.0" prefHeight="70.0" prefWidth="997.0" spacing="15" styleClass="navbar" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0">
+        <children>
+            <HBox prefHeight="50.0" prefWidth="792.0" HBox.hgrow="ALWAYS" />
+            <TextField promptText="Search" styleClass="search-bar" />
+            <ImageView fitHeight="40.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" styleClass="user-icon">
+                <image>
+                    <Image url="@images/user_icon.png" />
+                </image>
+            </ImageView>
+        </children>
+    </HBox>
+
+    <!-- Main Content -->
+    <VBox fx:id="content" layoutX="250.0" layoutY="79.0" prefHeight="750.0" prefWidth="1050.0" spacing="20" styleClass="content-container" AnchorPane.bottomAnchor="-9.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="79.0">
+        <children>
+            <!-- Trip Section -->
+            <HBox spacing="20">
+                <VBox prefHeight="322.0" prefWidth="876.0" styleClass="trip-card">
+                    <Label styleClass="trip-title" text="Santorini" />
+                    <ImageView fitHeight="154.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@images/santorini_banner.png" />
+                        </image>
+                    </ImageView>
                 </VBox>
-            </children>
-        </HBox>
-    </top>
-</BorderPane>
+                <VBox styleClass="trip-details">
+                    <Label styleClass="trip-info" text="Travel Date: 9 days" />
+                    <Label styleClass="trip-info" text="People: 2 Adults" />
+                    <Label styleClass="trip-info" text="Destination: Rome, Greece" />
+                </VBox>
+            </HBox>
+
+            <HBox layoutX="10.0" layoutY="10.0" spacing="20">
+                <children>
+                    <VBox prefHeight="193.0" prefWidth="848.0" styleClass="trip-card">
+                        <children>
+                            <Label styleClass="trip-title" text="Santorini" />
+                            <ImageView fitHeight="154.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/santorini_banner.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                    </VBox>
+                    <VBox styleClass="trip-details">
+                        <children>
+                            <Label styleClass="trip-info" text="Travel Date: 9 days" />
+                            <Label styleClass="trip-info" text="People: 2 Adults" />
+                            <Label styleClass="trip-info" text="Destination: Rome, Greece" />
+                        </children>
+                    </VBox>
+                </children>
+            </HBox>
+        </children>
+    </VBox>
+
+</AnchorPane>
