@@ -22,6 +22,14 @@ public class User {
         this.Role = Role;
     }
 
+    public User(String nom, String prenom, int num_tel, String email, String role) {
+        Nom = nom;
+        Prenom = prenom;
+        Num_tel = num_tel;
+        Email = email;
+        Role = role;
+    }
+
     public User(String nom, String prenom, String email, String MDP, String role) {
         Nom = nom;
         Prenom = prenom;

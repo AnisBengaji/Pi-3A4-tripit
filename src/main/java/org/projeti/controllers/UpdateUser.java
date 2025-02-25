@@ -1,19 +1,20 @@
 package org.projeti.controllers;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.projeti.Service.UserService;
-import org.projeti.controllers.DetailControllerUser;
-import org.projeti.entites.User;
 
+import org.projeti.entites.User;
+import org.projeti.controllers.DetailControllerUser;
 import java.sql.SQLException;
-import java.util.regex.Pattern;
 
 public class UpdateUser {
     @FXML
-    private TextField nomField, prenomField, numTelField, emailField, roleField;
+    private TextField nomField, prenomField, numTelField, emailField;
+    @FXML
+    private CheckBox adminCheckBox, clientCheckBox, fournisseurCheckBox;
 
     private User user;
     private DetailControllerUser detailControllerUser;
@@ -29,31 +30,70 @@ public class UpdateUser {
         prenomField.setText(user.getPrenom());
         numTelField.setText(String.valueOf(user.getNum_tel()));
         emailField.setText(user.getEmail());
-        roleField.setText(user.getRole());
+
+        // Set role checkboxes based on the user role
+        if (user.getRole().equals("admin")) {
+            adminCheckBox.setSelected(true);
+        } else if (user.getRole().equals("client")) {
+            clientCheckBox.setSelected(true);
+        } else if (user.getRole().equals("fournisseur")) {
+            fournisseurCheckBox.setSelected(true);
+        }
     }
 
+    @FXML
+    public void initialize() {
+        // Ensure only one checkbox is selected at a time
+        adminCheckBox.setOnAction(event -> {
+            if (adminCheckBox.isSelected()) {
+                fournisseurCheckBox.setSelected(false);
+                clientCheckBox.setSelected(false);
+            }
+        });
+        clientCheckBox.setOnAction(event -> {
+            if (clientCheckBox.isSelected()) {
+                fournisseurCheckBox.setSelected(false);
+                adminCheckBox.setSelected(false);
+            }
+        });
+
+        fournisseurCheckBox.setOnAction(event -> {
+            if (fournisseurCheckBox.isSelected()) {
+                clientCheckBox.setSelected(false);
+                adminCheckBox.setSelected(false);
+            }
+        });
+    }
     @FXML
     private void handleUpdateUser() {
         String nom = nomField.getText().trim();
         String prenom = prenomField.getText().trim();
         String email = emailField.getText().trim();
-        String role = roleField.getText().trim().toLowerCase(); // Normalize role input
 
         // Validate inputs
-        if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || role.isEmpty()) {
+        if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty()) {
             showAlert("Erreur", "Veuillez remplir tous les champs.");
             return;
         }
 
         // Validate email format
-        if (!Pattern.matches(EMAIL_REGEX, email)) {
+        if (!email.matches(EMAIL_REGEX)) {
             showAlert("Erreur", "L'email n'est pas valide. Veuillez saisir un email correct (ex: exemple@email.com).");
             return;
         }
 
-        // Validate role (must be "admin", "client", or "fournisseur")
-        if (!role.equals("admin") && !role.equals("client") && !role.equals("fournisseur")) {
-            showAlert("Erreur", "Le rôle doit être 'admin', 'client' ou 'fournisseur'.");
+        // Check role selection
+        String role = "";
+        if (adminCheckBox.isSelected()) {
+            role = "admin";
+        } else if (clientCheckBox.isSelected()) {
+            role = "client";
+        } else if (fournisseurCheckBox.isSelected()) {
+            role = "fournisseur";
+        }
+
+        if (role.isEmpty()) {
+            showAlert("Erreur", "Veuillez sélectionner un rôle.");
             return;
         }
 
@@ -94,3 +134,4 @@ public class UpdateUser {
         alert.showAndWait();
     }
 }
+

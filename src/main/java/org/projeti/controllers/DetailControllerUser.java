@@ -56,7 +56,7 @@ public class DetailControllerUser {
     @FXML
     private void handleBackToMain(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/adminInterface.fxml"));
             Parent mainPage = loader.load();
             Scene mainScene = new Scene(mainPage);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

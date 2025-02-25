@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -8,6 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="750" prefWidth="1200" stylesheets="@styleSignin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.UserController">
@@ -24,7 +26,7 @@
         <VBox alignment="CENTER" layoutX="59.0" layoutY="64.0" prefHeight="609.0" prefWidth="469.0" spacing="15" styleClass="signin-container">
             <children>
                 <!-- Title -->
-                <Label styleClass="title" text="create your account" />
+                <Label styleClass="title" text="Create Your Account" />
 
                 <!-- Form Fields -->
                 <TextField fx:id="nomField" prefHeight="39.0" prefWidth="473.0" promptText="Name" styleClass="text-field" />
@@ -32,15 +34,21 @@
                 <TextField fx:id="numTelField" promptText="Phone Number" styleClass="text-field" />
                 <TextField fx:id="emailField" promptText="Email" styleClass="text-field" />
                 <PasswordField fx:id="mdpField" promptText="Your Password" styleClass="text-field" />
-                <TextField fx:id="roleField" promptText="Rôle" styleClass="text-field" />
+
+                <!-- Role Selection (Checkboxes in Horizontal Layout) -->
+                <HBox alignment="CENTER" spacing="20" style="-fx-padding: 10; -fx-alignment: center;">
+                    <CheckBox fx:id="clientCheckBox" styleClass="role-checkbox" text="Client" />
+                    <CheckBox fx:id="fournisseurCheckBox" styleClass="role-checkbox" text="Fournisseur" />
+                </HBox>
+
 
                 <!-- Save Button -->
-                <Button onAction="#handleSaveUser" prefHeight="45.0" prefWidth="509.0" styleClass="sign-in-button" text="save" />
-            <Hyperlink onAction="#handleBackToLogIn" styleClass="forgot-password" text="Back to Log In" />
+                <Button onAction="#handleSaveUser" prefHeight="45.0" prefWidth="509.0" styleClass="sign-in-button" text="Save" />
+                <Hyperlink onAction="#handleBackToLogIn" styleClass="forgot-password" text="Back to Log In" />
 
             </children>
         </VBox>
-        
+
         <!-- Right Side (Illustration) -->
         <VBox alignment="CENTER" layoutX="672.0" layoutY="37.0" prefHeight="688.0" prefWidth="500.0" spacing="20" styleClass="illustration-container">
             <children>

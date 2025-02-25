@@ -132,3 +132,23 @@ AnchorPane {
 .action-button:hover {
     -fx-background-color: #e65c00;
 }
+
+.role-checkbox {
+    -fx-text-fill: #007A8C;
+    -fx-font-size: 14px;
+}
+/* Custom checkbox */
+.role-checkbox .box {
+    -fx-background-color: white;
+    -fx-border-color: #CFEDFE; /* Outline color */
+    -fx-border-radius: 50%; /* Makes it circular */
+    -fx-padding: 3;
+    -fx-min-width: 18px;
+    -fx-min-height: 18px;
+}
+
+
+/* Checkmark color */
+.role-checkbox:selected .mark {
+    -fx-background-color: #007A8C;
+}

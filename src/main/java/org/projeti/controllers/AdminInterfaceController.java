@@ -43,7 +43,7 @@ public class AdminInterfaceController {
         if (dashboardLabel != null)
             dashboardLabel.setOnMouseClicked(event -> loadSection("Main.fxml"));
         if (userManagementLabel != null)
-            userManagementLabel.setOnMouseClicked(event -> loadSection("UserManagement.fxml"));
+            userManagementLabel.setOnMouseClicked(event -> loadSection("DetailUser.fxml"));
         if (reportsLabel != null)
             reportsLabel.setOnMouseClicked(event -> loadSection("Reports.fxml"));
         if (settingsLabel != null)

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="750" prefWidth="1200" stylesheets="@styleSignin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.UpdateUser">
+
     <children>
         <!-- Background Image -->
         <ImageView fitHeight="750" fitWidth="1200" pickOnBounds="true" preserveRatio="false" styleClass="background-image">
@@ -24,14 +27,19 @@
                 <Label styleClass="title" text="Update User" />
 
                 <!-- Form Fields -->
-                <TextField fx:id="nomField" prefHeight="39.0" prefWidth="473.0" promptText="Nom" styleClass="text-field" />
+                <TextField fx:id="nomField" promptText="Nom" styleClass="text-field" />
                 <TextField fx:id="prenomField" promptText="Prénom" styleClass="text-field" />
                 <TextField fx:id="numTelField" promptText="Numéro de Téléphone" styleClass="text-field" />
                 <TextField fx:id="emailField" promptText="Email" styleClass="text-field" />
-                <TextField fx:id="roleField" promptText="Rôle" styleClass="text-field" />
+
+                <HBox alignment="CENTER" spacing="20">
+                    <CheckBox fx:id="adminCheckBox" styleClass="role-checkbox" text="Admin" />
+                    <CheckBox fx:id="clientCheckBox" styleClass="role-checkbox" text="Client" />
+                    <CheckBox fx:id="fournisseurCheckBox" styleClass="role-checkbox" text="Fournisseur" />
+                </HBox>
 
                 <!-- Update Button -->
-                <Button onAction="#handleUpdateUser" prefHeight="45.0" prefWidth="445.0" styleClass="sign-in-button" text="Upadate" />
+                <Button onAction="#handleUpdateUser" prefHeight="45.0" prefWidth="445.0" styleClass="sign-in-button" text="Update" />
             </children>
         </VBox>
 

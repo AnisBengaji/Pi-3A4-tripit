@@ -7,12 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 
+
 public class Home extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/signIn.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/DetailUser.fxml"));
             // Get the screen dimensions
             double screenWidth = Screen.getPrimary().getBounds().getWidth();
             double screenHeight = Screen.getPrimary().getBounds().getHeight();
