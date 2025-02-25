@@ -1,16 +1,27 @@
+
 package org.projeti.Controlleurs;
 
+import com.sun.javafx.logging.PlatformLogger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.projeti.Service.EvenementService;
 import org.projeti.entites.Evenement;
 import org.projeti.utils.Database;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EvenementController {
     @FXML private ListView<String> evenementList;
@@ -223,6 +234,39 @@ public class EvenementController {
             return false;
         }
     }
+    @FXML
+    private void handleReservation(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de réservation
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Reservation.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Créer une nouvelle fenêtre (stage)
+            Stage reservationStage = new Stage();
+            reservationStage.setTitle("Gestion des Réservations");
+            reservationStage.setScene(scene);
+
+            // Optionnel : configurer le stage parent
+            reservationStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+
+            // Afficher la fenêtre
+            reservationStage.show();
+
+        } catch (IOException e) {
+            Logger.getLogger(EvenementController.class.getName()).log(Level.SEVERE, "Erreur de chargement de Reservation.fxml", e);
+            showAlert( // Appel avec 3 paramètres
+                    "Erreur Critique",
+                    "Erreur de chargement de l'interface :\n"
+                            + e.getMessage()
+                            + "\nVérifiez que le fichier Reservation.fxml existe dans le dossier views",
+                    Alert.AlertType.ERROR // Troisième paramètre obligatoire
+            );
+        }
+    }
+
 
     private void clearFields() {
         typeField.clear();

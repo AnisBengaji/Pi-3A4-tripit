@@ -13,8 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ReservationController {
-    @FXML
-    private TextField idReservationField;
+
     @FXML
     private ComboBox<String> statusComboBox;
     @FXML
@@ -54,7 +53,6 @@ public class ReservationController {
 
     // Méthode pour remplir les champs avec les données de la réservation sélectionnée
     private void populateFields(Reservation reservation) {
-        idReservationField.setText(String.valueOf(reservation.getId_reservation()));
         statusComboBox.setValue(reservation.getStatus().toString());
         priceField.setText(String.valueOf(reservation.getPrice_total()));
         modePaiementComboBox.setValue(reservation.getMode_paiment());
@@ -182,7 +180,6 @@ public class ReservationController {
 
     private void clearFields() {
         // Réinitialiser les champs du formulaire
-        idReservationField.clear();
         statusComboBox.getSelectionModel().clearSelection();
         priceField.clear();
         modePaiementComboBox.getSelectionModel().clearSelection();

@@ -64,7 +64,7 @@
             <Button fx:id="addButton" text="Ajouter" onAction="#handleAddEvent" prefWidth="130" styleClass="action-button"/>
             <Button fx:id="updateButton" text="Mettre à jour" onAction="#handleUpdateEvent" prefWidth="130" styleClass="action-button"/>
             <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="130" styleClass="delete-button"/>
-        </HBox>
+            <Button fx:id="reservationButton" text="Réservation" onAction="#handleReservation" prefWidth="130" styleClass="action-button"/>        </HBox>
 
         <!-- ListView pour afficher les événements -->
         <ListView fx:id="evenementList" prefWidth="600" prefHeight="300" styleClass="event-list"/>
