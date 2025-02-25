@@ -152,3 +152,6 @@ AnchorPane {
 .role-checkbox:selected .mark {
     -fx-background-color: #007A8C;
 }
+.auchor_container{
+    -fx-background-color: #007A8C;
+}

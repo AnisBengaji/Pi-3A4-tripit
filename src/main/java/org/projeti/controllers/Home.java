@@ -13,7 +13,7 @@ public class Home extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/DetailUser.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/adminInterface.fxml"));
             // Get the screen dimensions
             double screenWidth = Screen.getPrimary().getBounds().getWidth();
             double screenHeight = Screen.getPrimary().getBounds().getHeight();

@@ -36,7 +36,6 @@ public class AdminInterfaceController {
 
     @FXML
     private Label dashboardLabel, userManagementLabel, reportsLabel, settingsLabel;
-
     @FXML
     public void initialize() {
         // Add event listeners for menu items
@@ -49,11 +48,10 @@ public class AdminInterfaceController {
         if (settingsLabel != null)
             settingsLabel.setOnMouseClicked(event -> loadSection("Settings.fxml"));
     }
-
     private void loadSection(String fxmlFile) {
         try {
-            String filePath = "/" + fxmlFile; // Only the filename
-            System.out.println("Trying to load: " + filePath); // Debugging output
+            String filePath = "/" + fxmlFile;
+            System.out.println("Trying to load: " + filePath);
 
             URL resource = getClass().getResource(filePath);
             if (resource == null) {
@@ -62,6 +60,11 @@ public class AdminInterfaceController {
 
             FXMLLoader loader = new FXMLLoader(resource);
             AnchorPane section = loader.load();
+
+            // Ensure the section fills the available space in StackPane
+            section.prefWidthProperty().bind(content.widthProperty());
+            section.prefHeightProperty().bind(content.heightProperty());
+
             content.getChildren().setAll(section); // Replace current content
 
             System.out.println("Successfully loaded: " + fxmlFile);
@@ -70,6 +73,9 @@ public class AdminInterfaceController {
             e.printStackTrace();
         }
     }
+
+
+
 
     @FXML
     private void handleSignOut() {

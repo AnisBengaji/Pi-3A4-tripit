@@ -84,7 +84,7 @@
     </HBox>
 
     <!-- Main Content -->
-    <VBox fx:id="content" layoutX="343.0" layoutY="110.0" prefHeight="682.0" prefWidth="938.0" spacing="20" styleClass="content-container" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="343.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="110.0">
+    <VBox fx:id="content" layoutX="343.0" layoutY="110.0" prefHeight="682.0" prefWidth="897.0" spacing="20" styleClass="content-container" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="343.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="110.0">
         <children>
             <Label styleClass="header" text="Admin Dashboard" />
             <HBox spacing="20">
