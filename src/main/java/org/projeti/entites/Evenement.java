@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Evenement {
     private int id_Evenement;
-    private String Type;
+    private String nom;
 
     private LocalDate Date_EvenementDepart;
 
@@ -18,9 +18,9 @@ public class Evenement {
     private List<Reservation> reservations; // Liste des réservations associées à cet événement
 
 
-    public Evenement(int id_Evenement, String type, LocalDate date_EvenementDepart, LocalDate date_EvenementArriver, String lieu, String Description, float price) {
+    public Evenement(int id_Evenement, String nom, LocalDate date_EvenementDepart, LocalDate date_EvenementArriver, String lieu, String Description, float price) {
         this.id_Evenement = id_Evenement;
-        Type = type;
+        this.nom = nom;
         this.Date_EvenementDepart = date_EvenementDepart;
         this.Date_EvenementArriver = date_EvenementArriver;
         this.lieu = lieu;
@@ -39,12 +39,12 @@ public class Evenement {
         this.id_Evenement = id_Evenement;
     }
 
-    public String getType() {
-        return Type;
+    public String getNom() {
+        return nom;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public void setNom(String nom) {
+        nom = nom;
     }
 
 
@@ -100,7 +100,7 @@ public class Evenement {
     public String toString() {
         return "Evenement{" +
                 "id_Evenement=" + id_Evenement +
-                ", Type='" + Type + '\'' +
+                ", nom='" + nom + '\'' +
                 ", Date_EvenementDepart=" + Date_EvenementDepart +
                 ", Date_EvenementArriver=" + Date_EvenementArriver +
                 ", lieu='" + lieu + '\'' +

@@ -1,7 +1,5 @@
-
 package org.projeti.Controlleurs;
 
-import com.sun.javafx.logging.PlatformLogger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,29 +22,40 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EvenementController {
-    @FXML private ListView<String> evenementList;
-    @FXML private TextField typeField;
-    @FXML private DatePicker dateDepartField;  // Modifié en DatePicker
-    @FXML private DatePicker dateArriverField; // Modifié en DatePicker
+    @FXML private ListView<Evenement> evenementList; // Changé en ListView<Evenement>
+    @FXML private TextField nomField;
+    @FXML private DatePicker dateDepartField;
+    @FXML private DatePicker dateArriverField;
     @FXML private TextField lieuField;
     @FXML private TextField descriptionField;
     @FXML private TextField priceField;
-    @FXML private Button addButton;
-    @FXML private Button updateButton;
-    @FXML private Button deleteButton;
 
+    private Evenement selectedEvent;
     private EvenementService evenementService;
-    private ObservableList<String> evenementData = FXCollections.observableArrayList();
+    private ObservableList<Evenement> evenementData = FXCollections.observableArrayList();
 
     public void initialize() {
         Connection connection = Database.getInstance().getCnx();
         evenementService = new EvenementService(connection);
+        configureListSelection();
         loadEvenements();
+    }
 
-        // Ajouter un listener pour remplir automatiquement les champs lors de la sélection
+    private void configureListSelection() {
         evenementList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                selectedEvent = newValue;
+                System.out.println("Événement sélectionné - ID: " + selectedEvent.getId_Evenement()
+                        + ", Nom: " + selectedEvent.getNom());
                 fillFieldsWithSelectedEvent(newValue);
+            }
+        });
+
+        evenementList.setCellFactory(param -> new ListCell<Evenement>() {
+            @Override
+            protected void updateItem(Evenement item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : formatEvent(item));
             }
         });
     }
@@ -60,141 +69,128 @@ public class EvenementController {
     }
 
     private void loadEvenements() {
-        List<Evenement> evenements = evenementService.getAll();
-        evenementData.clear();
-
-        for (Evenement evenement : evenements) {
-            evenementData.add(formatEvent(evenement));
-        }
-
+        evenementData.setAll(evenementService.getAll());
         evenementList.setItems(evenementData);
     }
 
     private String formatEvent(Evenement evenement) {
-        return evenement.getType() + " - " + evenement.getDate_EvenementDepart() + " - " + evenement.getDate_EvenementArriver() + " - "
-                + evenement.getLieu() + " - " + evenement.getDescription() + " - "
-                + evenement.getPrice();
+        return evenement.getNom() + " - " + evenement.getDate_EvenementDepart()
+                + " - " + evenement.getDate_EvenementArriver() + " - " + evenement.getLieu();
     }
 
-    private void fillFieldsWithSelectedEvent(String selectedEventText) {
-        Evenement selectedEvent = getEventByText(selectedEventText);
-        if (selectedEvent != null) {
-            typeField.setText(selectedEvent.getType());
-            dateDepartField.setValue(selectedEvent.getDate_EvenementDepart());  // Modifié pour utiliser setValue()
-            dateArriverField.setValue(selectedEvent.getDate_EvenementArriver()); // Modifié pour utiliser setValue()
-            lieuField.setText(selectedEvent.getLieu());
-            descriptionField.setText(selectedEvent.getDescription());
-            priceField.setText(String.valueOf(selectedEvent.getPrice()));
-        }
+    private void fillFieldsWithSelectedEvent(Evenement event) {
+        nomField.setText(event.getNom());
+        dateDepartField.setValue(event.getDate_EvenementDepart());
+        dateArriverField.setValue(event.getDate_EvenementArriver());
+        lieuField.setText(event.getLieu());
+        descriptionField.setText(event.getDescription());
+        priceField.setText(String.valueOf(event.getPrice()));
     }
 
     @FXML
     private void handleAddEvent() {
         if (fieldsAreValid()) {
             try {
-                float price = Float.parseFloat(priceField.getText());
-
-                if (price < 0) {
-                    showAlert("Erreur", "Le prix ne peut pas être négatif.", Alert.AlertType.ERROR);
-                    return;
-                }
-
-                // Récupération des valeurs des DatePicker
-                LocalDate dateDepart = dateDepartField.getValue();
-                LocalDate dateArriver = dateArriverField.getValue();
-
                 Evenement evenement = new Evenement(
-                        0, typeField.getText(), dateDepart, dateArriver,
-                        lieuField.getText(), descriptionField.getText(), price
+                        0,
+                        nomField.getText(),
+                        dateDepartField.getValue(),
+                        dateArriverField.getValue(),
+                        lieuField.getText(),
+                        descriptionField.getText(),
+                        Float.parseFloat(priceField.getText())
                 );
+
                 evenementService.add(evenement);
                 loadEvenements();
                 clearFields();
             } catch (NumberFormatException e) {
-                showAlert("Erreur", "Veuillez entrer un prix valide.", Alert.AlertType.ERROR);
+                showAlert("Erreur", "Veuillez entrer un prix valide", Alert.AlertType.ERROR);
             }
         }
     }
 
     @FXML
     private void handleUpdateEvent() {
-        String selectedEventText = evenementList.getSelectionModel().getSelectedItem();
-        if (selectedEventText == null) {
-            showAlert("Erreur", "Veuillez sélectionner un événement à modifier.", Alert.AlertType.ERROR);
-            return;
-        }
-
-        Evenement selectedEvent = getEventByText(selectedEventText);
         if (selectedEvent == null) {
-            showAlert("Erreur", "Événement introuvable.", Alert.AlertType.ERROR);
+            showAlert("Erreur", "Veuillez sélectionner un événement", Alert.AlertType.ERROR);
             return;
         }
 
         if (fieldsAreValid()) {
             try {
-                float price = Float.parseFloat(priceField.getText());
-
-                if (price < 0) {
-                    showAlert("Erreur", "Le prix ne peut pas être négatif.", Alert.AlertType.ERROR);
-                    return;
-                }
-
-                // Récupération des valeurs des DatePicker
-                LocalDate dateDepart = dateDepartField.getValue();
-                LocalDate dateArriver = dateArriverField.getValue();
-
-                selectedEvent.setType(typeField.getText());
-                selectedEvent.setDate_EvenementDepart(dateDepart);
-                selectedEvent.setDate_EvenementArriver(dateArriver);
+                selectedEvent.setNom(nomField.getText());
+                selectedEvent.setDate_EvenementDepart(dateDepartField.getValue());
+                selectedEvent.setDate_EvenementArriver(dateArriverField.getValue());
                 selectedEvent.setLieu(lieuField.getText());
                 selectedEvent.setDescription(descriptionField.getText());
-                selectedEvent.setPrice(price);
+                selectedEvent.setPrice(Float.parseFloat(priceField.getText()));
 
                 evenementService.update(selectedEvent);
                 loadEvenements();
                 clearFields();
             } catch (NumberFormatException e) {
-                showAlert("Erreur", "Veuillez entrer un prix valide.", Alert.AlertType.ERROR);
+                showAlert("Erreur", "Veuillez entrer un prix valide", Alert.AlertType.ERROR);
             }
         }
     }
 
     @FXML
     private void handleDeleteEvent() {
-        String selectedEventText = evenementList.getSelectionModel().getSelectedItem();
-        if (selectedEventText == null) {
-            showAlert("Erreur", "Veuillez sélectionner un événement à supprimer.", Alert.AlertType.ERROR);
-            return;
-        }
-
-        Evenement selectedEvent = getEventByText(selectedEventText);
         if (selectedEvent == null) {
-            showAlert("Erreur", "Événement introuvable.", Alert.AlertType.ERROR);
+            showAlert("Erreur", "Veuillez sélectionner un événement", Alert.AlertType.ERROR);
             return;
         }
 
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.setTitle("Confirmation");
-        confirmation.setHeaderText(null);
         confirmation.setContentText("Êtes-vous sûr de vouloir supprimer cet événement ?");
+
         confirmation.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 evenementService.delete(selectedEvent.getId_Evenement());
                 loadEvenements();
+                clearFields();
             }
         });
     }
 
-    private Evenement getEventByText(String eventText) {
-        return evenementService.getAll().stream()
-                .filter(e -> formatEvent(e).equals(eventText))
-                .findFirst()
-                .orElse(null);
+
+
+    @FXML
+    private void handleReservation(ActionEvent event) {
+        if (selectedEvent == null) {
+            showAlert("Erreur", "Aucun événement sélectionné !", Alert.AlertType.WARNING);
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Reservation.fxml"));
+            Parent root = loader.load();
+
+            ReservationController reservationController = loader.getController();
+            reservationController.setEventId(selectedEvent.getId_Evenement());
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            showAlert("Erreur", "Impossible d'ouvrir les réservations", Alert.AlertType.ERROR);
+        }
     }
 
+    private void clearFields() {
+        nomField.clear();
+        dateDepartField.setValue(null);
+        dateArriverField.setValue(null);
+        lieuField.clear();
+        descriptionField.clear();
+        priceField.clear();
+    }
     private boolean fieldsAreValid() {
-        if (typeField.getText().isEmpty() || lieuField.getText().isEmpty() || descriptionField.getText().isEmpty()) {
-            showAlert("Erreur", "Le type, le lieu et la description doivent être remplis.", Alert.AlertType.ERROR);
+        if (nomField.getText().isEmpty() || lieuField.getText().isEmpty() || descriptionField.getText().isEmpty()) {
+            showAlert("Erreur", "Le nom, le lieu et la description doivent être remplis.", Alert.AlertType.ERROR);
             return false;
         }
 
@@ -233,47 +229,5 @@ public class EvenementController {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-    @FXML
-    private void handleReservation(ActionEvent event) {
-        try {
-            // Charger le fichier FXML de réservation
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Reservation.fxml"));
-            Parent root = loader.load();
-
-            // Créer une nouvelle scène
-            Scene scene = new Scene(root);
-
-            // Créer une nouvelle fenêtre (stage)
-            Stage reservationStage = new Stage();
-            reservationStage.setTitle("Gestion des Réservations");
-            reservationStage.setScene(scene);
-
-            // Optionnel : configurer le stage parent
-            reservationStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-
-            // Afficher la fenêtre
-            reservationStage.show();
-
-        } catch (IOException e) {
-            Logger.getLogger(EvenementController.class.getName()).log(Level.SEVERE, "Erreur de chargement de Reservation.fxml", e);
-            showAlert( // Appel avec 3 paramètres
-                    "Erreur Critique",
-                    "Erreur de chargement de l'interface :\n"
-                            + e.getMessage()
-                            + "\nVérifiez que le fichier Reservation.fxml existe dans le dossier views",
-                    Alert.AlertType.ERROR // Troisième paramètre obligatoire
-            );
-        }
-    }
-
-
-    private void clearFields() {
-        typeField.clear();
-        dateDepartField.setValue(null); // Réinitialiser les DatePicker
-        dateArriverField.setValue(null); // Réinitialiser les DatePicker
-        lieuField.clear();
-        descriptionField.clear();
-        priceField.clear();
     }
 }

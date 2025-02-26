@@ -24,8 +24,8 @@
         <VBox spacing="10" styleClass="form-container">
             <!-- Type -->
             <HBox spacing="10" styleClass="form-row">
-                <Label text="Type" prefWidth="100" styleClass="form-label"/>
-                <TextField fx:id="typeField" promptText="Entrez le type de l'événement" prefWidth="200" styleClass="form-input"/>
+                <Label text="Nom" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="nomField" promptText="Entrez le nom de l'événement" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
             <!-- Date de départ -->

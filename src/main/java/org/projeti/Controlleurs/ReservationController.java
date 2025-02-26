@@ -24,6 +24,8 @@ public class ReservationController {
     private ListView<Reservation> reservationListView;
 
     private ReservationService reservationService;
+    private int eventId;
+
     private ObservableList<Reservation> reservationList = FXCollections.observableArrayList();
 
     public void initialize() {
@@ -99,7 +101,7 @@ public class ReservationController {
             user.setId(1); // Remplacez par l'ID réel de l'utilisateur
 
             Evenement evenement = new Evenement();
-            evenement.setId_Evenement(1); // Remplacez par l'ID réel de l'événement
+            evenement.setId_Evenement(this.eventId); // Utilisation de l'ID stocké
 
             // Créer la réservation avec un ID auto-incrémenté (0 pour indiquer qu'il sera généré)
             Reservation reservation = new Reservation(0, status, price_total, modePaiement);
@@ -189,5 +191,9 @@ public class ReservationController {
         // Charger les réservations existantes depuis la base de données
         List<Reservation> reservations = reservationService.getAll();
         reservationList.setAll(reservations); // Mettre à jour la liste observable
+    }
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+        System.out.println("ID reçu : " + eventId); // Pour vérification
     }
 }
