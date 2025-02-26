@@ -3,6 +3,7 @@ package org.projeti.controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import org.projeti.entites.Destination;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ActivityBack {
 
@@ -26,8 +28,10 @@ public class ActivityBack {
 
     @FXML
     private Button btnsup;
-
-
+    @FXML
+    private TextField tfrechercher;
+    @FXML
+    private ComboBox<String> cbtri;
     @FXML
     private ComboBox<String> cbdestination;
 
@@ -78,7 +82,7 @@ public class ActivityBack {
     private final ActivityService as = new ActivityService();
     private final DestinationService ds=new DestinationService();
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
         try {
             cbdestination.setItems(FXCollections.observableArrayList(ds.getPaysVille()));
         } catch (SQLException e) {
@@ -88,16 +92,18 @@ public class ActivityBack {
             System.err.println("Erreur : tabActivity est null. Vérifiez le fichier FXML.");
         } else {
             tabActivity.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            refresh();
+            refresh(as.showAll());
         }
+        cbtri.setItems(FXCollections.observableArrayList("Nom","Prix","Type"));
+        recherche_avance();
     }
 
-    void refresh() {
+    void refresh(List<Activity> activities) {
         if (tabActivity == null) {
             System.err.println("Erreur : tabActivity est null. Vérifiez le fichier FXML.");
             return;
         }
-        try {
+
             colnom_activity.setCellValueFactory(new PropertyValueFactory<>("nom_activity"));
             colimage_activity.setCellValueFactory(new PropertyValueFactory<>("image_activity"));
             coltype.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -112,7 +118,7 @@ public class ActivityBack {
                     throw new RuntimeException(e);
                 }
             });
-            obslist = FXCollections.observableArrayList(as.showAll());
+            obslist = FXCollections.observableArrayList(activities);
             System.out.println("Données récupérées : " + obslist.size() + " activités trouvées");
 
             tabActivity.setItems(null);
@@ -121,9 +127,7 @@ public class ActivityBack {
             if (obslist.isEmpty()) {
                 System.err.println("Aucune activité trouvée dans la base de données.");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @FXML
@@ -141,7 +145,7 @@ public class ActivityBack {
             alert.setContentText("User insérée avec succés!");
             alert.show();
 
-            refresh();
+            refresh(as.showAll());
 
             initialize();
         } catch (SQLException e) {
@@ -207,7 +211,7 @@ public class ActivityBack {
         if(dest!=null){
             try {
                 as.delete(dest.getId_activity());
-                refresh();
+                refresh(as.showAll());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -235,7 +239,7 @@ public class ActivityBack {
             selected.setActivity_price(Float.parseFloat(tfactivity_price.getText()));
             selected.setIdDestination(ds.getIdByPaysVille(cbdestination.getValue()));
             as.update(selected);
-            refresh();
+            refresh(as.showAll());
             tabActivity.refresh();
             viderChamps();
         }catch (SQLException e) {
@@ -263,4 +267,51 @@ public class ActivityBack {
             System.err.println("Failed to load Destination.fxml: " + e.getMessage());
         }
     }
+    @FXML
+    void tri(ActionEvent event) {
+        try {
+            refresh(as.triParCritere(cbtri.getValue()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void recherche_avance() {
+        try {
+
+            ObservableList<Activity> data = FXCollections.observableArrayList(as.showAll());
+
+
+            FilteredList<Activity> filteredList = new FilteredList<>(data, b -> true);
+
+
+            tfrechercher.textProperty().addListener((observable, oldValue, newValue) -> {
+
+                filteredList.setPredicate(activity -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (activity.getNom_activity().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (activity.getType().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (activity.getDescription().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (String.valueOf(activity.getActivity_price()).contains(lowerCaseFilter)) {
+                        return true;
+                    }
+
+                    return false;
+                });
+
+                refresh(filteredList);
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

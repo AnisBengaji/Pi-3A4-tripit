@@ -19,7 +19,7 @@ public class DestinationService implements CRUD<Destination> {
     }
 
     @Override
-    public void insert(Destination destination) throws SQLException {
+    public void insert( Destination destination) throws SQLException {
         String query = "INSERT INTO destination (pays, ville, code_postal, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement pstmt = cnx.prepareStatement(query);
         pstmt.setString(1, destination.getPays());
@@ -84,4 +84,16 @@ public class DestinationService implements CRUD<Destination> {
         Destination destination = showAll().stream().filter(d->d.getId_Destination()==id).findFirst().get();
         return destination.getPays()+"-"+destination.getVille();
     }
+    public List<Destination> triParCritere(String critere) throws SQLException {
+        if(critere.equals("Pays")){
+            return showAll().stream().sorted((d1,d2)->d1.getPays().toLowerCase().compareTo(d2.getPays().toLowerCase())).collect(Collectors.toList());
+        }else if(critere.equals("Ville")){
+            return showAll().stream().sorted((d1,d2)->d1.getVille().toLowerCase().compareTo(d2.getVille().toLowerCase())).collect(Collectors.toList());
+
+        }else{
+            return showAll().stream().sorted((d1,d2)->d1.getCode_postal()-d2.getCode_postal()).collect(Collectors.toList());
+
+        }
+    }
 }
+

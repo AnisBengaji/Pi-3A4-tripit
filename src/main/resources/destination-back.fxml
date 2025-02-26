@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -28,10 +29,13 @@
       <TextField fx:id="tflat" layoutX="531.0" layoutY="248.0" promptText="Latitude" />
       <TextField fx:id="tflong" layoutX="531.0" layoutY="304.0" promptText="Longitude" />
       <Button layoutX="637.0" layoutY="406.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
-      <Button fx:id="btnsup" layoutX="219.0" layoutY="419.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+      <Button fx:id="btnsup" layoutX="244.0" layoutY="419.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
 
 
       <Text layoutX="530.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays" />
+      <TextField fx:id="tfrechercher" layoutX="109.0" layoutY="26.0" text="rechercher" />
+      <ComboBox fx:id="cbtri" layoutX="283.0" layoutY="26.0" prefWidth="150.0" />
+      <Button layoutX="441.0" layoutY="26.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
 
    </children>
 </AnchorPane>

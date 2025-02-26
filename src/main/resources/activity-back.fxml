@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="425.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controller.ActivityBack">
    <children>
-       <TableView fx:id="tabActivity" layoutX="26.0" layoutY="39.0" prefHeight="294.0" prefWidth="494.0">
+       <TableView fx:id="tabActivity" layoutX="26.0" layoutY="49.0" prefHeight="294.0" prefWidth="494.0">
 
        <columns>
            <TableColumn fx:id="colidDestination" prefWidth="105.60000228881836" text="DESTINATION" />
@@ -29,6 +29,9 @@
       <Button fx:id="btnajout" layoutX="615.0" layoutY="355.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
       <Button fx:id="modifier" layoutX="713.0" layoutY="355.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
       <ComboBox fx:id="cbdestination" layoutX="615.0" layoutY="39.0" prefWidth="150.0" />
-      <Button layoutX="26.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoDestination" text="Destination" />
+      <Button layoutX="26.0" layoutY="12.0" mnemonicParsing="false" onAction="#gotoDestination" text="Destination" />
+      <TextField fx:id="tfrechercher" layoutX="123.0" layoutY="14.0" promptText="rechercher" />
+      <ComboBox fx:id="cbtri" layoutX="297.0" layoutY="14.0" prefWidth="150.0" />
+      <Button layoutX="455.0" layoutY="14.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
    </children>
 </AnchorPane>

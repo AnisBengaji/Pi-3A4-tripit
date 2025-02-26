@@ -2,6 +2,7 @@ package org.projeti.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import org.projeti.entites.Destination;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class DestinationBack {
 @FXML
@@ -50,27 +52,33 @@ public class DestinationBack {
 
     @FXML
     private TextField tfpays;
-
+    @FXML
+    private ComboBox<String> cbtri;
+    @FXML
+    private TextField tfrechercher;
     @FXML
     private TextField tfville;
     ObservableList<Destination> obslist;
     DestinationService ds=new DestinationService();
     public void initialize() {
-       refresh();
-
-    }
-    void refresh(){
         try {
+            refresh(ds.showAll());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        cbtri.setItems(FXCollections.observableArrayList("Ville","Pays","Code postal"));
+        recherche_avance();
+    }
+    void refresh(List<Destination> destinationList){
+
             colcodepostal.setCellValueFactory(new PropertyValueFactory<>("code_postal"));
             collat.setCellValueFactory(new PropertyValueFactory<>("latitude"));
             collong.setCellValueFactory(new PropertyValueFactory<>("longitude"));
             colpays.setCellValueFactory(new PropertyValueFactory<>("pays"));
             colville.setCellValueFactory(new PropertyValueFactory<>("ville"));
-            obslist= FXCollections.observableArrayList(ds.showAll());
+            obslist= FXCollections.observableArrayList(destinationList);
             tabDestination.setItems(obslist);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     @FXML
@@ -86,7 +94,7 @@ public class DestinationBack {
         dest.setLongitude(Float.parseFloat(tflong.getText()));
         try {
             ds.insert(dest);
-            refresh();
+            refresh(ds.showAll());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -108,7 +116,7 @@ public class DestinationBack {
                 dest.setLatitude(Float.parseFloat(tflat.getText()));
                 dest.setLongitude(Float.parseFloat(tflong.getText()));
                 ds.update(dest);
-                refresh();
+                refresh(ds.showAll());
                 tabDestination.refresh();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -124,7 +132,7 @@ public class DestinationBack {
         if(dest!=null){
             try {
                 ds.delete(dest.getId_Destination());
-                refresh();
+                refresh(ds.showAll());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -205,6 +213,42 @@ public class DestinationBack {
         tfville.setText(dest.getVille());
         tfpays.setText(dest.getPays());
 
+    }
+    @FXML
+    void tri(ActionEvent event) {
+        try {
+            refresh(ds.triParCritere(cbtri.getValue()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void recherche_avance(){
+        ObservableList<Destination> data= null;
+        try {
+            data = FXCollections.observableArrayList(ds.showAll());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        FilteredList<Destination> filteredList=new FilteredList<>(data);
+        tfrechercher.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(
+                    d->{
+                        if(newValue==null || newValue.isEmpty()){
+                            return true;
+                        } else if (d.getPays().toLowerCase().contains(newValue.toLowerCase())) {
+                            return true;
+                        } else if (d.getVille().toLowerCase().contains(newValue.toLowerCase())) {
+                        return true;
+                        } else if (String.valueOf(d.getCode_postal()).contains(newValue.toLowerCase())) {
+                            return true;
+                        } else{
+                            return false;
+                        }
+                    }
+            );
+            refresh(filteredList);
+
+        });
     }
 
 }
