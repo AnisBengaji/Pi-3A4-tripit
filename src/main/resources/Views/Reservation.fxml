@@ -48,6 +48,8 @@
             <Button text="Ajouter" onAction="#handleAddReservation" styleClass="action-button"/>
             <Button text="Mettre à jour" onAction="#handleUpdateReservation" styleClass="action-button"/>
             <Button text="Supprimer" onAction="#handleDeleteReservation" styleClass="delete-button"/>
+            <!-- Bouton de paiement Stripe -->
+            <Button text="Payer avec Stripe" layoutX="150" layoutY="260" onAction="#handlePayButton" styleClass="payment-button"/>
         </HBox>
 
         <!-- ListView pour afficher les réservations -->
