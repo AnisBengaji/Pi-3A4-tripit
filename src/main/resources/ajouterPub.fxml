@@ -14,7 +14,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.ajouterPubController" styleClass="travel-background">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@newstyle.css" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.ajouterPubController" styleClass="travel-background">
     <children>
         <!-- Main Container -->
         <VBox alignment="CENTER" layoutX="42.4" layoutY="40.0" prefHeight="502.0" prefWidth="588.0" spacing="20.0" styleClass="main-container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">

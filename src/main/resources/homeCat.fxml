@@ -1,121 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="833.0" prefWidth="1300.0" styleClass="travel-background"
-            stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.2"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.projeti.controllers.HomeCategoryController">
+<AnchorPane fx:id="root" prefHeight="787.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.HomeCategoryController">
+    <!-- Apply CSS stylesheet -->
+    <stylesheets>
+        <URL value="@newstyle.css" />
+    </stylesheets>
 
-    <!-- Top Section: Header with Category Management -->
-    <top>
-        <HBox prefHeight="60.0" prefWidth="1200.0" styleClass="header-box">
-            <children>
-                <Label text="Category Management" styleClass="title-label">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-            </children>
-        </HBox>
-    </top>
+    <!-- Background Image -->
+    <ImageView fitHeight="800" fitWidth="1200">
+        <image>
+            <Image url="@icons/background.jpg" />
+        </image>
+    </ImageView>
 
-    <!-- Main Content Section -->
-    <center>
-        <VBox prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER" spacing="15" styleClass="main-container">
-            <children>
-                <!-- Search Section -->
-                <HBox prefHeight="60.0" prefWidth="900.0" spacing="15">
+    <!-- Left Side Menu -->
+    <VBox fx:id="menu" prefHeight="800" prefWidth="250" style="-fx-background-color: rgba(0, 0, 0, 0.7);">
+        <!-- Logo -->
+        <Label alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold; -fx-padding: 30px;" text="Trip It">
+            <font>
+                <Font name="Arial" size="28" />
+            </font>
+        </Label>
+
+        <!-- Menu Items -->
+        <Button fx:id="homeButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Home">
+            <graphic>
+                <ImageView fitHeight="28" fitWidth="28">
+                    <image>
+                        <Image url="@icons/home.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="destinationsButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Destinations">
+            <graphic>
+                <ImageView fitHeight="28" fitWidth="28">
+                    <image>
+                        <Image url="@icons/destination.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="bookingsButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Reservation">
+            <graphic>
+                <ImageView fitHeight="28" fitWidth="28">
+                    <image>
+                        <Image url="@icons/reserve.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="galleryButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Offre">
+            <graphic>
+                <ImageView fitHeight="28" fitWidth="28">
+                    <image>
+                        <Image url="@icons/offer.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="tipsButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Publications">
+            <graphic>
+                <ImageView fitHeight="28" fitWidth="28">
+                    <image>
+                        <Image url="@icons/post1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="eventbutton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Evenement">
+            <graphic>
+                <ImageView fitHeight="28" fitWidth="28">
+                    <image>
+                        <Image url="@icons/event.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="contactButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Profile">
+            <graphic>
+                <ImageView fitHeight="28" fitWidth="28">
+                    <image>
+                        <Image url="@icons/profile.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </VBox>
+
+    <!-- Main Content Area -->
+    <ScrollPane fx:id="contentArea" layoutX="250" layoutY="0" prefHeight="787.0" prefWidth="836.0" style="-fx-background-color: transparent;">
+        <VBox fx:id="mainContent" prefHeight="806.0" prefWidth="854.0" spacing="20" style="-fx-padding: 30px;">
+            <!-- Header Section -->
+            <HBox prefHeight="100.0" prefWidth="950.0" spacing="20">
+                <VBox alignment="CENTER" prefHeight="100.0" prefWidth="399.0">
                     <children>
-                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="400.0">
-                            <children>
-                                <Label prefHeight="60.0" prefWidth="221.0" text="Les Categories" styleClass="subtitle-label">
-                                    <font>
-                                        <Font size="22.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <Pane prefHeight="60.0" prefWidth="500.0">
-                            <children>
-                                <TextField fx:id="categorySearchTextField" layoutX="0.0" layoutY="10.0"
-                                           prefHeight="35.0" prefWidth="200.0" promptText="Search"
-                                           styleClass="search-bar"/>
-                                <Button fx:id="btnSearch" layoutX="210.0" layoutY="10.0"
-                                        mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0"
-                                        styleClass="button-main" text="Search" textFill="WHITE"/>
-                            </children>
-                        </Pane>
+                        <Label prefHeight="96.0" prefWidth="221.0" text="Les Categories" textFill="00CED1">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
                     </children>
-                </HBox>
+                </VBox>
+                <Pane prefHeight="100.0" prefWidth="502.0">
+                    <children>
+                        <TextField fx:id="categorySearchTextField" layoutX="15.0" layoutY="37.0" prefHeight="34.0" prefWidth="200.0" promptText="Search " styleClass="search-bar" />
+                    </children>
+                </Pane>
+            </HBox>
 
-                <!-- Switch to Publications Button -->
-                <Button fx:id="switchToPubButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0"
-                        styleClass="button-main" onAction="#switchToHomePub">
-                    <graphic>
-                        <ImageView fx:id="icon" fitHeight="30.0" fitWidth="30.0">
-                            <image>
-                                <Image url="@icons/post1.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
+            <!-- Switch to Publications Button -->
+            <Button fx:id="switchToPubButton" onAction="#switchToHomePub" prefHeight="0.0" prefWidth="29.0" styleClass="button-main">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+                        <image>
+                            <Image url="@icons/category.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
 
-                <!-- ScrollPane with Category List -->
-                <ScrollPane prefHeight="400.0" prefWidth="900.0" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
-                    <content>
-                        <ListView fx:id="categoriesListView" prefHeight="400.0" prefWidth="900.0"
-                                  styleClass="category-list" />
-                    </content>
-                </ScrollPane>
-            </children>
+            <!-- Category ListView -->
+            <ScrollPane prefHeight="612.0" prefWidth="845.0" styleClass="scroll-pane">
+                <content>
+                    <ListView fx:id="categoriesListView" prefHeight="558.0" prefWidth="896.0" styleClass="category-list" />
+                </content>
+            </ScrollPane>
         </VBox>
-    </center>
-
-    <!-- Right Section with Action Buttons -->
-    <right>
-        <VBox alignment="CENTER" prefWidth="220.0" spacing="25" styleClass="action-buttons-container">
-            <children>
-                <!-- Detail Button -->
-                <Button fx:id="btnDetail" onAction="#goToDetailCategory" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0"
-                        styleClass="button-main" text="Detail" textFill="WHITE" >
-                    <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@/icons/detail.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-
-                <!-- Add Button -->
-                <Button fx:id="btnAjouter" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0"
-                        styleClass="button-main" text="Ajouter" textFill="WHITE" onAction="#goToAjouterCat">
-                    <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@/icons/addpost.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-
-                <!-- Delete Button -->
-                <Button fx:id="btnDelete" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0"
-                        styleClass="button-main" text="Delete" textFill="WHITE" >
-                    <graphic>
-                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@/icons/delete.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-            </children>
-        </VBox>
-    </right>
-</BorderPane>
+    </ScrollPane>
+   <VBox layoutX="1233.0" layoutY="261.0" prefHeight="116.0" prefWidth="121.0">
+      <children>
+      
+          <!-- Place for buttons outside ScrollPane, to the right of the ListView -->
+          <VBox prefHeight="118.0" prefWidth="162.0" spacing="20">
+              <Button fx:id="btnDetail" mnemonicParsing="false" onAction="#goToDetailCategory" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Detail" textFill="WHITE">
+                  <graphic>
+                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+                          <image>
+                              <Image url="@icons/detail.png" />
+                          </image>
+                      </ImageView>
+                  </graphic>
+              </Button>
+              <Button fx:id="btnAjouter" mnemonicParsing="false" onAction="#goToAjouterCat" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Ajouter" textFill="WHITE">
+                  <graphic>
+                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+                          <image>
+                              <Image url="@icons/addpost.png" />
+                          </image>
+                      </ImageView>
+                  </graphic>
+              </Button>
+          </VBox>
+      </children>
+   </VBox>
+</AnchorPane>

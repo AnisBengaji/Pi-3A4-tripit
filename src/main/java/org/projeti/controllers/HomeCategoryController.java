@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.projeti.Service.CategorieService;
@@ -33,8 +34,12 @@ public class HomeCategoryController {
     private Button switchToPubButton;
     @FXML
     private ListView<Categorie> categoriesListView;
+    /*@FXML
+    private BorderPane root; */
+
     @FXML
-    private BorderPane root;
+    private AnchorPane root;
+
 
     private CategorieService categorieService = new CategorieService();
     private ObservableList<Categorie> categories = FXCollections.observableArrayList();

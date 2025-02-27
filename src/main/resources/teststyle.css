@@ -1,0 +1,252 @@
+/* Main application styles */
+.main-container {
+    -fx-background-color: linear-gradient(to bottom, #01788e, rgba(1,120,142,255));
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-padding: 15;
+}
+
+/* Top navigation bar */
+.top-nav {
+    -fx-background-color: rgba(1,120,142,255);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 5);
+    -fx-padding: 15 25;
+    -fx-spacing: 20;
+    -fx-alignment: center-left;
+    -fx-border-radius: 10;
+}
+
+/* App Title */
+.app-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 2);
+}
+
+/* Search Field */
+.search-field {
+    -fx-background-radius: 20px;
+    -fx-pref-width: 300px;
+    -fx-padding: 10 15;
+    -fx-prompt-text-fill: #010001;
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-border-color: rgba(1,120,142,255);
+    -fx-border-radius: 20;
+}
+
+.search-field:focused {
+    -fx-background-color: white;
+    -fx-border-color: white;
+}
+
+/* Buttons */
+.create-button, .filter-button {
+    -fx-background-radius: 20px;
+    -fx-background-color: #ff742d;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-transition: background-color 0.3s, scale 0.2s;
+}
+
+.create-button:hover, .filter-button:hover {
+    -fx-background-color: #e66424;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Categories panel */
+.categories-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-padding: 20;
+    -fx-spacing: 15;
+    -fx-border-radius: 10px;
+    -fx-border-color: white;
+}
+
+.section-header {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.categories-panel .list-cell {
+    -fx-padding: 10;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Subtle contrast to make text readable */
+    -fx-border-color: rgba(255, 255, 255, 0.4); /* Adds visibility */
+    -fx-border-radius: 8px;
+    -fx-transition: background-color 0.3s, text-fill 0.3s, font-weight 0.3s;
+}
+
+.categories-panel .list-cell {
+    -fx-padding: 10;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(1, 120, 142, 0.5); /* Subtle but visible by default */
+    -fx-border-color: rgba(255, 255, 255, 0.6); /* Makes it stand out */
+    -fx-border-radius: 8px;
+    -fx-transition: background-color 0.3s, text-fill 0.3s, font-weight 0.3s;
+}
+
+/* Hover Effect - Brighter for better visibility */
+.categories-panel .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.7);
+    -fx-text-fill: #010001;
+    -fx-font-weight: bold;
+}
+
+/* Selected Effect - Strong contrast */
+.categories-panel .list-cell:selected {
+    -fx-background-color: #ff742d;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0, 0, 3);
+}
+
+
+/* Publications Feed */
+.feed-container {
+    -fx-background-color: transparent;
+}
+
+.publication-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 2);
+    -fx-padding: 20;
+    -fx-spacing: 15;
+    -fx-transition: transform 0.3s;
+}
+
+.publication-card:hover {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* Publication Header */
+.publication-header {
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+.author-avatar {
+    -fx-background-radius: 50%;
+    -fx-border-color: rgba(1,120,142,255);
+    -fx-border-width: 2;
+}
+
+.author-name {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #010001;
+}
+
+.publication-date {
+    -fx-text-fill: #65676b;
+    -fx-font-size: 12px;
+}
+
+.visibility-badge {
+    -fx-background-color: rgba(1,120,142,255);
+    -fx-background-radius: 10px;
+    -fx-padding: 4 10;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+
+/* Publication Content */
+.publication-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-text-fill: #010001;
+}
+
+.publication-content {
+    -fx-font-size: 14px;
+    -fx-line-spacing: 5px;
+}
+
+/* Category Tag */
+.category-tag {
+    -fx-background-color: rgba(1,120,142,255);
+    -fx-background-radius: 12px;
+    -fx-padding: 6 14;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+
+/* Publication Actions */
+.publication-actions {
+    -fx-padding: 10 0;
+    -fx-spacing: 10;
+    -fx-border-color: rgba(1,120,142,255);
+    -fx-border-width: 1 0 0 0;
+}
+
+.action-button {
+    -fx-background-color: #ff742d;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 15;
+    -fx-border-radius: 5px;
+}
+
+.action-button:hover {
+    -fx-background-color: #e66424;
+}
+
+/* Comments Section */
+.comments-section {
+    -fx-padding: 10 0 0 0;
+    -fx-spacing: 10;
+    -fx-border-color: rgba(1,120,142,255);
+    -fx-border-width: 1 0 0 0;
+}
+
+.comment-field {
+    -fx-background-radius: 20px;
+    -fx-padding: 8 15;
+    -fx-border-color: rgba(1,120,142,255);
+}
+
+.post-comment-button {
+    -fx-background-radius: 20px;
+    -fx-background-color: #ff742d;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-transition: background-color 0.3s;
+}
+
+.post-comment-button:hover {
+    -fx-background-color: #e66424;
+}
+
+/* Floating Action Button */
+.fab-container {
+    -fx-padding: 20;
+    -fx-alignment: bottom-right;
+}
+
+.floating-action-button {
+    -fx-background-color: #ff742d;
+    -fx-background-radius: 30px;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.3s, scale 0.2s;
+}
+
+.floating-action-button:hover {
+    -fx-background-color: #e66424;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}

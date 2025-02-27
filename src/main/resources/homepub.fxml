@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -15,16 +17,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<AnchorPane fx:id="root" prefHeight="750.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.HomePublicationController">
+<AnchorPane fx:id="root" prefHeight="882.0" prefWidth="1640.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.HomePublicationController">
    <!-- Apply CSS stylesheet -->
    <stylesheets>
-      <URL value="@styles2.css" />
+      <URL value="@newstyle.css" />
    </stylesheets>
 
    <!-- Background Image -->
-   <ImageView fitHeight="800" fitWidth="1200">
+   <ImageView fitHeight="800" fitWidth="1170.0">
       <image>
          <Image url="@icons/background.jpg" />
       </image>
@@ -40,7 +40,7 @@
       </Label>
 
       <!-- Menu Items -->
-      <Button fx:id="homeButton" styleClass="menu-button" text="Home">
+      <Button fx:id="homeButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Home">
          <graphic>
             <ImageView fitHeight="28" fitWidth="28">
                <image>
@@ -49,7 +49,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="destinationsButton" styleClass="menu-button" text="Destinations">
+      <Button fx:id="destinationsButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Destinations">
          <graphic>
             <ImageView fitHeight="28" fitWidth="28">
                <image>
@@ -58,7 +58,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="bookingsButton" styleClass="menu-button" text="Reservation">
+      <Button fx:id="bookingsButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Reservation">
          <graphic>
             <ImageView fitHeight="28" fitWidth="28">
                <image>
@@ -67,7 +67,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="galleryButton" styleClass="menu-button" text="offre">
+      <Button fx:id="galleryButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="offre">
          <graphic>
             <ImageView fitHeight="28" fitWidth="28">
                <image>
@@ -76,7 +76,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="tipsButton" styleClass="menu-button" text="Publications">
+      <Button fx:id="tipsButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="Publications">
          <graphic>
             <ImageView fitHeight="28" fitWidth="28">
                <image>
@@ -85,7 +85,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="eventbutton" styleClass="menu-button" text="evenement">
+      <Button fx:id="eventbutton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="evenement">
          <graphic>
             <ImageView fitHeight="28" fitWidth="28">
                <image>
@@ -94,7 +94,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="contactButton" styleClass="menu-button" text="profile">
+      <Button fx:id="contactButton" prefHeight="40.0" prefWidth="200.0" styleClass="menu-button" text="profile">
          <graphic>
             <ImageView fitHeight="28" fitWidth="28">
                <image>
@@ -106,7 +106,7 @@
    </VBox>
 
    <!-- Main Content Area -->
-   <ScrollPane fx:id="contentArea" layoutX="250" layoutY="0" prefHeight="800" prefWidth="950" style="-fx-background-color: transparent;">
+   <ScrollPane fx:id="contentArea" layoutX="250" layoutY="0" prefHeight="882.0" prefWidth="1386.0" style="-fx-background-color: transparent;">
       <VBox fx:id="mainContent" spacing="20" style="-fx-padding: 30px;">
          <!-- Header Section -->
          <HBox prefHeight="100.0" prefWidth="950.0" spacing="20">
@@ -119,10 +119,10 @@
                   </Label>
                </children>
             </VBox>
-            <Pane prefHeight="100.0" prefWidth="330.0">
+            <Pane prefHeight="100.0" prefWidth="502.0">
                <children>
-                  <TextField fx:id="searchTextField" layoutX="-12.0" layoutY="37.0" prefHeight="30.0" prefWidth="200.0" promptText="Search " styleClass="search-bar" />
-                  <ComboBox fx:id="sortComboBox" layoutX="200.0" layoutY="37.0" prefHeight="30.0" prefWidth="150.0" promptText="Sort by Date" >
+                  <TextField fx:id="searchTextField" layoutX="15.0" layoutY="37.0" prefHeight="34.0" prefWidth="200.0" promptText="Search " styleClass="search-bar" />
+                  <ComboBox fx:id="sortComboBox" layoutX="273.0" layoutY="35.0" prefHeight="32.0" prefWidth="163.0" promptText="Sort by Date">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Newest to Oldest" />
@@ -135,7 +135,7 @@
          </HBox>
 
          <!-- Switch to Categories Button -->
-         <Button fx:id="switchToCatButton" onAction="#switchToHomeCat" prefHeight="40.0" prefWidth="200.0" styleClass="button-main" text="Switch to Categories">
+         <Button fx:id="switchToCatButton" onAction="#switchToHomeCat" prefHeight="0.0" prefWidth="29.0" styleClass="button-main">
             <graphic>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
                   <image>
@@ -146,32 +146,14 @@
          </Button>
 
          <!-- Publications ListView -->
-         <ScrollPane prefHeight="550.0" prefWidth="950.0" styleClass="scroll-pane">
+         <ScrollPane prefHeight="590.0" prefWidth="2388.0" styleClass="scroll-pane">
             <content>
-               <ListView fx:id="publicationsListView" prefHeight="550.0" prefWidth="950.0" styleClass="publication-list" />
+               <ListView fx:id="publicationsListView" prefHeight="558.0" prefWidth="860.0" styleClass="publication-list" />
             </content>
          </ScrollPane>
 
          <!-- Detail, Ajouter, and Translate Buttons -->
          <HBox alignment="CENTER" spacing="20">
-            <Button fx:id="btnDetail" mnemonicParsing="false" onAction="#goToDetail" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Detail" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
-                     <image>
-                        <Image url="@icons/detail.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btnAjouter" mnemonicParsing="false" onAction="#goToAjouterPub" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Ajouter" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
-                     <image>
-                        <Image url="@icons/addpost.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             <!-- Translate Button and Language ComboBox -->
             <Button fx:id="btnTranslate" mnemonicParsing="false" onAction="#translatePublication" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Translate" textFill="WHITE">
                <graphic>
@@ -196,4 +178,30 @@
          </HBox>
       </VBox>
    </ScrollPane>
+   <VBox layoutX="1204.0" layoutY="332.0" prefHeight="200.0" prefWidth="308.0">
+      <children>
+         <VBox prefHeight="200.0" prefWidth="100.0" spacing="40.0">
+            <children>
+               <Button fx:id="btnDetail" mnemonicParsing="false" onAction="#goToDetail" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Detail" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+                        <image>
+                           <Image url="@icons/detail.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button fx:id="btnAjouter" mnemonicParsing="false" onAction="#goToAjouterPub" prefHeight="40.0" prefWidth="150.0" styleClass="button-main" text="Ajouter" textFill="WHITE">
+                  <graphic>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+                        <image>
+                           <Image url="@icons/addpost.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </children>
+         </VBox>
+      </children>
+   </VBox>
 </AnchorPane>

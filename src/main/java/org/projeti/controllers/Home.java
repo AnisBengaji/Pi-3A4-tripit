@@ -13,7 +13,7 @@ public class Home extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/testhome.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/social.fxml"));
             primaryStage.setTitle("Accueil");
             primaryStage.setScene(new Scene(root, 800, 600));
             primaryStage.show();

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.EditPublicationController">
+    <top>
+        <Label text="Edit Publication" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+            <BorderPane.margin>
+                <Insets top="15.0" />
+            </BorderPane.margin>
+        </Label>
+    </top>
+    <center>
+        <VBox spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <GridPane hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="100.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Title:" />
+                        <Label text="Category:" GridPane.rowIndex="1" />
+                        <Label text="Visibility:" GridPane.rowIndex="2" />
+                        <Label text="Image:" GridPane.rowIndex="3" />
+                        <Label text="Content:" GridPane.rowIndex="4" />
+                        <TextField fx:id="titleField" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="categoryComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="visibilityComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <children>
+                                <TextField fx:id="imagePathField" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="browseButton" mnemonicParsing="false" text="Browse" />
+                            </children>
+                        </HBox>
+                        <TextArea fx:id="contentArea" prefHeight="150.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    </children>
+                </GridPane>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+            </BorderPane.margin>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
+                <Button fx:id="saveButton" defaultButton="true" mnemonicParsing="false" text="Save" />
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+            </BorderPane.margin>
+        </HBox>
+    </bottom>
+</BorderPane>

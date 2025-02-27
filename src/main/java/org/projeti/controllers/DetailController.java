@@ -394,7 +394,7 @@ public class DetailController {
                     cell.setCellValue(columns[i]);
                 }
 
-                // Fill data rows
+
                 int rowNum = 1;
                 for (Publication publication : publicationsTableView.getItems()) {
                     Row row = sheet.createRow(rowNum++);
@@ -408,12 +408,12 @@ public class DetailController {
                     row.createCell(7).setCellValue(publication.getCategorie().getIdCategorie());
                 }
 
-                // Auto-size columns
+
                 for (int i = 0; i < columns.length; i++) {
                     sheet.autoSizeColumn(i);
                 }
 
-                // Write to file
+
                 try (FileOutputStream fileOut = new FileOutputStream(file)) {
                     workbook.write(fileOut);
                 }

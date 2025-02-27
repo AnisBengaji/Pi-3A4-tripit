@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.projeti.controllers.CreatePublicationController"
+      spacing="10">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label text="Create Publication" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="titleField" promptText="Enter title..." maxWidth="400"/>
+
+    <TextArea fx:id="contentArea" promptText="Enter content..." maxWidth="400" prefRowCount="4"/>
+
+    <ComboBox fx:id="categoryComboBox" promptText="Select category" maxWidth="400"/>
+
+    <ComboBox fx:id="visibilityComboBox" promptText="Select visibility" maxWidth="400"/>
+
+    <HBox spacing="5">
+        <TextField fx:id="imagePathField" promptText="Image path..." editable="false" HBox.hgrow="ALWAYS"/>
+        <Button fx:id="browseButton" text="Browse"/>
+    </HBox>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button fx:id="cancelButton" text="Cancel"/>
+        <Button fx:id="saveButton" text="Save" style="-fx-background-color: #1877f2; -fx-text-fill: white;"/>
+    </HBox>
+
+</VBox>

@@ -104,6 +104,151 @@ public class PublicationService implements CRUD<Publication> {
             ps.executeUpdate();
         }
     }
+
+    public List<Publication> searchPublications(String searchTerm) throws SQLException {
+        List<Publication> result = new ArrayList<>();
+        String searchTermLike = "%" + searchTerm + "%";
+
+        String req = "SELECT p.*, c.nomCategorie FROM publication p " +
+                "LEFT JOIN categorie c ON p.idCategorie = c.idCategorie " +
+                "WHERE p.title LIKE ? OR p.contenu LIKE ? OR p.author LIKE ?";
+
+        ps = cnx.prepareStatement(req);
+        ps.setString(1, searchTermLike);
+        ps.setString(2, searchTermLike);
+        ps.setString(3, searchTermLike);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Publication p = new Publication();
+            p.setId_publication(rs.getInt("id_publication"));
+            p.setTitle(rs.getString("title"));
+            p.setContenu(rs.getString("contenu"));
+            p.setDate_publication(rs.getDate("date_publication"));
+            p.setAuthor(rs.getString("author"));
+            p.setVisibility(rs.getString("visibility"));
+            p.setImage(rs.getString("image"));
+
+            int idCategorie = rs.getInt("idCategorie");
+            String nomCategorie = rs.getString("nomCategorie");
+
+            Categorie categorie = new Categorie(idCategorie, nomCategorie);
+            p.setCategorie(categorie);
+
+            result.add(p);
+        }
+
+        return result;
+    }
+
+    public List<Publication> getPublicationsByCategory(String categoryName) throws SQLException {
+        List<Publication> result = new ArrayList<>();
+
+        String req = "SELECT p.*, c.nomCategorie FROM publication p " +
+                "JOIN categorie c ON p.idCategorie = c.idCategorie " +
+                "WHERE c.nomCategorie = ?";
+
+        ps = cnx.prepareStatement(req);
+        ps.setString(1, categoryName);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Publication p = new Publication();
+            p.setId_publication(rs.getInt("id_publication"));
+            p.setTitle(rs.getString("title"));
+            p.setContenu(rs.getString("contenu"));
+            p.setDate_publication(rs.getDate("date_publication"));
+            p.setAuthor(rs.getString("author"));
+            p.setVisibility(rs.getString("visibility"));
+            p.setImage(rs.getString("image"));
+
+            int idCategorie = rs.getInt("idCategorie");
+            String nomCategorie = rs.getString("nomCategorie");
+
+            Categorie categorie = new Categorie(idCategorie, nomCategorie);
+            p.setCategorie(categorie);
+
+            result.add(p);
+        }
+
+        return result;
+    }
+
+    public List<Publication> getPublicationsByAuthor(String authorName) throws SQLException {
+        List<Publication> result = new ArrayList<>();
+
+        String req = "SELECT p.*, c.nomCategorie FROM publication p " +
+                "LEFT JOIN categorie c ON p.idCategorie = c.idCategorie " +
+                "WHERE p.author = ?";
+
+        ps = cnx.prepareStatement(req);
+        ps.setString(1, authorName);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Publication p = new Publication();
+            p.setId_publication(rs.getInt("id_publication"));
+            p.setTitle(rs.getString("title"));
+            p.setContenu(rs.getString("contenu"));
+            p.setDate_publication(rs.getDate("date_publication"));
+            p.setAuthor(rs.getString("author"));
+            p.setVisibility(rs.getString("visibility"));
+            p.setImage(rs.getString("image"));
+
+            int idCategorie = rs.getInt("idCategorie");
+            String nomCategorie = rs.getString("nomCategorie");
+
+            Categorie categorie = new Categorie(idCategorie, nomCategorie);
+            p.setCategorie(categorie);
+
+            result.add(p);
+        }
+
+        return result;
+    }
+
+    public List<Publication> getPublicationsByVisibility(String visibility) throws SQLException {
+        List<Publication> result = new ArrayList<>();
+
+        String req = "SELECT p.*, c.nomCategorie FROM publication p " +
+                "LEFT JOIN categorie c ON p.idCategorie = c.idCategorie " +
+                "WHERE p.visibility = ?";
+
+        ps = cnx.prepareStatement(req);
+        ps.setString(1, visibility);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Publication p = new Publication();
+            p.setId_publication(rs.getInt("id_publication"));
+            p.setTitle(rs.getString("title"));
+            p.setContenu(rs.getString("contenu"));
+            p.setDate_publication(rs.getDate("date_publication"));
+            p.setAuthor(rs.getString("author"));
+            p.setVisibility(rs.getString("visibility"));
+            p.setImage(rs.getString("image"));
+
+            int idCategorie = rs.getInt("idCategorie");
+            String nomCategorie = rs.getString("nomCategorie");
+
+            Categorie categorie = new Categorie(idCategorie, nomCategorie);
+            p.setCategorie(categorie);
+
+            result.add(p);
+        }
+
+        return result;
+    }
+
+    public void deletePublication(int publicationId) throws SQLException {
+        Publication publication = new Publication();
+        publication.setId_publication(publicationId);
+        delete(publication);
+    }
 }
 
 

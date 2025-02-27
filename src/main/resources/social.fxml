@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.net.*?>
+<?import javafx.scene.effect.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.projeti.controllers.SocialController"
+      prefWidth="800" prefHeight="600" styleClass="main-container">
+
+    <stylesheets>
+        <URL value="@teststyle.css" />
+    </stylesheets>
+
+    <!-- Top Navigation Bar -->
+    <HBox styleClass="top-nav">
+        <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
+        <Label text="PubliShare" styleClass="app-title"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <TextField promptText="Search publications..." styleClass="search-field" fx:id="searchField" onKeyReleased="#handleSearch" />
+        <Button text="+" styleClass="create-button" onAction="#showCreatePublicationDialog" />
+        <MenuButton text="Filters" styleClass="filter-button">
+            <items>
+                <MenuItem text="All Publications" onAction="#filterAll" />
+                <MenuItem text="My Publications" onAction="#filterMine" />
+                <Menu text="By Category">
+                    <items>
+                        <!-- Categories will be populated dynamically -->
+                    </items>
+                </Menu>
+                <MenuItem text="Public Only" onAction="#filterPublic" />
+            </items>
+        </MenuButton>
+    </HBox>
+
+    <!-- Main Content Area -->
+    <SplitPane dividerPositions="0.25" VBox.vgrow="ALWAYS">
+        <!-- Left Panel - Categories -->
+        <VBox styleClass="categories-panel">
+            <Label text="Categories" styleClass="section-header"/>
+            <ListView fx:id="categoriesListView" VBox.vgrow="ALWAYS" onMouseClicked="#handleCategorySelect" />
+        </VBox>
+
+        <!-- Right Panel - Publications Feed -->
+        <ScrollPane fitToWidth="true" styleClass="feed-container">
+            <VBox fx:id="publicationsContainer" spacing="15">
+                <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+                <!-- Publication Template - will be created dynamically in controller -->
+                <fx:define>
+                    <VBox fx:id="publicationTemplate" styleClass="publication-card">
+                        <HBox styleClass="publication-header">
+                            <ImageView fitHeight="40" fitWidth="40" styleClass="author-avatar" fx:id="authorAvatar" />
+                            <VBox>
+                                <Label text="Author Name" styleClass="author-name" fx:id="authorName" />
+                                <Label text="Date Published" styleClass="publication-date" fx:id="publicationDate" />
+                            </VBox>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label text="Public" styleClass="visibility-badge" fx:id="visibilityBadge" />
+                            <MenuButton styleClass="publication-menu">
+                                <items>
+                                    <MenuItem text="Edit" fx:id="editMenu" />
+                                    <MenuItem text="Delete" fx:id="deleteMenu" />
+                                    <MenuItem text="Share" fx:id="shareMenu" />
+                                </items>
+                            </MenuButton>
+                        </HBox>
+
+                        <Label text="Publication Title" styleClass="publication-title" fx:id="publicationTitle" wrapText="true" />
+
+                        <ImageView fx:id="publicationImage" fitWidth="400" preserveRatio="true"
+                                   styleClass="publication-image" />
+
+                        <TextFlow fx:id="publicationContent" styleClass="publication-content" />
+
+                        <Label text="Category Name" styleClass="category-tag" fx:id="categoryName" />
+
+                        <HBox styleClass="publication-actions">
+                            <Button text="Like" styleClass="action-button" fx:id="likeButton" />
+                            <Button text="Comment" styleClass="action-button" fx:id="commentButton" />
+                            <Button text="Share" styleClass="action-button" fx:id="shareButton" />
+                        </HBox>
+
+                        <!-- Comments section (initially collapsed) -->
+                        <VBox fx:id="commentsSection" styleClass="comments-section" managed="false" visible="false">
+                            <HBox>
+                                <TextField promptText="Write a comment..." styleClass="comment-field" fx:id="commentField" HBox.hgrow="ALWAYS" />
+                                <Button text="Post" styleClass="post-comment-button" fx:id="postCommentButton" />
+                            </HBox>
+                            <VBox fx:id="commentsContainer" styleClass="comments-container" />
+                        </VBox>
+                    </VBox>
+                </fx:define>
+            </VBox>
+        </ScrollPane>
+    </SplitPane>
+
+    <!-- Floating Action Button -->
+    <StackPane StackPane.alignment="BOTTOM_RIGHT" styleClass="fab-container">
+        <Button fx:id="buttonnavigateadd" text="+" styleClass="floating-action-button" onAction="#showCreatePublicationDialog">
+            <effect>
+                <DropShadow />
+            </effect>
+        </Button>
+    </StackPane>
+</VBox>

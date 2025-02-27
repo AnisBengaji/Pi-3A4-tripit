@@ -140,7 +140,7 @@ public class ajouterPubController {
     private void returnHome() {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homePub.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/social.fxml"));
             Parent root = loader.load();
 
             // Get the current stage
@@ -156,4 +156,5 @@ public class ajouterPubController {
             System.err.println("Failed to load homePub.fxml: " + e.getMessage());
         }
     }
+
 }
