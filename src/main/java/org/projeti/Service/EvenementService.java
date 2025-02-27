@@ -14,8 +14,8 @@ public class EvenementService implements CRUD<Evenement> {
 
     @Override
     public void add(Evenement evenement) {
-        String query = "INSERT INTO evenement (nom, date_evenement_depart, date_evenement_arriver, lieu, description, price) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO evenement (nom, date_evenement_depart, date_evenement_arriver, lieu, description, price, latitude, longitude) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, evenement.getNom());
@@ -24,6 +24,8 @@ public class EvenementService implements CRUD<Evenement> {
             stmt.setString(4, evenement.getLieu());
             stmt.setString(5, evenement.getDescription());
             stmt.setFloat(6, evenement.getPrice());
+            stmt.setDouble(7, evenement.getLatitude());  // Ajout de la latitude
+            stmt.setDouble(8, evenement.getLongitude()); // Ajout de la longitude
 
             stmt.executeUpdate();
 
@@ -40,7 +42,7 @@ public class EvenementService implements CRUD<Evenement> {
     @Override
     public void update(Evenement evenement) {
         String query = "UPDATE evenement SET nom = ?, date_evenement_depart = ?, date_evenement_arriver = ?, "
-                + "lieu = ?, description = ?, price = ? WHERE id_evenement = ?";
+                + "lieu = ?, description = ?, price = ?, latitude = ?, longitude = ? WHERE id_evenement = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, evenement.getNom());
@@ -49,7 +51,9 @@ public class EvenementService implements CRUD<Evenement> {
             stmt.setString(4, evenement.getLieu());
             stmt.setString(5, evenement.getDescription());
             stmt.setFloat(6, evenement.getPrice());
-            stmt.setInt(7, evenement.getId_Evenement());
+            stmt.setDouble(7, evenement.getLatitude()); // Mise à jour de la latitude
+            stmt.setDouble(8, evenement.getLongitude()); // Mise à jour de la longitude
+            stmt.setInt(9, evenement.getId_Evenement());
 
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated == 0) {
@@ -88,7 +92,9 @@ public class EvenementService implements CRUD<Evenement> {
                             rs.getDate("date_evenement_arriver").toLocalDate(),
                             rs.getString("lieu"),
                             rs.getString("description"),
-                            rs.getFloat("price")
+                            rs.getFloat("price"),
+                            rs.getDouble("latitude"),   // Récupération de la latitude
+                            rs.getDouble("longitude")   // Récupération de la longitude
                     );
                 }
                 throw new RuntimeException("Aucun événement trouvé avec l'ID : " + id);
@@ -113,7 +119,9 @@ public class EvenementService implements CRUD<Evenement> {
                         rs.getDate("date_evenement_arriver").toLocalDate(),
                         rs.getString("lieu"),
                         rs.getString("description"),
-                        rs.getFloat("price")
+                        rs.getFloat("price"),
+                        rs.getDouble("latitude"),  // Récupération de la latitude
+                        rs.getDouble("longitude")  // Récupération de la longitude
                 ));
             }
         } catch (SQLException e) {

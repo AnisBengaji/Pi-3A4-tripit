@@ -29,6 +29,9 @@ public class EvenementController {
     @FXML private TextField lieuField;
     @FXML private TextField descriptionField;
     @FXML private TextField priceField;
+    @FXML private TextField latitudeField;
+    @FXML private TextField longitudeField;
+
 
     private Evenement selectedEvent;
     private EvenementService evenementService;
@@ -85,12 +88,18 @@ public class EvenementController {
         lieuField.setText(event.getLieu());
         descriptionField.setText(event.getDescription());
         priceField.setText(String.valueOf(event.getPrice()));
+        latitudeField.setText(String.valueOf(event.getLatitude()));
+        longitudeField.setText(String.valueOf(event.getLongitude()));
     }
+
 
     @FXML
     private void handleAddEvent() {
         if (fieldsAreValid()) {
             try {
+                double latitude = Double.parseDouble(latitudeField.getText());
+                double longitude = Double.parseDouble(longitudeField.getText());
+
                 Evenement evenement = new Evenement(
                         0,
                         nomField.getText(),
@@ -98,18 +107,21 @@ public class EvenementController {
                         dateArriverField.getValue(),
                         lieuField.getText(),
                         descriptionField.getText(),
-                        Float.parseFloat(priceField.getText())
+                        Float.parseFloat(priceField.getText()),
+                        latitude,
+                        longitude
                 );
 
                 evenementService.add(evenement);
                 loadEvenements();
                 clearFields();
             } catch (NumberFormatException e) {
-                showAlert("Erreur", "Veuillez entrer un prix valide", Alert.AlertType.ERROR);
+                showAlert("Erreur", "Veuillez entrer des coordonnées valides", Alert.AlertType.ERROR);
             }
         }
     }
 
+    // Méthode pour mettre à jour un événement avec latitude et longitude
     @FXML
     private void handleUpdateEvent() {
         if (selectedEvent == null) {
@@ -119,18 +131,23 @@ public class EvenementController {
 
         if (fieldsAreValid()) {
             try {
+                double latitude = Double.parseDouble(latitudeField.getText());
+                double longitude = Double.parseDouble(longitudeField.getText());
+
                 selectedEvent.setNom(nomField.getText());
                 selectedEvent.setDate_EvenementDepart(dateDepartField.getValue());
                 selectedEvent.setDate_EvenementArriver(dateArriverField.getValue());
                 selectedEvent.setLieu(lieuField.getText());
                 selectedEvent.setDescription(descriptionField.getText());
                 selectedEvent.setPrice(Float.parseFloat(priceField.getText()));
+                selectedEvent.setLatitude(latitude);
+                selectedEvent.setLongitude(longitude);
 
                 evenementService.update(selectedEvent);
                 loadEvenements();
                 clearFields();
             } catch (NumberFormatException e) {
-                showAlert("Erreur", "Veuillez entrer un prix valide", Alert.AlertType.ERROR);
+                showAlert("Erreur", "Veuillez entrer des coordonnées valides", Alert.AlertType.ERROR);
             }
         }
     }
@@ -189,6 +206,7 @@ public class EvenementController {
         priceField.clear();
     }
     private boolean fieldsAreValid() {
+        // Vérification des champs obligatoires : nom, lieu et description
         if (nomField.getText().isEmpty() || lieuField.getText().isEmpty() || descriptionField.getText().isEmpty()) {
             showAlert("Erreur", "Le nom, le lieu et la description doivent être remplis.", Alert.AlertType.ERROR);
             return false;
@@ -214,8 +232,30 @@ public class EvenementController {
             return false;
         }
 
+        // Validation du prix
         if (priceField.getText().isEmpty() || !isNumeric(priceField.getText()) || Float.parseFloat(priceField.getText()) < 0) {
             showAlert("Erreur", "Veuillez entrer un prix valide.", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        // Validation des coordonnées (latitude et longitude)
+        try {
+            double latitude = Double.parseDouble(latitudeField.getText());
+            double longitude = Double.parseDouble(longitudeField.getText());
+
+            // Vérification des valeurs de latitude et longitude dans une plage acceptable
+            if (latitude < -90 || latitude > 90) {
+                showAlert("Erreur", "La latitude doit être entre -90 et 90.", Alert.AlertType.ERROR);
+                return false;
+            }
+
+            if (longitude < -180 || longitude > 180) {
+                showAlert("Erreur", "La longitude doit être entre -180 et 180.", Alert.AlertType.ERROR);
+                return false;
+            }
+
+        } catch (NumberFormatException e) {
+            showAlert("Erreur", "Veuillez entrer des coordonnées valides pour la latitude et la longitude.", Alert.AlertType.ERROR);
             return false;
         }
 

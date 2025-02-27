@@ -1,24 +1,22 @@
-
 package org.projeti.entites;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class Evenement {
     private int id_Evenement;
     private String nom;
-
     private LocalDate Date_EvenementDepart;
-
     private LocalDate Date_EvenementArriver;
     private String lieu;
     private String Description;
     private float price;
     private List<Reservation> reservations; // Liste des réservations associées à cet événement
+    private double latitude;  // Nouveau champ pour la latitude
+    private double longitude; // Nouveau champ pour la longitude
 
-
-    public Evenement(int id_Evenement, String nom, LocalDate date_EvenementDepart, LocalDate date_EvenementArriver, String lieu, String Description, float price) {
+    // Constructeur avec latitude et longitude
+    public Evenement(int id_Evenement, String nom, LocalDate date_EvenementDepart, LocalDate date_EvenementArriver, String lieu, String Description, float price, double latitude, double longitude) {
         this.id_Evenement = id_Evenement;
         this.nom = nom;
         this.Date_EvenementDepart = date_EvenementDepart;
@@ -26,11 +24,32 @@ public class Evenement {
         this.lieu = lieu;
         this.Description = Description;
         this.price = price;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
+    // Constructeur par défaut
     public Evenement() {
     }
 
+    // Getters et setters pour les nouveaux attributs
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    // Getters et setters existants
     public int getId_Evenement() {
         return id_Evenement;
     }
@@ -44,12 +63,7 @@ public class Evenement {
     }
 
     public void setNom(String nom) {
-        nom = nom;
-    }
-
-
-    public String getLieu() {
-        return lieu;
+        this.nom = nom;
     }
 
     public LocalDate getDate_EvenementDepart() {
@@ -68,12 +82,8 @@ public class Evenement {
         Date_EvenementArriver = date_EvenementArriver;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
+    public String getLieu() {
+        return lieu;
     }
 
     public void setLieu(String lieu) {
@@ -84,8 +94,8 @@ public class Evenement {
         return Description;
     }
 
-    public void setDescription(String DEscription) {
-        this.Description = DEscription;
+    public void setDescription(String description) {
+        this.Description = description;
     }
 
     public float getPrice() {
@@ -94,6 +104,14 @@ public class Evenement {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     @Override
@@ -106,6 +124,8 @@ public class Evenement {
                 ", lieu='" + lieu + '\'' +
                 ", Description='" + Description + '\'' +
                 ", price=" + price +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 ", reservations=" + reservations +
                 '}';
     }

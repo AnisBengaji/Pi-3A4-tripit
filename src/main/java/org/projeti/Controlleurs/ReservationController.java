@@ -212,45 +212,45 @@ public class ReservationController {
     }
 
     @FXML
-        private void handlePayButton() {
-            try {
-                // Récupérer le montant à payer
-                String priceText = priceField.getText().trim();
+    private void handlePayButton() {
+        try {
+            // Récupérer le montant à payer
+            String priceText = priceField.getText().trim();
 
-                // Vérifiez que le champ n'est pas vide
-                if (priceText.isEmpty()) {
-                    showError("Erreur de saisie", "Le champ 'Prix total' est vide.", "Veuillez entrer un montant valide.");
-                    return;
-                }
-
-                // Convertir la chaîne en double
-                double amount = Double.parseDouble(priceText);
-
-                // Créer une session de paiement Stripe
-                String paymentUrl = StripePaymentService.createCheckoutSession(amount);
-
-                // Ouvrir l'URL de paiement dans un WebView
-                WebView webView = new WebView();
-                webView.getEngine().load(paymentUrl);
-
-                // Afficher le WebView dans une nouvelle fenêtre
-                Stage stage = new Stage();
-                stage.setScene(new Scene(webView, 800, 600));
-                stage.setTitle("Paiement Stripe");
-                stage.show();
-            } catch (NumberFormatException e) {
-                showError("Erreur de saisie", "Le montant saisi est invalide.", "Veuillez entrer un nombre valide.");
-            } catch (Exception e) {
-                e.printStackTrace();
-                showError("Erreur de paiement", "Une erreur s'est produite lors du paiement.", e.getMessage());
+            // Vérifiez que le champ n'est pas vide
+            if (priceText.isEmpty()) {
+                showError("Erreur de saisie", "Le champ 'Prix total' est vide.", "Veuillez entrer un montant valide.");
+                return;
             }
-        }
 
-        private void showError(String title, String header, String content) {
-            Alert alert = new Alert(Alert.AlertType.ERROR); // Utilisez AlertType.ERROR
-            alert.setTitle(title);
-            alert.setHeaderText(header);
-            alert.setContentText(content);
-            alert.showAndWait();
+            // Convertir la chaîne en double
+            double amount = Double.parseDouble(priceText);
+
+            // Créer une session de paiement Stripe
+            String paymentUrl = StripePaymentService.createCheckoutSession(amount);
+
+            // Ouvrir l'URL de paiement dans un WebView
+            WebView webView = new WebView();
+            webView.getEngine().load(paymentUrl);
+
+            // Afficher le WebView dans une nouvelle fenêtre
+            Stage stage = new Stage();
+            stage.setScene(new Scene(webView, 800, 600));
+            stage.setTitle("Paiement Stripe");
+            stage.show();
+        } catch (NumberFormatException e) {
+            showError("Erreur de saisie", "Le montant saisi est invalide.", "Veuillez entrer un nombre valide.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Erreur de paiement", "Une erreur s'est produite lors du paiement.", e.getMessage());
         }
     }
+
+    private void showError(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR); // Utilisez AlertType.ERROR
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+}

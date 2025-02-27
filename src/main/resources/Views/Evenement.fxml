@@ -10,6 +10,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.web.WebView?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.projeti.Controlleurs.EvenementController" stylesheets="@style.css">
     <!-- Label pour l'en-tête -->
     <Label text="Liste des Événements" layoutX="14" layoutY="14" styleClass="header-label"/>
@@ -22,7 +23,7 @@
 
         <!-- Formulaire d'ajout ou de modification -->
         <VBox spacing="10" styleClass="form-container">
-            <!-- Type -->
+            <!-- Nom -->
             <HBox spacing="10" styleClass="form-row">
                 <Label text="Nom" prefWidth="100" styleClass="form-label"/>
                 <TextField fx:id="nomField" promptText="Entrez le nom de l'événement" prefWidth="200" styleClass="form-input"/>
@@ -57,6 +58,19 @@
                 <Label text="Prix" prefWidth="100" styleClass="form-label"/>
                 <TextField fx:id="priceField" promptText="Entrez le prix" prefWidth="200" styleClass="form-input"/>
             </HBox>
+
+            <HBox spacing="10" styleClass="form-row">
+                <Label text="latitude" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="latitudeField" promptText="Entrez le latitudeField" prefWidth="200" styleClass="form-input"/>
+            </HBox>
+
+
+            <HBox spacing="10" styleClass="form-row">
+                <Label text="longitude" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="longitudeField" promptText="Entrez le longitude" prefWidth="200" styleClass="form-input"/>
+            </HBox>
+
+
         </VBox>
 
         <!-- Boutons pour actions -->
@@ -64,7 +78,9 @@
             <Button fx:id="addButton" text="Ajouter" onAction="#handleAddEvent" prefWidth="130" styleClass="action-button"/>
             <Button fx:id="updateButton" text="Mettre à jour" onAction="#handleUpdateEvent" prefWidth="130" styleClass="action-button"/>
             <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="130" styleClass="delete-button"/>
-            <Button fx:id="reservationButton" text="Réservation" onAction="#handleReservation" prefWidth="130" styleClass="action-button"/>        </HBox>
+            <Button fx:id="reservationButton" text="Réservation" onAction="#handleReservation" prefWidth="130" styleClass="action-button"/>
+
+        </HBox>
 
         <!-- ListView pour afficher les événements -->
         <ListView fx:id="evenementList" prefWidth="600" prefHeight="300" styleClass="event-list"/>
