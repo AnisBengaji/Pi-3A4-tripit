@@ -2,6 +2,7 @@ package org.projeti.Controlleurs;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +10,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.projeti.Service.EvenementService;
 import org.projeti.entites.Evenement;
 import org.projeti.utils.Database;
 
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +37,8 @@ public class EvenementController {
     @FXML private TextField priceField;
     @FXML private TextField latitudeField;
     @FXML private TextField longitudeField;
+    @FXML private TextField searchField; //
+    @FXML private ComboBox<String> priceFilterCombo;
 
 
     private Evenement selectedEvent;
@@ -42,6 +50,13 @@ public class EvenementController {
         evenementService = new EvenementService(connection);
         configureListSelection();
         loadEvenements();
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());
+
+        // Ajout de l'écouteur pour le filtre par prix
+        priceFilterCombo.setItems(FXCollections.observableArrayList("Tous", "Moins de 50€", "50€ - 100€", "Plus de 100€"));
+        priceFilterCombo.getSelectionModel().selectFirst(); // Sélectionner "Tous" par défaut
+
+
     }
 
     private void configureListSelection() {
@@ -62,6 +77,12 @@ public class EvenementController {
             }
         });
     }
+    private String formatEvent(Evenement evenement) {
+        return evenement.getNom() + " - " + evenement.getDate_EvenementDepart()
+                + " - " + evenement.getDate_EvenementArriver() + " - " + evenement.getLieu()
+                + " - " + String.format("%.2f", evenement.getPrice()) + " €";  // Ajout du prix formaté
+    }
+
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
@@ -76,10 +97,7 @@ public class EvenementController {
         evenementList.setItems(evenementData);
     }
 
-    private String formatEvent(Evenement evenement) {
-        return evenement.getNom() + " - " + evenement.getDate_EvenementDepart()
-                + " - " + evenement.getDate_EvenementArriver() + " - " + evenement.getLieu();
-    }
+
 
     private void fillFieldsWithSelectedEvent(Evenement event) {
         nomField.setText(event.getNom());
@@ -270,4 +288,46 @@ public class EvenementController {
             return false;
         }
     }
+
+
+
+  // ComboBox pour filtrer par prix
+
+
+    @FXML
+    private void handleSearch() {
+        String searchText = searchField.getText().toLowerCase();
+        ObservableList<Evenement> filteredList = FXCollections.observableArrayList();
+
+        for (Evenement event : evenementData) {
+            // Recherche par nom ou lieu
+            if (event.getNom().toLowerCase().contains(searchText) || event.getLieu().toLowerCase().contains(searchText)) {
+                filteredList.add(event);
+            }
+        }
+
+        evenementList.setItems(filteredList);
+    }
+
+    @FXML// Méthode pour filtrer les événements par prix
+    private void handleFilter() {
+        String filterValue = priceFilterCombo.getValue();
+        ObservableList<Evenement> filteredList = FXCollections.observableArrayList();
+
+        for (Evenement event : evenementData) {
+            if (filterValue.equals("Tous")) {
+                filteredList.add(event);
+            } else if (filterValue.equals("Moins de 50€") && event.getPrice() < 50) {
+                filteredList.add(event);
+            } else if (filterValue.equals("50€ - 100€") && event.getPrice() >= 50 && event.getPrice() <= 100) {
+                filteredList.add(event);
+            } else if (filterValue.equals("Plus de 100€") && event.getPrice() > 100) {
+                filteredList.add(event);
+            }
+        }
+
+        evenementList.setItems(filteredList);
+    }
+
+
 }

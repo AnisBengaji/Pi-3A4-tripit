@@ -9,21 +9,45 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
 
-<?import javafx.scene.web.WebView?>
+<?import java.lang.String?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.projeti.Controlleurs.EvenementController" stylesheets="@style.css">
-    <!-- Label pour l'en-tête -->
+
+    <!-- En-tête -->
     <Label text="Liste des Événements" layoutX="14" layoutY="14" styleClass="header-label"/>
 
-    <!-- VBox pour organiser la liste et le formulaire -->
-    <VBox spacing="10" layoutX="14" layoutY="50" prefWidth="600" styleClass="main-container">
+    <!-- Barre de recherche -->
+    <HBox spacing="10" styleClass="form-row" layoutX="14" layoutY="40"> <!-- Positionnement ajouté -->
+        <Label text="Rechercher" prefWidth="100" styleClass="form-label"/>
+        <TextField fx:id="searchField" promptText="Entrez un nom d'événement" prefWidth="200" styleClass="form-input" onKeyReleased="#handleSearch"/>
+    </HBox>
+
+    <!-- Filtre par prix -->
+    <HBox spacing="10" styleClass="form-row" layoutX="14" layoutY="90">
+        <Label text="Filtrer par prix" prefWidth="100" styleClass="form-label"/>
+        <ComboBox fx:id="priceFilterCombo" prefWidth="200" onAction="#handleFilter">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Tous"/>
+                    <String fx:value="Moins de 50€"/>
+                    <String fx:value="50€ - 100€"/>
+                    <String fx:value="Plus de 100€"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </HBox>
+
+    <!-- Formulaire d'ajout ou de modification d'événements -->
+    <VBox spacing="10" layoutX="14" layoutY="150" prefWidth="600" styleClass="main-container">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
 
-        <!-- Formulaire d'ajout ou de modification -->
+        <!-- Champs du formulaire -->
         <VBox spacing="10" styleClass="form-container">
-            <!-- Nom -->
+            <!-- Nom de l'événement -->
             <HBox spacing="10" styleClass="form-row">
                 <Label text="Nom" prefWidth="100" styleClass="form-label"/>
                 <TextField fx:id="nomField" promptText="Entrez le nom de l'événement" prefWidth="200" styleClass="form-input"/>
@@ -59,30 +83,28 @@
                 <TextField fx:id="priceField" promptText="Entrez le prix" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
+            <!-- Latitude -->
             <HBox spacing="10" styleClass="form-row">
-                <Label text="latitude" prefWidth="100" styleClass="form-label"/>
-                <TextField fx:id="latitudeField" promptText="Entrez le latitudeField" prefWidth="200" styleClass="form-input"/>
+                <Label text="Latitude" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="latitudeField" promptText="Entrez la latitude" prefWidth="200" styleClass="form-input"/>
             </HBox>
 
-
+            <!-- Longitude -->
             <HBox spacing="10" styleClass="form-row">
-                <Label text="longitude" prefWidth="100" styleClass="form-label"/>
-                <TextField fx:id="longitudeField" promptText="Entrez le longitude" prefWidth="200" styleClass="form-input"/>
+                <Label text="Longitude" prefWidth="100" styleClass="form-label"/>
+                <TextField fx:id="longitudeField" promptText="Entrez la longitude" prefWidth="200" styleClass="form-input"/>
             </HBox>
-
-
         </VBox>
 
-        <!-- Boutons pour actions -->
+        <!-- Boutons d'action -->
         <HBox spacing="10" styleClass="button-container">
             <Button fx:id="addButton" text="Ajouter" onAction="#handleAddEvent" prefWidth="130" styleClass="action-button"/>
             <Button fx:id="updateButton" text="Mettre à jour" onAction="#handleUpdateEvent" prefWidth="130" styleClass="action-button"/>
             <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="130" styleClass="delete-button"/>
             <Button fx:id="reservationButton" text="Réservation" onAction="#handleReservation" prefWidth="130" styleClass="action-button"/>
-
         </HBox>
 
-        <!-- ListView pour afficher les événements -->
+        <!-- Liste des événements -->
         <ListView fx:id="evenementList" prefWidth="600" prefHeight="300" styleClass="event-list"/>
     </VBox>
 </AnchorPane>
