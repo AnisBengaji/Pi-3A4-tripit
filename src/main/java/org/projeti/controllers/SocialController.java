@@ -1,5 +1,6 @@
 package org.projeti.controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,11 +22,16 @@ import javafx.scene.layout.Region;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.projeti.Service.CommentService;
+import org.projeti.entites.Comment;
 import org.projeti.entites.Publication;
 import org.projeti.entites.Categorie;
 import org.projeti.Service.PublicationService;
@@ -44,7 +50,7 @@ public class SocialController implements Initializable {
     private VBox publicationTemplate;
     @FXML
     private Button buttonnavigateadd;
-
+    String currentUser = "Guest";
     private PublicationService publicationService;
     private CategorieService categorieService;
     private List<Publication> currentPublications;
@@ -223,7 +229,13 @@ public class SocialController implements Initializable {
 
         Button postButton = new Button("Post");
         postButton.getStyleClass().add("post-comment-button");
-        postButton.setOnAction(e -> postComment(pubId, commentField.getText()));
+        postButton.setOnAction(e -> {
+            try {
+                postComment(pubId, commentField.getText());
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         commentInputBox.getChildren().addAll(commentField, postButton);
 
@@ -541,36 +553,46 @@ public class SocialController implements Initializable {
         handleShare(publicationId);
     }
 
-    private void postComment(int publicationId, String commentText) {
+    private void postComment(int publicationId, String commentText) throws SQLException {
         if (commentText == null || commentText.trim().isEmpty()) {
             return; // Don't post empty comments
         }
 
-        // TODO: Save comment to database
-        System.out.println("Posted comment on publication " + publicationId + ": " + commentText);
+        // Retrieve the current user (Modify based on your actual user management)
+       // String currentUser = UserSession.getInstance().getUsername(); // Ensure this method exists
 
-        // Find the publication card and add the new comment to the UI
-        for (javafx.scene.Node node : publicationsContainer.getChildren()) {
-            if (node instanceof VBox && node.getUserData() != null &&
-                    node.getUserData().equals(publicationId)) {
+        // Convert LocalDateTime to java.sql.Date
+        java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
 
-                VBox card = (VBox) node;
-                VBox commentsSection = (VBox) card.getChildren().get(card.getChildren().size() - 1);
-                VBox commentsContainer = (VBox) commentsSection.getChildren().get(1);
+        // Save comment to database with corrected constructor parameters
+        CommentService commentService = new CommentService(); // Ensure this is initialized somewhere
 
-                // Add the new comment at the top
-                String currentUser = "Current User"; // Replace with actual user
-                VBox newComment = createCommentBubble(currentUser, commentText);
-                commentsContainer.getChildren().add(0, newComment);
+        Comment newComment = new Comment(currentUser, commentText, sqlDate, publicationId);
+        commentService.insert(newComment); // Ensure commentService is properly initialized
 
-                // Clear the comment field
-                TextField commentField = (TextField) ((HBox) commentsSection.getChildren().get(0)).getChildren().get(0);
-                commentField.clear();
+        // UI Update must run on JavaFX Application Thread
+        Platform.runLater(() -> {
+            // Find the publication card and update UI
+            for (javafx.scene.Node node : publicationsContainer.getChildren()) {
+                if (node instanceof VBox && publicationId == (int) node.getUserData()) {
+                    VBox card = (VBox) node;
+                    VBox commentsSection = (VBox) card.getChildren().get(card.getChildren().size() - 1);
+                    VBox commentsContainer = (VBox) commentsSection.getChildren().get(1);
 
-                break;
+                    // Add the new comment at the top
+                    VBox newCommentBubble = createCommentBubble(currentUser, commentText);
+                    commentsContainer.getChildren().add(0, newCommentBubble);
+
+                    // Clear the comment field
+                    TextField commentField = (TextField) ((HBox) commentsSection.getChildren().get(0)).getChildren().get(0);
+                    commentField.clear();
+
+                    break;
+                }
             }
-        }
+        });
     }
+
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

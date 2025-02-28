@@ -1,6 +1,8 @@
 package org.projeti.entites;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Publication {
@@ -11,7 +13,8 @@ public class Publication {
     private String author;
     private String visibility;
     private String image;
-    private Categorie categorie;  // Une seule catégorie pour chaque publication
+    private Categorie categorie;  //
+    private List<Comment> comments;
 
     // Constructor with all fields
     public Publication(String title, String contenu, Date date_publication, String author, String visibility, String image, Categorie categorie) {
@@ -22,6 +25,7 @@ public class Publication {
         this.visibility = visibility;
         this.image = image;
         this.categorie = categorie;
+        this.comments = new ArrayList<>();
     }
 
     // Default constructor
@@ -90,6 +94,15 @@ public class Publication {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override

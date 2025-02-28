@@ -20,7 +20,17 @@
     <!-- Top Navigation Bar -->
     <HBox styleClass="top-nav">
         <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
-        <Label text="PubliShare" styleClass="app-title"/>
+
+        <!-- Container for Image and Title -->
+        <HBox spacing="5">
+            <ImageView fitWidth="40" fitHeight="24">
+                <image>
+                    <Image url="@/icons/iconTripit.png"/>
+                </image>
+            </ImageView>
+            <Label text="Trip in" styleClass="app-title"/>
+        </HBox>
+
         <Region HBox.hgrow="ALWAYS" />
         <TextField promptText="Search publications..." styleClass="search-field" fx:id="searchField" onKeyReleased="#handleSearch" />
         <Button text="+" styleClass="create-button" onAction="#showCreatePublicationDialog" />
@@ -37,6 +47,7 @@
             </items>
         </MenuButton>
     </HBox>
+
 
     <!-- Main Content Area -->
     <SplitPane dividerPositions="0.25" VBox.vgrow="ALWAYS">
