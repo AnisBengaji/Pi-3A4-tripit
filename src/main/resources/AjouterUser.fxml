@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
 
 <AnchorPane prefHeight="750" prefWidth="1200" stylesheets="@styleSignin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.UserController">
 
@@ -24,7 +23,7 @@
         </ImageView>
 
         <!-- Left Side (Form) -->
-        <VBox alignment="CENTER" layoutX="59.0" layoutY="64.0" prefHeight="609.0" prefWidth="469.0" spacing="15" styleClass="signin-container">
+        <VBox alignment="CENTER" layoutX="66.0" layoutY="59.0" prefHeight="592.0" prefWidth="469.0" spacing="15" styleClass="signin-container">
             <children>
                 <!-- Title -->
                 <Label styleClass="title" text="Create Your Account" />
@@ -42,9 +41,13 @@
                     <CheckBox fx:id="fournisseurCheckBox" styleClass="role-checkbox" text="Fournisseur" />
                 </HBox>
 
-                <!-- CAPTCHA Input Field and Label -->
-                <Label fx:id="captchaLabel" text="Enter CAPTCHA" styleClass="captcha-label" />
-                <TextField fx:id="captchaField" promptText="Enter the CAPTCHA" styleClass="captcha-field"/>
+                <!-- CAPTCHA Container with Blue Background -->
+                <VBox alignment="CENTER" prefHeight="92.0" prefWidth="429.0" spacing="10" styleClass="captcha-container">
+                    <children>
+                        <Label fx:id="captchaLabel" styleClass="captcha-label" text="Enter CAPTCHA" />
+                        <TextField fx:id="captchaField" prefHeight="29.0" prefWidth="300.0" promptText="Enter the CAPTCHA" styleClass="captcha-field" />
+                    </children>
+                </VBox>
 
                 <!-- Save Button -->
                 <Button onAction="#handleSaveUser" prefHeight="45.0" prefWidth="509.0" styleClass="sign-in-button" text="Save" />

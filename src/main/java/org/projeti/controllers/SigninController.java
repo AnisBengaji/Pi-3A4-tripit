@@ -158,7 +158,7 @@ public class SigninController {
                     "<p class='warning-box'>If this wasn't you, please change your password immediately.</p>" +
                     "<p>For security reasons, avoid sharing your login credentials.</p>" +
                     "</div>" + // Close .content (white container)
-                    "<div class='footer'>© 2025 Your App Name. Stay Secure.</div>" + // Footer outside the white box
+                    "<div class='footer'>© 2025 TripIn. Stay Secure.</div>" + // Footer outside the white box
                     "</div>" + // Close .email-container
                     "</body></html>";
 

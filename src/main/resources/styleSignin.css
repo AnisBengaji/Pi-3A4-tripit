@@ -155,3 +155,34 @@ AnchorPane {
 .auchor_container{
     -fx-background-color: #007A8C;
 }
+
+
+/* CAPTCHA Container */
+.captcha-container {
+    -fx-background-color: #ffffff; /* Light background color */
+    -fx-background-radius: 10;
+    -fx-border-radius: 20px; /* Makes it circular */
+
+    -fx-border-color: #007A8C; /* Blue border */
+    -fx-border-width: 2;
+    -fx-padding: 10;
+    -fx-spacing: 5;
+    -fx-alignment: center;
+}
+
+/* CAPTCHA Label */
+.captcha-label {
+    -fx-text-fill: #FF742C;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* CAPTCHA Text Field */
+.captcha-field {
+    -fx-background-color: white;
+    -fx-border-color: #CFEDFE; /* Blue border */
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-pref-width: 250;
+}
+

@@ -66,7 +66,7 @@ public class UserController {
     private void generateCaptcha() {
         int number = (int) (Math.random() * 10000);  // Generates a random 4-digit number
         generatedCaptcha = String.valueOf(number);
-        captchaLabel.setText("Enter this CAPTCHA: " + generatedCaptcha);
+        captchaLabel.setText("Enter this CODE: " + generatedCaptcha);
     }
 
     @FXML
