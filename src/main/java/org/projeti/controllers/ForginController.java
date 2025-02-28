@@ -8,13 +8,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.projeti.Service.UserService;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
-
+import java.io.File;
 public class ForginController {
 
     @FXML
@@ -63,14 +69,14 @@ public class ForginController {
 
     private boolean sendVerificationEmail(String recipientEmail, String code) {
         final String senderEmail = "linatekaya00@gmail.com";
-        final String senderPassword = "gmre fcoi mlkt zbvb";
+        final String senderPassword = "gmre fcoi mlktzbvb";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.ssl.trust", "smtp.gmail.com"); // Ajoute cette ligne pour éviter les erreurs SSL
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -79,12 +85,59 @@ public class ForginController {
         });
 
         try {
-            Message message = new MimeMessage(session);
+            MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-            message.setSubject("Code de validation");
-            message.setText("Votre code de validation est : " + code + "\nIl expire dans 5 minutes.");
+            message.setSubject("Reset Your Password");
 
+            // **Styled Email Template (Fix Applied)**
+            String emailContent = "<html>" +
+                    "<head><style>" +
+                    "body { margin: 0; padding: 0; font-family: Arial, sans-serif; text-align: center; }" +
+                    ".email-container { background: #007A8C; padding: 40px 0;border-radius: 10px; width: 100%; }" +  // Background color applied here
+                    ".content { background: #ffffff; padding: 20px; border-radius: 10px; width: 80%; max-width: 400px; margin: auto; }" +
+                    ".logo img { max-width: 150px; }" +
+                    "h2 { color: #FF742C; }" +
+                    ".verification-code { font-size: 24px; font-weight: bold; background: #ffffff; padding: 15px 20px; border-radius: 8px; display: inline-block; border: 2px solid #FF742C; color: #333; }" +
+                    ".footer { font-size: 12px; color: #fff; margin-top: 20px; }" + // Footer text is white
+                    "</style></head>" +
+                    "<body>" +
+                    "<div class='email-container'>" + // This wraps everything in the blue background
+                    "<div class='content'>" + // White box for content
+                    "<div class='logo'><img src='cid:appLogo' alt='App Logo'></div>" +
+                    "<h2>Password Reset Request</h2>" +
+                    "<p>Hello,</p>" +
+                    "<p>You have requested to reset your password. Use the verification code below to proceed:</p>" +
+                    "<p class='verification-code'>" + code + "</p>" +
+                    "<p>This code is valid for 5 minutes.</p>" +
+                    "<p>If you did not request a password reset, please ignore this email.</p>" +
+                    "</div>" + // Close .content (white container)
+                    "<div class='footer'>© 2025 Your App Name. All rights reserved.</div>" + // Footer outside the white box
+                    "</div>" + // Close .email-container
+                    "</body></html>";
+
+            MimeMultipart multipart = new MimeMultipart("related");
+
+            // **HTML Part**
+            MimeBodyPart htmlPart = new MimeBodyPart();
+            htmlPart.setContent(emailContent, "text/html; charset=utf-8");
+            multipart.addBodyPart(htmlPart);
+
+            // **Attach Logo**
+            String logoPath = "src/main/resources/images/logo.png"; // Adjust the path if needed
+            File logoFile = new File(logoPath);
+
+            if (logoFile.exists()) {
+                MimeBodyPart imagePart = new MimeBodyPart();
+                DataSource fds = new FileDataSource(logoFile);
+                imagePart.setDataHandler(new DataHandler(fds));
+                imagePart.setHeader("Content-ID", "<appLogo>"); // Matches the `cid:appLogo` in HTML
+                multipart.addBodyPart(imagePart);
+            } else {
+                System.err.println("Warning: Logo file not found. Email sent without an image.");
+            }
+
+            message.setContent(multipart);
             Transport.send(message);
             return true;
         } catch (MessagingException e) {
@@ -92,6 +145,9 @@ public class ForginController {
             return false;
         }
     }
+
+
+
 
     private String generateVerificationCode() {
         Random random = new Random();
