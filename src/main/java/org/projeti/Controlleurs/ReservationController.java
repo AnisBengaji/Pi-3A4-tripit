@@ -1,4 +1,13 @@
 package org.projeti.Controlleurs;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 
 import javafx.application.HostServices;
@@ -7,6 +16,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.projeti.Service.ReservationService;
@@ -14,8 +27,13 @@ import org.projeti.Service.StripePaymentService;
 import org.projeti.entites.*;
 import org.projeti.utils.Database;
 
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ReservationController {
@@ -28,6 +46,8 @@ public class ReservationController {
     private ComboBox<ModePaiement> modePaiementComboBox;  // Change de TextField à ComboBox<ModePaiement>
     @FXML
     private ListView<Reservation> reservationListView;
+    private Evenement selectedEvent;
+
 
     private HostServices hostServices;
 
@@ -36,6 +56,8 @@ public class ReservationController {
 
     private ReservationService reservationService;
     private int eventId;
+    @FXML
+    private Button pdfButton;
 
     private ObservableList<Reservation> reservationList = FXCollections.observableArrayList();
 
@@ -46,7 +68,10 @@ public class ReservationController {
 
         // Initialiser la ComboBox pour le mode de paiement avec les valeurs de l'énumération ModePaiement
         modePaiementComboBox.setItems(FXCollections.observableArrayList(ModePaiement.values()));
-
+        ImageView pdfIcon = new ImageView(new Image(getClass().getResourceAsStream("/views/icons/pdf.png")));
+        pdfIcon.setFitWidth(20);
+        pdfIcon.setFitHeight(20);
+        pdfButton.setGraphic(pdfIcon);
         try {
             // Connexion à la base de données
             Connection connection = Database.getInstance().getCnx();
@@ -253,4 +278,6 @@ public class ReservationController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-}
+
+
+    }

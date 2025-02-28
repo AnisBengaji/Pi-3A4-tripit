@@ -1,15 +1,43 @@
 package org.projeti.Controlleurs;
 
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Worker;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.InputStream;
+
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.awt.Desktop;
+import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -19,26 +47,43 @@ import org.projeti.entites.Evenement;
 import org.projeti.utils.Database;
 
 
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EvenementController {
-    @FXML private ListView<Evenement> evenementList; // Changé en ListView<Evenement>
-    @FXML private TextField nomField;
-    @FXML private DatePicker dateDepartField;
-    @FXML private DatePicker dateArriverField;
-    @FXML private TextField lieuField;
-    @FXML private TextField descriptionField;
-    @FXML private TextField priceField;
-    @FXML private TextField latitudeField;
-    @FXML private TextField longitudeField;
-    @FXML private TextField searchField; //
-    @FXML private ComboBox<String> priceFilterCombo;
+    @FXML
+    private ListView<Evenement> evenementList; // Changé en ListView<Evenement>
+    @FXML
+    private TextField nomField;
+    @FXML
+    private DatePicker dateDepartField;
+    @FXML
+    private DatePicker dateArriverField;
+    @FXML
+    private TextField lieuField;
+    @FXML
+    private TextField descriptionField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private TextField latitudeField;
+    @FXML
+    private TextField longitudeField;
+    @FXML
+    private TextField searchField; //
+
+    @FXML
+    private ComboBox<String> priceFilterCombo;
 
 
     private Evenement selectedEvent;
@@ -77,6 +122,7 @@ public class EvenementController {
             }
         });
     }
+
     private String formatEvent(Evenement evenement) {
         return evenement.getNom() + " - " + evenement.getDate_EvenementDepart()
                 + " - " + evenement.getDate_EvenementArriver() + " - " + evenement.getLieu()
@@ -96,7 +142,6 @@ public class EvenementController {
         evenementData.setAll(evenementService.getAll());
         evenementList.setItems(evenementData);
     }
-
 
 
     private void fillFieldsWithSelectedEvent(Evenement event) {
@@ -191,7 +236,6 @@ public class EvenementController {
     }
 
 
-
     @FXML
     private void handleReservation(ActionEvent event) {
         if (selectedEvent == null) {
@@ -223,6 +267,7 @@ public class EvenementController {
         descriptionField.clear();
         priceField.clear();
     }
+
     private boolean fieldsAreValid() {
         // Vérification des champs obligatoires : nom, lieu et description
         if (nomField.getText().isEmpty() || lieuField.getText().isEmpty() || descriptionField.getText().isEmpty()) {
@@ -290,8 +335,7 @@ public class EvenementController {
     }
 
 
-
-  // ComboBox pour filtrer par prix
+    // ComboBox pour filtrer par prix
 
 
     @FXML
@@ -328,6 +372,87 @@ public class EvenementController {
 
         evenementList.setItems(filteredList);
     }
+    @FXML
+    private void handlePdf(ActionEvent event) throws FileNotFoundException {
+        if (selectedEvent == null) {
+            showAlert("Erreur", "Veuillez sélectionner un événement pour générer un PDF.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Création du fichier PDF
+        String path = "C:\\Users\\MSI\\Desktop\\PI\\PI-20250210T192842Z-001\\PI\\src\\main\\resources\\Views\\pdf_" + selectedEvent.getId_Evenement() + ".pdf";
+        PdfWriter writer = new PdfWriter(path);
+        PdfDocument pdf = new PdfDocument(writer);
+        com.itextpdf.layout.Document document = new com.itextpdf.layout.Document(pdf);
+        String logoPath = getClass().getResource("/views/icons/Logo.png").toExternalForm();  // Accès à une ressource dans le répertoire /resources
+
+        // Ajouter le logo
+        try {
+            ImageData imageData = ImageDataFactory.create(logoPath);
+            com.itextpdf.layout.element.Image image = new com.itextpdf.layout.element.Image(imageData);
+
+            // Ajuster la taille de l'image et l'ajouter au document
+            image.setHeight(100).setWidth(100);  // Vous pouvez ajuster la taille selon vos besoins
+            document.add(image);
+        } catch (IOException e) {
+            showAlert("Erreur", "Le logo n'a pas pu être ajouté.", Alert.AlertType.ERROR);
+        }
+
+        // Titre du PDF
+        document.add(new com.itextpdf.layout.element.Paragraph("Détails de l'événement : " + selectedEvent.getNom())
+                .setFontColor(ColorConstants.BLACK).setBold().setFontSize(16).setTextAlignment(TextAlignment.CENTER));
+
+        // Informations de l'événement
+        Table table = new Table(UnitValue.createPercentArray(new float[]{1, 1})).useAllAvailableWidth();
+        table.addCell("Nom :");
+        table.addCell(selectedEvent.getNom());
+        table.addCell("Date de départ :");
+        table.addCell(selectedEvent.getDate_EvenementDepart().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        table.addCell("Date d'arrivée :");
+        table.addCell(selectedEvent.getDate_EvenementArriver().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        table.addCell("Lieu :");
+        table.addCell(selectedEvent.getLieu());
+        table.addCell("Description :");
+        table.addCell(selectedEvent.getDescription());
+        table.addCell("Prix :");
+        table.addCell(String.valueOf(selectedEvent.getPrice()) + " €");
+        document.add(table);
+
+        // Ajouter le message de bienvenue
+        document.add(new com.itextpdf.layout.element.Paragraph("\nBienvenue chez Tripin!\n")
+                .setFontColor(ColorConstants.BLACK).setFontSize(14).setTextAlignment(TextAlignment.LEFT));
+        document.add(new com.itextpdf.layout.element.Paragraph("Nous sommes ravis que vous ayez choisi notre agence pour votre événement. Voici les détails de votre réservation.")
+                .setFontColor(ColorConstants.BLACK).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+        document.add(new com.itextpdf.layout.element.Paragraph("\nCordialement,\n")
+                .setFontColor(ColorConstants.BLACK).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+        document.add(new com.itextpdf.layout.element.Paragraph("Le Directeur Tripin")
+                .setFontColor(ColorConstants.BLACK).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
+
+        // Ajouter la signature (image)
+        try {
+            String signaturePath = getClass().getResource("/views/icons/signature.png").toExternalForm(); // Chemin de l'image de la signature
+            ImageData signatureImageData = ImageDataFactory.create(signaturePath);
+            com.itextpdf.layout.element.Image signatureImage = new com.itextpdf.layout.element.Image(signatureImageData);
+            signatureImage.setHeight(50).setWidth(150);  // Vous pouvez ajuster la taille de la signature
+            document.add(signatureImage);
+        } catch (IOException e) {
+            showAlert("Erreur", "La signature n'a pas pu être ajoutée.", Alert.AlertType.ERROR);
+        }
+
+        document.close();
+
+        // Ouvrir le PDF
+        try {
+            Desktop.getDesktop().open(new File(path));
+        } catch (IOException e) {
+            showAlert("Erreur", "Impossible d'ouvrir le fichier PDF.", Alert.AlertType.ERROR);
+        }
+    }
+
 
 
 }
+
+
+
+
