@@ -1,6 +1,4 @@
 package org.projeti.controllers;
-
-
 import org.projeti.Service.UserService;
 import org.projeti.utils.Database;
 import javafx.event.ActionEvent;
@@ -14,24 +12,33 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
+import java.io.File;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 
 public class SigninController {
 
     @FXML
-    private TextField emailField;  // Email input field
+    private TextField emailField;
 
     @FXML
-    private PasswordField passwordField;  // Password input field
+    private PasswordField passwordField;
 
-    private UserService userService = new UserService();  // User service instance
-
-    private Connection cnx = Database.getInstance().getCnx(); // Database connection
+    private UserService userService = new UserService();
+    private Connection cnx = Database.getInstance().getCnx();
+    private int failedAttempts = 0; // Counter for failed login attempts
 
     @FXML
     private void handleSignUp(ActionEvent event) throws IOException {
-        // Open the sign-up form
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
@@ -60,20 +67,21 @@ public class SigninController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        // Fetch user role based on email and password
         String role = getUserRole(email, password);
 
         if (role == null) {
+            failedAttempts++;
             showAlert("Login Failed", "Invalid email or password.");
+
+            if (failedAttempts >= 3) {
+                sendSecurityAlert(email);
+            }
             return;
         }
 
-        String fxmlFile;
-        if ("admin".equalsIgnoreCase(role)) {
-            fxmlFile = "/adminInterface.fxml";
-        } else {
-            fxmlFile = "/Main.fxml";
-        }
+        failedAttempts = 0; // Reset failed attempts on successful login
+
+        String fxmlFile = "admin".equalsIgnoreCase(role) ? "/adminInterface.fxml" : "/Main.fxml";
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -82,7 +90,6 @@ public class SigninController {
             stage.setScene(new Scene(root));
             stage.show();
 
-            // Close the login window
             Stage currentStage = (Stage) emailField.getScene().getWindow();
             currentStage.close();
         } catch (IOException e) {
@@ -92,276 +99,97 @@ public class SigninController {
     }
 
     private String getUserRole(String email, String password) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try {
-            String query = "SELECT Role FROM user WHERE Email = ? AND MDP = ?";
-            ps = cnx.prepareStatement(query);
+        String query = "SELECT Role FROM user WHERE Email = ? AND MDP = ?";
+        try (PreparedStatement ps = cnx.prepareStatement(query)) {
             ps.setString(1, email);
             ps.setString(2, password);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return rs.getString("Role"); // Return the role of the user
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("Role");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert("Error", "Database error: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+        }
+        return null;
+    }
+    private void sendSecurityAlert(String email) {
+        final String senderEmail = "linatekaya00@gmail.com";
+        final String senderPassword = "gmre fcoi mlktzbvb";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
             }
-        }
-        return null; // Return null if the user is not found
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-}
-
-/*import org.projeti.Service.UserService;
-import org.projeti.utils.Database;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.sql.*;
-
-public class SigninController {
-
-    @FXML
-    private TextField emailField;  // Champ de saisie pour l'email
-
-    @FXML
-    private PasswordField passwordField;  // Champ de saisie pour le mot de passe
-
-    private UserService userService = new UserService();  // Service utilisateur pour les opérations CRUD
-
-    private Connection cnx = Database.getInstance().getCnx(); // Connexion à la base de données
-
-    @FXML
-    private void handleSignUp(ActionEvent event) throws IOException {
-        // Ouvre la fenêtre d'inscription
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
-    }
-    @FXML
-    private void handleForgotPassword(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forgin.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load the forgot password page.");
-        }
-    }
-
-    @FXML
-    private void handleSignIn(ActionEvent event) {
-        String email = emailField.getText();  // Récupérer l'email saisi
-        String password = passwordField.getText();  // Récupérer le mot de passe saisi
-
-        // Vérification des identifiants
-        if (isValidLogin(email, password)) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Main.fxml"));  // Charger la page principale
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-
-                // Fermer la fenêtre de connexion
-                Stage currentStage = (Stage) emailField.getScene().getWindow();
-                currentStage.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                showAlert("Error", "Failed to load the main page.");
-            }
-        }
-    }
-
-    private boolean isValidLogin(String email, String password) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        });
 
         try {
-            // Vérifier si l'email existe dans la base de données
-            String emailQuery = "SELECT `MDP` FROM `user` WHERE `Email` = ?";
-            ps = cnx.prepareStatement(emailQuery);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(senderEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            message.setSubject("Security Alert: Suspicious Login Attempts");
 
-            if (!rs.next()) {
-                showAlert("Login Failed", "This email is not found.");
-                return false; // L'email n'existe pas
-            }
+            // **Styled Email Template**
+            String emailContent = "<html>" +
+                    "<head><style>" +
+                    "body { margin: 0; padding: 0; font-family: Arial, sans-serif; text-align: center; }" +
+                    ".email-container { background: #D32F2F; padding: 40px 0; border-radius: 10px; width: 100%; }" + // Red background
+                    ".content { background: #ffffff; padding: 20px; border-radius: 10px; width: 80%; max-width: 400px; margin: auto; }" +
+                    ".logo img { max-width: 150px; }" +
+                    "h2 { color: #D32F2F; }" + // Title in red
+                    ".warning-box { font-size: 18px; font-weight: bold; background: #ffffff; padding: 15px 20px; border-radius: 8px; display: inline-block; border: 2px solid #D32F2F; color: #333; }" +
+                    ".footer { font-size: 12px; color: #fff; margin-top: 20px; }" + // Footer text is white
+                    "</style></head>" +
+                    "<body>" +
+                    "<div class='email-container'>" + // This wraps everything in the red background
+                    "<div class='content'>" + // White box for content
+                    "<div class='logo'><img src='cid:appLogo' alt='App Logo'></div>" +
+                    "<h2>Security Alert</h2>" +
+                    "<p>Hello,</p>" +
+                    "<p>We detected multiple unsuccessful login attempts to your account.</p>" +
+                    "<p class='warning-box'>If this wasn't you, please change your password immediately.</p>" +
+                    "<p>For security reasons, avoid sharing your login credentials.</p>" +
+                    "</div>" + // Close .content (white container)
+                    "<div class='footer'>© 2025 Your App Name. Stay Secure.</div>" + // Footer outside the white box
+                    "</div>" + // Close .email-container
+                    "</body></html>";
 
-            // Vérifier si le mot de passe correspond
-            String correctPassword = rs.getString("MDP");
-            if (!correctPassword.equals(password)) {
-                showAlert("Login Failed", "Incorrect password.");
-                return false; // Mauvais mot de passe
-            }
+            MimeMultipart multipart = new MimeMultipart("related");
 
-            return true; // Connexion réussie
+            // **HTML Part**
+            MimeBodyPart htmlPart = new MimeBodyPart();
+            htmlPart.setContent(emailContent, "text/html; charset=utf-8");
+            multipart.addBodyPart(htmlPart);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert("Error", "Database error during login: " + e.getMessage());
-            return false;
-        } finally {
-            // Fermeture des ressources
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+            // **Attach Logo**
+            String logoPath = "src/main/resources/images/logo.png"; // Adjust path if needed
+            File logoFile = new File(logoPath);
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-}
-*/
-
-
-
-/*package org.projeti.controllers;
-
-import org.projeti.Service.UserService;
-import org.projeti.utils.Database;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.sql.*;
-
-public class SigninController {
-
-    @FXML
-    private TextField emailField;  // Email input field
-
-    @FXML
-    private PasswordField passwordField;  // Password input field
-
-    private UserService userService = new UserService();  // Instantiate UserService to access CRUD methods
-
-    private Connection cnx = Database.getInstance().getCnx(); // Assuming this is your DB connection
-
-    @FXML
-    private void handleSignUp(ActionEvent event) throws IOException {
-        // Open the sign-up form (your existing code for the sign-up window)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
-    }
-
-    @FXML
-    private void handleSignIn(ActionEvent event) {
-        String email = emailField.getText();  // Get email from the input field
-        String password = passwordField.getText();  // Get password from the input field
-
-        // Check if the login credentials are valid
-        if (isValidLogin(email, password)) {
-            // If login is successful, load the main page (main.fxml)
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Main.fxml"));  // Correct page to load
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-
-                // Close the current stage (login screen)
-                Stage currentStage = (Stage) emailField.getScene().getWindow();
-                currentStage.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                showAlert("Error", "Failed to load the main page.");
-            }
-        } else {
-            // If login fails, show an alert to the user
-            showAlert("Login Failed", "Invalid email or password");
-        }
-    }
-    private boolean isValidLogin(String email, String password) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try {
-            // SQL query to check if the email and password match
-            String query = "SELECT * FROM `user` WHERE `Email` = ? AND `MDP` = ?";
-            ps = cnx.prepareStatement(query);
-            ps.setString(1, email);
-            ps.setString(2, password);
-
-            rs = ps.executeQuery();
-
-            // Check if a matching row exists
-            if (rs.next()) {
-                // User found, valid login
-                return true;
+            if (logoFile.exists()) {
+                MimeBodyPart imagePart = new MimeBodyPart();
+                DataSource fds = new FileDataSource(logoFile);
+                imagePart.setDataHandler(new DataHandler(fds));
+                imagePart.setHeader("Content-ID", "<appLogo>"); // Matches `cid:appLogo` in HTML
+                multipart.addBodyPart(imagePart);
             } else {
-                // No matching user, invalid login
-                return false;
+                System.err.println("Warning: Logo file not found. Email sent without an image.");
             }
-        } catch (SQLException e) {
+
+            message.setContent(multipart);
+            Transport.send(message);
+            System.out.println("Security alert email sent to " + email);
+        } catch (MessagingException e) {
             e.printStackTrace();
-            showAlert("Error", "Database error during login: " + e.getMessage());
-            return false;  // Error connecting to the database
-        } finally {
-            // Close database resources
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
-
 
 
     private void showAlert(String title, String message) {
@@ -372,4 +200,3 @@ public class SigninController {
         alert.showAndWait();
     }
 }
-*/
