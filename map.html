@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carte des événements</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style> #map { height: 600px; width: 100%; } </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([48.8566, 2.3522], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+L.marker([48.8566, 2.3522]).addTo(map).bindPopup('<b>Concert Rock</b><br>Paris, France');
+L.marker([40.7128, -74.006]).addTo(map).bindPopup('<b>Marathon de New York</b><br>New York, USA');
+L.marker([51.5074, -0.1278]).addTo(map).bindPopup('<b>Exposition d'Art Moderne</b><br>Londres, Royaume-Uni');
+L.marker([48.8566, 2.3522]).addTo(map).bindPopup('<b>Festival de Musique</b><br>Lyon,France');
+    </script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 package org.projeti.Controlleurs;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -56,8 +57,7 @@ public class ReservationController {
 
     private ReservationService reservationService;
     private int eventId;
-    @FXML
-    private Button pdfButton;
+
 
     private ObservableList<Reservation> reservationList = FXCollections.observableArrayList();
 
@@ -67,11 +67,8 @@ public class ReservationController {
         reservationListView.setItems(reservationList);
 
         // Initialiser la ComboBox pour le mode de paiement avec les valeurs de l'énumération ModePaiement
-        modePaiementComboBox.setItems(FXCollections.observableArrayList(ModePaiement.values()));
-        ImageView pdfIcon = new ImageView(new Image(getClass().getResourceAsStream("/views/icons/pdf.png")));
-        pdfIcon.setFitWidth(20);
-        pdfIcon.setFitHeight(20);
-        pdfButton.setGraphic(pdfIcon);
+
+
         try {
             // Connexion à la base de données
             Connection connection = Database.getInstance().getCnx();
@@ -280,4 +277,4 @@ public class ReservationController {
     }
 
 
-    }
+}
