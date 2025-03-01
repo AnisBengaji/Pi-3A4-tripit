@@ -54,7 +54,7 @@
             <VBox alignment="CENTER" spacing="10" styleClass="team-member">
                 <ImageView fitHeight="150" fitWidth="150" styleClass="team-image">
                     <image>
-                        <Image url="@icons/team1.png" />
+                        <Image url="@icons/khaled.png" />
                     </image>
                 </ImageView>
                 <Label text="Khaled Abed" styleClass="team-name" />
