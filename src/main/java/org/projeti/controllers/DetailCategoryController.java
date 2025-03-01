@@ -30,6 +30,19 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
+// Apache POI imports
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+// Java IO imports (for file handling)
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 // New imports needed for PDF generation
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -417,6 +430,61 @@ public class DetailCategoryController implements Initializable {
         contentStream.newLineAtOffset(400, 30);
         contentStream.showText("Report generated: " + java.time.LocalDate.now().toString());
         contentStream.endText();
+    }
+
+
+    @FXML
+    private void downloadCategoryExcel() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Excel");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try (Workbook workbook = new XSSFWorkbook()) {
+                Sheet sheet = workbook.createSheet("Categories");
+
+                // Create header row
+                Row headerRow = sheet.createRow(0);
+                String[] columns = {"ID", "Category Name", "Description", "Publications"};
+                for (int i = 0; i < columns.length; i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(columns[i]);
+                }
+
+                int rowNum = 1;
+                for (Categorie categorie : categoriesTableView.getItems()) {
+                    Row row = sheet.createRow(rowNum++);
+                    row.createCell(0).setCellValue(categorie.getIdCategorie());
+                    row.createCell(1).setCellValue(categorie.getNomCategorie());
+                    row.createCell(2).setCellValue(categorie.getDescription());
+
+                    // Fetch publication IDs
+                    String publicationIds = "None";
+                    if (categorie.getPublications() != null && !categorie.getPublications().isEmpty()) {
+                        publicationIds = categorie.getPublications().stream()
+                                .map(publication -> String.valueOf(publication.getId_publication()))
+                                .collect(Collectors.joining(", "));
+                    }
+                    row.createCell(3).setCellValue(publicationIds);
+                }
+
+                // Auto-size columns for better readability
+                for (int i = 0; i < columns.length; i++) {
+                    sheet.autoSizeColumn(i);
+                }
+
+                // Write to file
+                try (FileOutputStream fileOut = new FileOutputStream(file)) {
+                    workbook.write(fileOut);
+                }
+
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Excel file saved successfully!");
+            } catch (IOException e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to save Excel file.");
+                e.printStackTrace();
+            }
+        }
     }
 
 }

@@ -33,6 +33,13 @@
                         </ImageView>
                     </graphic>
                 </Button>
+                <Button fx:id="buttonexcel" text="download excel" styleClass="button-main" onAction="#downloadCategoryExcel">
+                    <graphic>
+                        <ImageView fitHeight="18" fitWidth="18">
+                            <Image url="@icons/excel.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
         </HBox>
 
