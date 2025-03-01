@@ -12,7 +12,7 @@ public class CategorieListCell extends ListCell<Categorie> {
             setText(null);
             setGraphic(null);
         } else {
-            // Combine nomCategorie and description into one string and display it
+
             setText(categorie.getNomCategorie() + " - " + categorie.getDescription());
         }
     }

@@ -12,17 +12,35 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.projeti.Service.CategorieService;
 import org.projeti.entites.Categorie;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+// Existing imports you likely already have
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
+
+// New imports needed for PDF generation
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+
+// Utility imports
+import java.io.File;
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class DetailCategoryController implements Initializable {
@@ -57,17 +75,11 @@ public class DetailCategoryController implements Initializable {
     }
 
     private void setupTableColumns() {
-        categoryIdColumn.setPrefWidth(50);
-        categoryNameColumn.setPrefWidth(150);
-        descriptionColumn.setPrefWidth(200);
-        publicationsIdColumn.setPrefWidth(150);
-        actionsColumn.setPrefWidth(159);
-
         categoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("idCategorie"));
         categoryNameColumn.setCellValueFactory(new PropertyValueFactory<>("nomCategorie"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        // Fix for publicationsIdColumn
+        // Configure publicationsIdColumn to display publication IDs
         publicationsIdColumn.setCellValueFactory(cellData -> {
             Categorie categorie = cellData.getValue();
             String publicationIds = "No Publications";  // Default message
@@ -239,4 +251,172 @@ public class DetailCategoryController implements Initializable {
             System.err.println("Failed to load HomeCat.fxml: " + e.getMessage());
         }
     }
+    @FXML
+    private void downloadCategoryPdf() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try (PDDocument document = new PDDocument()) {
+                createCategoriesPdf(document, categoriesTableView.getItems());
+                document.save(file);
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Categories report saved successfully!");
+            } catch (IOException e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to generate PDF: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void createCategoriesPdf(PDDocument document, ObservableList<Categorie> categories) throws IOException {
+        PDPage page = new PDPage();
+        document.addPage(page);
+        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+        // Initial y position for content
+        int y = 750;
+        boolean isFirstPage = true;
+
+        // Process each category
+        for (int i = 0; i < categories.size(); i++) {
+            // If we need a new page (not enough vertical space or first item on next page)
+            if (y < 100) {
+                // Close current content stream
+                contentStream.close();
+
+                // Create a new page
+                page = new PDPage();
+                document.addPage(page);
+                contentStream = new PDPageContentStream(document, page);
+
+                // Reset position
+                y = 750;
+                isFirstPage = false;
+            }
+
+            // Draw header on first page or new pages
+            if ((i == 0) || (y == 750 && !isFirstPage)) {
+                y = drawHeader(document, contentStream, y);
+            }
+
+            // Draw category data
+            y = drawCategoryRow(contentStream, categories.get(i), y);
+        }
+
+        // Draw footer
+        drawFooter(contentStream);
+
+        // Close the content stream
+        contentStream.close();
+    }
+
+    private int drawHeader(PDDocument document, PDPageContentStream contentStream, int y) throws IOException {
+        // Load the logo/image
+        PDImageXObject logo = PDImageXObject.createFromFile("src/main/resources/icons/iconTripit.png", document);
+
+        // Draw the logo and app name
+        contentStream.drawImage(logo, 50, y - 50, 100, 50);
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 24);
+        contentStream.newLineAtOffset(160, y - 20);
+        contentStream.showText("Trip It - Categories Report");
+        contentStream.endText();
+
+        // Add a separator line
+        contentStream.setLineWidth(1);
+        contentStream.moveTo(50, y - 60);
+        contentStream.lineTo(550, y - 60);
+        contentStream.stroke();
+
+        // Table headers
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+        contentStream.newLineAtOffset(50, y - 80);
+        contentStream.showText("ID");
+        contentStream.newLineAtOffset(50, 0);
+        contentStream.showText("Category Name");
+        contentStream.newLineAtOffset(150, 0);
+        contentStream.showText("Description");
+        contentStream.newLineAtOffset(150, 0);
+        contentStream.showText("Publications");
+        contentStream.endText();
+
+        // Header separator line
+        contentStream.setLineWidth(0.5f);
+        contentStream.moveTo(50, y - 85);
+        contentStream.lineTo(550, y - 85);
+        contentStream.stroke();
+
+        // Return new y position
+        return y - 100;
+    }
+
+    private int drawCategoryRow(PDPageContentStream contentStream, Categorie categorie, int y) throws IOException {
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.HELVETICA, 10);
+        contentStream.newLineAtOffset(50, y);
+        contentStream.showText(String.valueOf(categorie.getIdCategorie()));
+        contentStream.newLineAtOffset(50, 0);
+
+        // Truncate category name if too long
+        String categoryName = categorie.getNomCategorie();
+        if (categoryName.length() > 20) {
+            categoryName = categoryName.substring(0, 17) + "...";
+        }
+        contentStream.showText(categoryName);
+
+        contentStream.newLineAtOffset(150, 0);
+
+        // Truncate description if too long
+        String description = categorie.getDescription();
+        if (description.length() > 25) {
+            description = description.substring(0, 22) + "...";
+        }
+        contentStream.showText(description);
+
+        contentStream.newLineAtOffset(150, 0);
+
+        // Get publication IDs
+        String publicationIds = "None";
+        if (categorie.getPublications() != null && !categorie.getPublications().isEmpty()) {
+            publicationIds = categorie.getPublications().stream()
+                    .map(publication -> String.valueOf(publication.getId_publication()))
+                    .collect(Collectors.joining(", "));
+
+            // Truncate if too long
+            if (publicationIds.length() > 20) {
+                publicationIds = publicationIds.substring(0, 17) + "...";
+            }
+        }
+        contentStream.showText(publicationIds);
+        contentStream.endText();
+
+        // Draw a line under each row
+        contentStream.setLineWidth(0.5f);
+        contentStream.moveTo(50, y - 5);
+        contentStream.lineTo(550, y - 5);
+        contentStream.stroke();
+
+        // Return new y position (20 points down)
+        return y - 20;
+    }
+
+    private void drawFooter(PDPageContentStream contentStream) throws IOException {
+        // Footer
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.HELVETICA_OBLIQUE, 10);
+        contentStream.newLineAtOffset(50, 30);
+        contentStream.showText("Thank you for using Trip It!");
+        contentStream.endText();
+
+        // Add date of report
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.HELVETICA, 10);
+        contentStream.newLineAtOffset(400, 30);
+        contentStream.showText("Report generated: " + java.time.LocalDate.now().toString());
+        contentStream.endText();
+    }
+
 }

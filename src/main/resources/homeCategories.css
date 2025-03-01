@@ -1,0 +1,153 @@
+/* ======================================
+   MAIN STYLING - TRIP IT APPLICATION
+   Color Palette:
+   - Blue: #007891
+   - Orange: #ff742d
+   - Dark Blue: #1b1f37
+   ====================================== */
+
+/* Base Elements */
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: linear-gradient(to bottom right, #00798b, #1b1f37);
+}
+
+/* Menu Styling */
+#menu {
+    -fx-background-color: #1b1f37;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+#menu .label {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-padding: 30px 0px 30px 0px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(255,116,45,0.3), 5, 0, 0, 1);
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-alignment: center-left;
+    -fx-padding: 8px 20px;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+    -fx-margin: 5px 0;
+    -fx-graphic-text-gap: 15;
+}
+
+.menu-button:hover {
+    -fx-background-color: rgba(255,116,45,0.2);
+    -fx-text-fill: #ff742d;
+    -fx-translate-x: 5px;
+    -fx-transition: -fx-translate-x 0.2s;
+}
+
+.menu-button:pressed {
+    -fx-background-color: rgba(255,116,45,0.4);
+}
+
+/* Selected menu item */
+.menu-button-selected {
+    -fx-background-color: #ff742d;
+    -fx-text-fill: white;
+    -fx-border-width: 0 0 0 5px;
+    -fx-border-color: white;
+}
+
+/* Button Styling */
+.button-main {
+    -fx-background-color: #007891;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 2);
+    -fx-graphic-text-gap: 10;
+}
+
+.button-main:hover {
+    -fx-background-color: #ff742d;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-effect: dropshadow(three-pass-box, rgba(255,116,45,0.4), 5, 0, 0, 3);
+}
+
+.button-main:pressed {
+    -fx-background-color: #e66a29;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 2, 0, 0, 1);
+}
+
+/* Main Content Styling */
+#mainContent {
+    -fx-background-color: rgba(255, 255, 255, 0.85);
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);
+    -fx-padding: 30px;
+}
+/* Updated search styles for homeCategories.css */
+
+.search-container {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+.modern-search-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 20px 0 0 20px;
+    -fx-border-radius: 20px 0 0 20px;
+    -fx-border-width: 1px;
+    -fx-border-color: rgba(255, 255, 255, 0.25);
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.6);
+    -fx-padding: 5px 10px 5px 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 0);
+}
+
+.modern-search-bar:focused {
+    -fx-background-color: rgba(27, 31, 55, 0.7);
+    -fx-border-color: #00CED1;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.4);
+}
+
+.search-button {
+    -fx-background-color: #00CED1;
+    -fx-background-radius: 0 20px 20px 0;
+    -fx-border-radius: 0 20px 20px 0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 0);
+}
+
+.search-button:hover {
+    -fx-background-color: #00E6F7;
+}
+
+.search-button:pressed {
+    -fx-background-color: #008B96;
+}
+
+/* Clear button styling */
+.clear-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 100px;
+    -fx-border-radius: 100px;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+    -fx-opacity: 0.7;
+    -fx-cursor: hand;
+}
+
+.clear-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-opacity: 1.0;
+}

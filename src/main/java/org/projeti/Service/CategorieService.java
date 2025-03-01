@@ -58,7 +58,7 @@ public class CategorieService implements CRUD<Categorie> {
 
         while (rs.next()) {
             Categorie categorie = new Categorie();
-            categorie.setIdCategorie(rs.getInt("idCategorie")); // Set the idCategorie
+            categorie.setIdCategorie(rs.getInt("idCategorie"));
             categorie.setNomCategorie(rs.getString("nomCategorie"));
             categorie.setDescription(rs.getString("description"));
             categories.add(categorie);
@@ -75,4 +75,5 @@ public class CategorieService implements CRUD<Categorie> {
 
         return rs.next();
     }
+
 }

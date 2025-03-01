@@ -225,7 +225,6 @@ public class DetailController {
         Node saveButton = dialog.getDialogPane().lookupButton(saveButtonType);
         saveButton.setDisable(true);
 
-        // Enable save button only when all fields are valid
         titleField.textProperty().addListener((observable, oldValue, newValue) -> saveButton.setDisable(!isInputValid(titleField, contentField, datePicker, authorField, visibilityField, imageField, categoryField)));
         contentField.textProperty().addListener((observable, oldValue, newValue) -> saveButton.setDisable(!isInputValid(titleField, contentField, datePicker, authorField, visibilityField, imageField, categoryField)));
         authorField.textProperty().addListener((observable, oldValue, newValue) -> saveButton.setDisable(!isInputValid(titleField, contentField, datePicker, authorField, visibilityField, imageField, categoryField)));

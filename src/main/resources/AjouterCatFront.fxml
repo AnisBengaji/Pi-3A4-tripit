@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.projeti.controllers.ajouterCategorieFrontController" stylesheets="@newstyle.css" styleClass="travel-background">
+    <children>
+        <!-- Main Container -->
+        <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="20.0" AnchorPane.bottomAnchor="20.0"
+              AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="main-container">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Return Button -->
+            <Button fx:id="returnButton" text="Return" onAction="#returnToHomePublication" styleClass="button-main" prefHeight="45.0" prefWidth="180.0">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/return1.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <!-- Title Label -->
+            <Label text="Add New Category" styleClass="title-label">
+                <font>
+                    <Font size="28.0"/>
+                </font>
+            </Label>
+
+            <!-- Form Fields -->
+            <VBox spacing="15.0">
+                <Label text="Category Name:" styleClass="form-label"/>
+                <TextField fx:id="nomCategorieTextField" styleClass="form-textfield" promptText="Enter category name" prefHeight="35.0" prefWidth="250.0"/>
+
+                <Label text="Description:" styleClass="form-label"/>
+                <TextField fx:id="descriptionTextField" styleClass="form-textfield" promptText="Enter description" prefHeight="35.0" prefWidth="250.0"/>
+            </VBox>
+
+            <!-- Submit Button -->
+            <Button text="Submit" onAction="#ajouterCategorie" styleClass="button-main" prefHeight="50.0" prefWidth="180.0"/>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -53,9 +53,21 @@
     <SplitPane dividerPositions="0.25" VBox.vgrow="ALWAYS">
         <!-- Left Panel - Categories -->
         <VBox styleClass="categories-panel">
-            <Label text="Categories" styleClass="section-header"/>
-            <ListView fx:id="categoriesListView" VBox.vgrow="ALWAYS" onMouseClicked="#handleCategorySelect" />
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Label text="Categories" styleClass="section-header"/>
+                <Button fx:id="buttonAddCat" styleClass="icon-button" onAction="#gotoAddCategoryFront">
+                    <graphic>
+                        <ImageView fitWidth="16" fitHeight="16">
+                            <image>
+                                <Image url="@icons/addCat.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+            <ListView fx:id="categoriesListView" VBox.vgrow="ALWAYS" onMouseClicked="#handleCategorySelect"/>
         </VBox>
+
 
         <!-- Right Panel - Publications Feed -->
         <ScrollPane fitToWidth="true" styleClass="feed-container">

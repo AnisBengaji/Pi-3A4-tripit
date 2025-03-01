@@ -1,8 +1,8 @@
 /* ---- GENERAL ---- */
 .root {
-    -fx-background-color: linear-gradient(to bottom, #00798b, #1c1f38);
-    -fx-font-family: "Inter", sans-serif;
-    -fx-padding: 20px;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #00798b 30%, #1b1f37 100%);
 }
 
 /* ---- SIDEBAR ---- */

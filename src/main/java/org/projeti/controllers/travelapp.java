@@ -236,9 +236,19 @@ public class travelapp implements Initializable {
     public void goBackToTestHome(ActionEvent event) {
         System.out.println("Return button clicked!"); // Debugging statement
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/testhome.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/testhome.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+
+            // Set the scene with fixed size
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
+
+            // Ensure window size remains fixed
+            stage.setResizable(false);
+
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -292,7 +302,9 @@ public class travelapp implements Initializable {
                 stage = new Stage();
             }
 
-            stage.setScene(new Scene(root));
+            // Create a new scene with the specified resolution (800x600)
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             System.err.println("Error loading " + fxmlFile + ": " + e.getMessage());

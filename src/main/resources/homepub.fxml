@@ -17,10 +17,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="882.0" prefWidth="1640.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.HomePublicationController">
+<AnchorPane  fx:id="root" prefHeight="882.0" prefWidth="1640.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.controllers.HomePublicationController">
    <!-- Apply CSS stylesheet -->
    <stylesheets>
-      <URL value="@newstyle.css" />
+      <URL value="@advStyle.css" />
    </stylesheets>
 
    <!-- Background Image -->
@@ -31,7 +31,7 @@
    </ImageView>
 
    <!-- Left Side Menu -->
-   <VBox fx:id="menu" prefHeight="800" prefWidth="250" style="-fx-background-color: rgba(0, 0, 0, 0.7);">
+   <VBox fx:id="menu" spacing="10" prefHeight="800" prefWidth="250" style="-fx-background-color: rgba(0, 0, 0, 0.7);">
       <!-- Logo -->
       <Label alignment="CENTER" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold; -fx-padding: 30px;" text="Trip It">
          <font>

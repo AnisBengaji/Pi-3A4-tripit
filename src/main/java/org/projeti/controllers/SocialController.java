@@ -50,6 +50,8 @@ public class SocialController implements Initializable {
     private VBox publicationTemplate;
     @FXML
     private Button buttonnavigateadd;
+    @FXML
+    private Button buttonAddCat;
     String currentUser = "Guest";
     private PublicationService publicationService;
     private CategorieService categorieService;
@@ -616,6 +618,22 @@ public class SocialController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Failed to load homePub.fxml: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void gotoAddCategoryFront() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterCatFront.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) buttonAddCat.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("ajouter categorie!");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load AjouterCategorie.fxml: " + e.getMessage());
         }
     }
 }

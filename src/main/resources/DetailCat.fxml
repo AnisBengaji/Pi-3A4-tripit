@@ -26,6 +26,13 @@
                         </ImageView>
                     </graphic>
                 </Button>
+                <Button fx:id="buttonPDF" text="download" styleClass="button-main" onAction="#downloadCategoryPdf">
+                    <graphic>
+                        <ImageView fitHeight="18" fitWidth="18">
+                            <Image url="@icons/pdf.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
         </HBox>
 
