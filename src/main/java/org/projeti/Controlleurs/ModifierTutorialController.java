@@ -78,4 +78,5 @@ public class ModifierTutorialController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

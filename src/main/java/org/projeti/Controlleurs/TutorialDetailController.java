@@ -13,43 +13,25 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.projeti.Service.TutorialService;
 import org.projeti.entites.Tutorial;
-/*import org.json.JSONArray;
-import org.json.JSONObject;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;*/
+
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import org.projeti.Service.TutorialService;
-import org.projeti.entites.Tutorial;
+import com.google.api.services.youtube.YouTube;
+import com.google.api.services.youtube.YouTubeRequestInitializer;
+import com.google.api.services.youtube.model.SearchListResponse;
+import com.google.api.services.youtube.model.SearchResult;
+
 import java.awt.Desktop;
 import java.net.URI;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.awt.Desktop;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
+import java.security.GeneralSecurityException;
 
 public class TutorialDetailController {
     @FXML
@@ -75,7 +57,7 @@ public class TutorialDetailController {
 
     private final TutorialService tutorialService = new TutorialService();
     private final ObservableList<Tutorial> tutorialList = FXCollections.observableArrayList();
-    private static final String API_KEY = "VOTRE_CLE_API";
+    private static final String API_KEY = "AIzaSyDHBt-VavZ1WEgopaU9xFkTdBH_6V04zO0"; // Remplace par ta clé API
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
     @FXML
@@ -100,16 +82,16 @@ public class TutorialDetailController {
             tutorialList.setAll(tutorials);
             tableView.setItems(tutorialList);
         } catch (SQLException e) {
+            showAlert("Erreur", "Problème lors du chargement des tutoriels.");
             e.printStackTrace();
         }
     }
 
     private void addDeleteButtonToTable() {
-        Callback<TableColumn<Tutorial, Void>, TableCell<Tutorial, Void>> cellFactory = param -> new TableCell<>() {
+        colActions.setCellFactory(param -> new TableCell<>() {
             private final Button btnDelete = new Button("Supprimer");
 
             {
-                btnDelete.setStyle("-fx-background-color: #FF742C; -fx-text-fill: white;");
                 btnDelete.setOnAction(event -> {
                     Tutorial tutorial = getTableView().getItems().get(getIndex());
                     deleteTutorial(tutorial);
@@ -121,8 +103,7 @@ public class TutorialDetailController {
                 super.updateItem(item, empty);
                 setGraphic(empty ? null : btnDelete);
             }
-        };
-        colActions.setCellFactory(cellFactory);
+        });
     }
 
     private void addUpdateButtonToTable() {
@@ -145,31 +126,6 @@ public class TutorialDetailController {
         };
         colUpdate.setCellFactory(cellFactory);
     }
-
-    private void addYoutubeButtonToTable() {
-        colOffre.setCellFactory(column -> new TableCell<>() {
-            private final Button btnYoutube = new Button("Voir sur YouTube");
-
-            @Override
-            protected void updateItem(String url, boolean empty) {
-                super.updateItem(url, empty);
-
-                if (empty || url == null || !url.matches("^https://www\\.youtube\\.com/watch\\?v=.*$")) {
-                    setGraphic(null);
-                } else {
-                    btnYoutube.setOnAction(event -> {
-                        try {
-                            Desktop.getDesktop().browse(new URI(url));
-                        } catch (Exception e) {
-                            showAlert("Erreur", "Impossible d'ouvrir YouTube.");
-                        }
-                    });
-                    setGraphic(btnYoutube);
-                }
-            }
-        });
-    }
-
     private void openUpdateWindow(Tutorial tutorial) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierTutorial.fxml"));
@@ -185,6 +141,26 @@ public class TutorialDetailController {
             showAlert("Erreur", "Impossible de charger la page de modification.");
         }
     }
+    private void addYoutubeButtonToTable() {
+        colOffre.setCellFactory(column -> new TableCell<>() {
+            private final Button btnYoutube = new Button("Voir sur YouTube");
+
+            @Override
+            protected void updateItem(String url, boolean empty) {
+                super.updateItem(url, empty);
+                setGraphic(empty || url == null ? null : btnYoutube);
+                btnYoutube.setOnAction(event -> openYoutubeLink(url));
+            }
+        });
+    }
+
+    private void openYoutubeLink(String url) {
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            showAlert("Erreur", "Impossible d'ouvrir YouTube.");
+        }
+    }
 
     private void deleteTutorial(Tutorial tutorial) {
         try {
@@ -195,24 +171,22 @@ public class TutorialDetailController {
             showAlert("Erreur", "Erreur lors de la suppression.");
         }
     }
+
     private void searchOnYoutube() {
-        String query = searchField.getText();
+        String query = searchField.getText().trim();
         if (query.isEmpty()) {
-            showAlert("Erreur", "Veuillez entrer un mot-clé pour la recherche.");
+            showAlert("Erreur", "Veuillez entrer un mot-clé.");
             return;
         }
 
         try {
-            YouTube youtubeService = new YouTube.Builder(GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY, null)
+            YouTube youtubeService = new YouTube.Builder(
+                    GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY, null)
                     .setApplicationName("TutorialFinder")
                     .build();
 
             YouTube.Search.List request = youtubeService.search().list("snippet");
-            SearchListResponse response = request.setKey(API_KEY)
-                    .setQ(query)
-                    .setType("video")
-                    .setMaxResults(5L)
-                    .execute();
+            SearchListResponse response = request.setKey(API_KEY).setQ(query).setType("video").setMaxResults(5L).execute();
 
             List<Tutorial> results = response.getItems().stream().map(item -> {
                 Tutorial tutorial = new Tutorial();
@@ -223,8 +197,9 @@ public class TutorialDetailController {
 
             tutorialList.setAll(results);
             tableView.setItems(tutorialList);
-        } catch (Exception e) {
-            showAlert("Erreur", "Impossible de récupérer les résultats.");
+        } catch (IOException | GeneralSecurityException e) {
+            showAlert("Erreur", "Problème de connexion à l'API YouTube.");
+            e.printStackTrace();
         }
     }
 
@@ -235,10 +210,8 @@ public class TutorialDetailController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
-
-public void refreshTable() {
+    public void refreshTable() {
         loadTutorials();
     }
+
 }
