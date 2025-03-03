@@ -287,8 +287,7 @@ public class ReservationController {
             // Récupérer le contrôleur
             EmailController emailController = loader.getController();
 
-            // Passer des données si nécessaire (ex: destinataire pré-rempli)
-            emailController.setRecipient("exemple@domaine.com");
+
 
             // Créer la fenêtre
             Stage stage = new Stage();

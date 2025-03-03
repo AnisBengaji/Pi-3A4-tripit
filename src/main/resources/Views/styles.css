@@ -1,41 +1,65 @@
+/* Appliquer une police et un arrière-plan global */
 .root {
-    -fx-background-color: #f9f9f9;
+    -fx-font-family: "Arial";
+    -fx-background-color: #f4f4f4;
 }
 
-.label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #333;
-}
-
-.label.title {
+/* Style du titre */
+.title {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50;
+    -fx-text-fill: #333;
+    -fx-padding: 10px 0;
 }
 
+/* Style des labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555;
+}
+
+/* Style des champs de texte */
 .text-field {
-    -fx-background-color: #fff;
+    -fx-font-size: 14px;
+    -fx-pref-height: 30px;
     -fx-border-color: #ccc;
     -fx-border-radius: 5px;
     -fx-padding: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #fff;
 }
 
 .text-field:focused {
-    -fx-border-color: #4CAF50;
+    -fx-border-color: #0078D7;
+    -fx-border-width: 2px;
 }
 
+/* Style du champ de message */
+#bodyField {
+    -fx-pref-height: 120px;
+}
+
+/* Style du bouton */
 .button {
-    -fx-background-color: #4CAF50;
+    -fx-background-color: #0078D7;
     -fx-text-fill: white;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-padding: 8px 15px;
     -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
 }
 
 .button:hover {
-    -fx-background-color: #45A049;
+    -fx-background-color: #005a9e;
 }
 
-#statusLabel {
-    -fx-text-fill: #666;
-    -fx-font-style: italic;
+.button:pressed {
+    -fx-background-color: #004377;
+}
+
+/* Style du label de statut */
+.status-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: green;
 }

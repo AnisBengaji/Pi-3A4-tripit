@@ -1,3 +1,4 @@
+
 package org.projeti.Controlleurs;
 
 import javafx.fxml.FXML;
@@ -49,23 +50,35 @@ public class EmailController {
             return;
         }
 
+        // Vérification des champs obligatoires avant d'envoyer l'e-mail
+        if (toField.getText().trim().isEmpty() || subjectField.getText().trim().isEmpty() || bodyField.getText().trim().isEmpty()) {
+            statusLabel.setText("Erreur : Tous les champs doivent être remplis !");
+            return;
+        }
+
         statusLabel.setText("Envoi en cours...");
 
         Task<Void> sendTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                emailService.sendEmail(
-                        toField.getText().trim(),
-                        subjectField.getText().trim(),
-                        bodyField.getText().trim()
-                );
+                try {
+                    // Envoi de l'e-mail avec les données
+                    emailService.sendEmail(
+                            toField.getText().trim(),
+                            subjectField.getText().trim(),
+                            bodyField.getText().trim()
+                    );
+                } catch (Exception e) {
+                    updateMessage("Erreur lors de l'envoi : " + e.getMessage());
+                    throw e; // Relancer l'exception pour gérer l'échec
+                }
                 return null;
             }
         };
 
-        sendTask.setOnSucceeded(e ->
-                statusLabel.setText("Succès ✅: E-mail envoyé !")
-        );
+        sendTask.setOnSucceeded(e -> {
+            statusLabel.setText("Succès ✅: E-mail envoyé !");
+        });
 
         sendTask.setOnFailed(e -> {
             Throwable cause = sendTask.getException().getCause();
@@ -73,6 +86,8 @@ public class EmailController {
                     (cause != null ? cause.getMessage() : "Erreur inconnue"));
         });
 
+        // Lancer la tâche dans un thread séparé
         new Thread(sendTask).start();
     }
+
 }

@@ -35,8 +35,8 @@
     <!-- Corps du message -->
     <Label text="Message :" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
     <TextField fx:id="bodyField" GridPane.columnIndex="1" GridPane.rowIndex="3"
-              promptText="Votre message ici..."
-              prefHeight="120" />
+               promptText="Votre message ici..."
+               prefHeight="120" />
 
     <!-- Bouton d'envoi -->
     <HBox spacing="10"
