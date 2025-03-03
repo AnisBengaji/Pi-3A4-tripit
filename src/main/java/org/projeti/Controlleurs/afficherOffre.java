@@ -46,7 +46,7 @@ public class afficherOffre {
         System.out.println("initialize() appelé");
 
         try {
-            List<Offre> offres = ps.readAll();
+            List<Offre> offres = ps.showAll();
             System.out.println("Offres récupérées: " + offres);
 
             ObservableList<Offre> observableList = FXCollections.observableList(offres);

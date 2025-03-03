@@ -41,7 +41,7 @@ public class Home extends Application {
         try {
 
 
-            Parent root = FXMLLoader.load(getClass().getResource("/AjouterOffre.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/TutorialDetails.fxml"));
 
             Scene scene = new Scene(root);
             stage.setScene(scene);

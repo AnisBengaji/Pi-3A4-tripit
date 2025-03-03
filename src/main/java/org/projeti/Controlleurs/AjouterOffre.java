@@ -92,28 +92,6 @@ public class AjouterOffre {
     }
 
     @FXML
-    private void supprimerOffre() {
-        try {
-            if (idOffre == -1) {
-                showAlert(Alert.AlertType.WARNING, "Aucune sélection", "Sélectionnez une offre à supprimer !");
-                return;
-            }
-            boolean isDeleted = offreService.delete(idOffre) > 0;  // On suppose que la méthode 'delete' renvoie un boolean
-            if (isDeleted) {
-                System.out.println("Suppression en base effectuée !");
-                showAlert(Alert.AlertType.INFORMATION, "Succès", "Offre supprimée avec succès !");
-                clearFields();
-                idOffre = -1;
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de la suppression de l'offre.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la suppression : " + e.getMessage());
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de la suppression de l'offre.");
-        }
-    }
-
-    @FXML
     private void clearFields() {
         titreField.clear();
         descriptionField.clear();
@@ -133,7 +111,7 @@ public class AjouterOffre {
     private void afficherOffres(ActionEvent event) {
         try {
             // Charger le fichier FXML de l'interface afficherOffre
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherOffre.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/OffreDetails.fxml"));
             Parent root = loader.load();
 
             // Obtenir la scène actuelle et changer vers la nouvelle

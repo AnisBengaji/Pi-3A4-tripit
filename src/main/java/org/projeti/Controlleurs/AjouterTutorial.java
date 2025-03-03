@@ -1,16 +1,21 @@
 package org.projeti.Controlleurs;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.projeti.Service.TutorialService;
 import org.projeti.entites.Tutorial;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 
 public class AjouterTutorial {
 
@@ -24,81 +29,64 @@ public class AjouterTutorial {
     private TextField prixField;
     @FXML
     private TextField offreField;
-    @FXML
-    private TableView<Tutorial> tutorialTable;
-    @FXML
-    private TableColumn<Tutorial, String> colNom;
-    @FXML
-    private TableColumn<Tutorial, String> colDebut;
-    @FXML
-    private TableColumn<Tutorial, String> colFin;
-    @FXML
-    private TableColumn<Tutorial, Float> colPrix;
-    @FXML
-    private TableColumn<Tutorial, String> colOffre;
 
-    private TutorialService tutorialService = new TutorialService();
-    private ObservableList<Tutorial> tutorialList = FXCollections.observableArrayList();
-
-    @FXML
-    public void initialize() {
-        // Lier les colonnes aux attributs de la classe Tutorial
-        colNom.setCellValueFactory(new PropertyValueFactory<>("nom_tutorial"));
-        colDebut.setCellValueFactory(new PropertyValueFactory<>("date_debutTutorial"));
-        colFin.setCellValueFactory(new PropertyValueFactory<>("date_finTutorial"));
-        colPrix.setCellValueFactory(new PropertyValueFactory<>("prix_tutorial"));
-        colOffre.setCellValueFactory(new PropertyValueFactory<>("offre"));
-
-        // Charger les tutoriels existants
-        chargerTutoriels();
-    }
+    private final TutorialService tutorialService = new TutorialService();
+    private int idTutorial = -1; // Stocke l'ID pour la modification
 
     @FXML
     private void sauvegarderTutorial() {
+        System.out.println("Le bouton 'Sauvegarder' a été cliqué !");
+
+        // Récupérer les valeurs des champs
+        String nom = nomTutorialField.getText().trim();
+        LocalDate dateDebut = dateDebutField.getValue();
+        LocalDate dateFin = dateFinField.getValue();
+        String prixText = prixField.getText().trim();
+        String offre = offreField.getText().trim();
+
+        // Vérification que les champs ne sont pas vides
+        if (nom.isEmpty() || dateDebut == null || dateFin == null || prixText.isEmpty() || offre.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Champs manquants", "Veuillez remplir tous les champs.");
+            return;
+        }
+
         try {
-            if (nomTutorialField.getText().isEmpty() || dateDebutField.getValue() == null ||
-                    dateFinField.getValue() == null || prixField.getText().isEmpty() || offreField.getText().isEmpty()) {
-                showAlert("Erreur", "Tous les champs doivent être remplis !");
+            float prix = Float.parseFloat(prixText);
+
+            // Vérifier que la date de fin est après la date de début
+            if (dateFin.isBefore(dateDebut)) {
+                showAlert(Alert.AlertType.ERROR, "Erreur", "La date de fin doit être après la date de début.");
                 return;
             }
 
-            LocalDate dateDebut = dateDebutField.getValue();
-            LocalDate dateFin = dateFinField.getValue();
-            float prix = Float.parseFloat(prixField.getText());
+            // Créer l'objet Tutorial
+            Tutorial tutorial = new Tutorial(idTutorial, nom, dateDebut, dateFin, prix, offre);
+            System.out.println("Objet Tutorial créé : " + tutorial);
 
-            Tutorial newTutorial = new Tutorial(nomTutorialField.getText(),
-                    dateDebut.toString(),
-                    dateFin.toString(),
-                    prix,
-                    offreField.getText());
+            // Ajouter ou modifier le tutoriel dans la base de données
+            boolean isSuccessful;
+            if (idTutorial == -1) {
+                isSuccessful = tutorialService.insert(tutorial) > 0;
+            } else {
+                isSuccessful = tutorialService.update(tutorial) > 0;
+                idTutorial = -1; // Réinitialiser après modification
+            }
 
-            tutorialService.insert2(newTutorial);
-            showAlert("Succès", "Le tutoriel a été ajouté avec succès !");
-            clearFields();
+            if (isSuccessful) {
+                showAlert(Alert.AlertType.INFORMATION, "Succès", "Tutoriel enregistré avec succès !");
+                clearFields();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de l'enregistrement du tutoriel.");
+            }
 
-            // Mettre à jour immédiatement la liste
-            chargerTutoriels();
         } catch (NumberFormatException e) {
-            showAlert("Erreur", "Le prix doit être un nombre valide !");
+            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez entrer un prix valide.");
         } catch (SQLException e) {
-            showAlert("Erreur", "Une erreur est survenue lors de l'ajout du tutoriel !");
-            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de l'enregistrement du tutoriel.");
         }
     }
 
-    private void chargerTutoriels() {
-        try {
-            List<Tutorial> tutoriels = tutorialService.showAll();
-            tutorialList.clear();
-            tutorialList.addAll(tutoriels);
-            tutorialTable.setItems(tutorialList);
-            tutorialTable.refresh(); // Forcer la mise à jour
-        } catch (SQLException e) {
-            showAlert("Erreur", "Impossible de charger les tutoriels !");
-            e.printStackTrace();
-        }
-    }
-
+    @FXML
     private void clearFields() {
         nomTutorialField.clear();
         dateDebutField.setValue(null);
@@ -107,11 +95,25 @@ public class AjouterTutorial {
         offreField.clear();
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void afficherTutorials(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TutorialDetails.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Liste des Tutoriels");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

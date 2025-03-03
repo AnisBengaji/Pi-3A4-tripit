@@ -1,21 +1,34 @@
 package org.projeti.entites;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Tutorial {
+    private int id_tutorial;
     private String nom_tutorial;
-    private String Date_debutTutorial;
-    private String Date_finTutorial;
+    private LocalDate dateDebut;
+    private LocalDate dateFin;
     private float prix_tutorial;
     private String offre;
 
+    // Constructeurs
     public Tutorial() {}
-    public Tutorial(String nom_tutorial, String date_debutTutorial, String date_finTutorial, float prix_tutorial, String offre) {
+
+    public Tutorial(int id_tutorial, String nom_tutorial, LocalDate dateDebut, LocalDate dateFin, float prix_tutorial, String offre) {
+        this.id_tutorial = id_tutorial;
         this.nom_tutorial = nom_tutorial;
-        Date_debutTutorial = date_debutTutorial;
-        Date_finTutorial = date_finTutorial;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
         this.prix_tutorial = prix_tutorial;
         this.offre = offre;
+    }
+
+    // Getters et Setters
+    public int getId_tutorial() {
+        return id_tutorial;
+    }
+
+    public void setId_tutorial(int id_tutorial) {
+        this.id_tutorial = id_tutorial;
     }
 
     public String getNom_tutorial() {
@@ -26,20 +39,20 @@ public class Tutorial {
         this.nom_tutorial = nom_tutorial;
     }
 
-    public String getDate_debutTutorial() {
-        return Date_debutTutorial;
+    public LocalDate getDateDebut() {
+        return dateDebut;
     }
 
-    public void setDate_debutTutorial(String date_debutTutorial) {
-        Date_debutTutorial = date_debutTutorial;
+    public void setDateDebut(LocalDate dateDebut) {
+        this.dateDebut = dateDebut;
     }
 
-    public String getDate_finTutorial() {
-        return Date_finTutorial;
+    public LocalDate getDateFin() {
+        return dateFin;
     }
 
-    public void setDate_finTutorial(String date_finTutorial) {
-        Date_finTutorial = date_finTutorial;
+    public void setDateFin(LocalDate dateFin) {
+        this.dateFin = dateFin;
     }
 
     public float getPrix_tutorial() {
@@ -56,16 +69,5 @@ public class Tutorial {
 
     public void setOffre(String offre) {
         this.offre = offre;
-    }
-
-    @Override
-    public String toString() {
-        return "Tutorial{" +
-                "nom_tutorial='" + nom_tutorial + '\'' +
-                ", Date_debutTutorial='" + Date_debutTutorial + '\'' +
-                ", Date_finTutorial='" + Date_finTutorial + '\'' +
-                ", prix_tutorial=" + prix_tutorial +
-                ", offre='" + offre + '\'' +
-                '}';
     }
 }
