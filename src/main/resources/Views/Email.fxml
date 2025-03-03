@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/17"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="org.projeti.Controlleurs.EmailController"
+          stylesheets="@styles.css"
+          hgap="10"
+          vgap="10"
+          prefWidth="600"
+          prefHeight="400">
+
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <!-- En-tête -->
+    <Label text="Envoyer un e-mail"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="0"
+           GridPane.columnSpan="2"
+           styleClass="title"/>
+
+    <!-- Champ Destinataire -->
+    <Label text="À :" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <TextField fx:id="toField" GridPane.columnIndex="1" GridPane.rowIndex="1"
+               promptText="exemple@domaine.com"/>
+
+    <!-- Champ Sujet -->
+    <Label text="Sujet :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="subjectField" GridPane.columnIndex="1" GridPane.rowIndex="2"
+               promptText="Sujet de l'email"/>
+
+    <!-- Corps du message -->
+    <Label text="Message :" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TextField fx:id="bodyField" GridPane.columnIndex="1" GridPane.rowIndex="3"
+              promptText="Votre message ici..."
+              prefHeight="120" />
+
+    <!-- Bouton d'envoi -->
+    <HBox spacing="10"
+          alignment="BOTTOM_RIGHT"
+          GridPane.columnIndex="1"
+          GridPane.rowIndex="4">
+        <Button fx:id="sendButton" text="Envoyer"
+                onAction="#handleSendEmail"
+                styleClass="button"
+                prefWidth="100"/>
+    </HBox>
+
+    <!-- Statut -->
+    <Label fx:id="statusLabel"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="5"
+           GridPane.columnSpan="2"
+           styleClass="status-label"
+           wrapText="true"/>
+
+    <!-- Configuration des colonnes -->
+    <columnConstraints>
+        <ColumnConstraints prefWidth="80" halignment="RIGHT"/>
+        <ColumnConstraints hgrow="ALWAYS" prefWidth="300"/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints prefHeight="40"/>
+        <RowConstraints prefHeight="40"/>
+        <RowConstraints prefHeight="40"/>
+        <RowConstraints prefHeight="120"/>
+        <RowConstraints prefHeight="60"/>
+        <RowConstraints prefHeight="40"/>
+    </rowConstraints>
+
+</GridPane>

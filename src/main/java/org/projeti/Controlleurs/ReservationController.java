@@ -9,6 +9,8 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 
 import javafx.application.HostServices;
@@ -275,6 +277,28 @@ public class ReservationController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+    @FXML
+    private void handleEmailButton(ActionEvent event) {
+        try {
+            // Charger le FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Email.fxml"));
+            Parent root = loader.load();
 
+            // Récupérer le contrôleur
+            EmailController emailController = loader.getController();
+
+            // Passer des données si nécessaire (ex: destinataire pré-rempli)
+            emailController.setRecipient("exemple@domaine.com");
+
+            // Créer la fenêtre
+            Stage stage = new Stage();
+            stage.setTitle("Envoyer un e-mail");
+            stage.setScene(new Scene(root, 400, 300));
+            stage.show();
+
+        } catch (IOException e) {
+            showAlert("Erreur", "Impossible d'ouvrir l'interface e-mail", Alert.AlertType.ERROR);
+        }
+    }
 
 }

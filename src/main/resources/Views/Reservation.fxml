@@ -53,6 +53,15 @@
             <Button text="Supprimer" onAction="#handleDeleteReservation" styleClass="delete-button"/>
             <!-- Bouton de paiement Stripe -->
             <Button text="Payer avec Stripe" layoutX="150" layoutY="260" onAction="#handlePayButton" styleClass="payment-button"/>
+            <Button text="Email" layoutX="150" layoutY="260" onAction="#handleEmailButton" styleClass="action-button">
+                <graphic>
+                    <ImageView fitWidth="20" fitHeight="20">
+                        <image>
+                            <Image url="@icons/email.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
 
         </HBox>
 

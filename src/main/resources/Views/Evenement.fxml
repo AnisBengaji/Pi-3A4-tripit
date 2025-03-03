@@ -102,11 +102,11 @@
         <!-- Boutons d'action -->
         <HBox spacing="10" styleClass="button-container">
             <Button fx:id="addButton" text="Ajouter" onAction="#handleAddEvent" prefWidth="130" styleClass="action-button"/>
-            <Button fx:id="updateButton" text="Mettre à jour" onAction="#handleUpdateEvent" prefWidth="130" styleClass="action-button"/>
-            <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="130" styleClass="delete-button"/>
-            <Button fx:id="reservationButton" text="Réservation" onAction="#handleReservation" prefWidth="130" styleClass="action-button"/>
+            <Button fx:id="updateButton" text=" update" onAction="#handleUpdateEvent" prefWidth="130" styleClass="action-button"/>
+            <Button fx:id="deleteButton" text="Supprimer" onAction="#handleDeleteEvent" prefWidth="150" styleClass="delete-button"/>
+            <Button fx:id="reservationButton" text="Réservation" onAction="#handleReservation" prefWidth="170" styleClass="action-button"/>
             <!-- Bouton pour générer le PDF -->
-            <Button fx:id="pdfButton" onAction="#handlePdf" prefWidth="130" styleClass="action-button">
+            <Button fx:id="pdfButton" text=" pdf" onAction="#handlePdf" prefWidth="130" styleClass="action-button">
                 <graphic>
                     <ImageView fitWidth="20" fitHeight="20">
                         <image>

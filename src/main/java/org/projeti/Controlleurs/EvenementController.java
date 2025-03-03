@@ -419,13 +419,13 @@ public class EvenementController {
         document.add(table);
 
         // Ajouter le message de bienvenue
-        document.add(new com.itextpdf.layout.element.Paragraph("\nBienvenue chez Tripin!\n")
+        document.add(new com.itextpdf.layout.element.Paragraph("\nBienvenue chez Trippin!\n")
                 .setFontColor(ColorConstants.BLACK).setFontSize(14).setTextAlignment(TextAlignment.LEFT));
         document.add(new com.itextpdf.layout.element.Paragraph("Nous sommes ravis que vous ayez choisi notre agence pour votre événement. Voici les détails de votre réservation.")
                 .setFontColor(ColorConstants.BLACK).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
         document.add(new com.itextpdf.layout.element.Paragraph("\nCordialement,\n")
                 .setFontColor(ColorConstants.BLACK).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
-        document.add(new com.itextpdf.layout.element.Paragraph("Le Directeur Tripin")
+        document.add(new com.itextpdf.layout.element.Paragraph("Le Directeur Trippin")
                 .setFontColor(ColorConstants.BLACK).setFontSize(12).setTextAlignment(TextAlignment.LEFT));
 
         // Ajouter la signature (image)

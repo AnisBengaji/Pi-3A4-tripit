@@ -1,27 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Carte des événements</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <style>
-        #map { height: 400px; width: 100%; }
+        #map { height: 100%; width: 100%; }
     </style>
 </head>
 <body>
 <div id="map"></div>
 <script>
-        var map = L.map('map').setView([51.505, -0.09], 13);  // Coordonnées initiales (centrer la carte)
+        var map;
+        function initializeMap(geojson) {
+            // Supprimer l'ancienne carte si existante
+            if(map) map.remove();
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+            // Créer une nouvelle carte
+            map = L.map('map').setView([0, 0], 2);
 
-        // Fonction pour ajouter un événement sur la carte
-        function ajouterEvenement(latitude, longitude, nom) {
-            L.marker([latitude, longitude]).addTo(map)
-                .bindPopup(nom)
-                .openPopup();
+            // Ajouter les tuiles OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            // Ajouter les marqueurs
+            geojson.features.forEach(function(feature) {
+                L.marker([
+                    feature.geometry.coordinates[1],
+                    feature.geometry.coordinates[0]
+                ])
+                .bindPopup(feature.properties.title)
+                .addTo(map);
+            });
+
+            // Ajuster la vue
+            if(geojson.features.length > 0) {
+                var bounds = L.geoJSON(geojson).getBounds();
+                map.fitBounds(bounds);
+            }
         }
     </script>
 </body>
