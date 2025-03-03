@@ -58,6 +58,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Google HTTP Client -->
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+            <version>1.43.3</version> <!-- Assurez-vous que la version est correcte -->
+        </dependency>
 
 
         <!-- JSON Factory (Jackson) -->
