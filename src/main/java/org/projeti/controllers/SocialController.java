@@ -377,11 +377,10 @@ public class SocialController implements Initializable {
     @FXML
     private void showCreatePublicationDialog() {
         try {
-            // Load the publication creation form
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreatePublication.fxml"));
             Parent root = loader.load();
 
-            // Get the controller and pass any necessary data
             CreatePublicationController controller = loader.getController();
 
             if (publicationService == null || categorieService == null) {
@@ -567,21 +566,21 @@ public class SocialController implements Initializable {
         java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
 
         // Save comment to database with corrected constructor parameters
-        CommentService commentService = new CommentService(); // Ensure this is initialized somewhere
+        CommentService commentService = new CommentService();
 
         Comment newComment = new Comment(currentUser, commentText, sqlDate, publicationId);
-        commentService.insert(newComment); // Ensure commentService is properly initialized
+        commentService.insert(newComment);
 
-        // UI Update must run on JavaFX Application Thread
+
         Platform.runLater(() -> {
-            // Find the publication card and update UI
+
             for (javafx.scene.Node node : publicationsContainer.getChildren()) {
                 if (node instanceof VBox && publicationId == (int) node.getUserData()) {
                     VBox card = (VBox) node;
                     VBox commentsSection = (VBox) card.getChildren().get(card.getChildren().size() - 1);
                     VBox commentsContainer = (VBox) commentsSection.getChildren().get(1);
 
-                    // Add the new comment at the top
+
                     VBox newCommentBubble = createCommentBubble(currentUser, commentText);
                     commentsContainer.getChildren().add(0, newCommentBubble);
 

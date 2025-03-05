@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.projeti.controllers.CheckNews"
+            prefWidth="800" prefHeight="600">
+
+    <VBox spacing="10" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+
+        <!-- Header Section -->
+        <HBox alignment="CENTER" spacing="10" style="-fx-background-color: #0078D7; -fx-padding: 10;">
+            <Label text="Latest News" style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <!-- Search Bar -->
+        <HBox alignment="CENTER" spacing="5">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <TextField fx:id="searchField" promptText="Search news..."/>
+            <Button text="Search" onAction="#handleSearch"/>
+        </HBox>
+
+        <!-- News List -->
+        <ListView fx:id="newsListView" VBox.vgrow="ALWAYS"/>
+
+    </VBox>
+</AnchorPane>

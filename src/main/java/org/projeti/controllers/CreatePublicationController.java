@@ -8,16 +8,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.projeti.Service.CategorieService;
+import org.projeti.Service.EmailValidation;
+import org.projeti.Service.PublicationService;
+import org.projeti.entites.Categorie;
+import org.projeti.entites.Publication;
 
 import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-
-import org.projeti.Service.CategorieService;
-import org.projeti.Service.PublicationService;
-import org.projeti.entites.Categorie;
-import org.projeti.entites.Publication;
 
 public class CreatePublicationController {
     @FXML private TextField titleField;
@@ -34,10 +34,16 @@ public class CreatePublicationController {
     private List<Categorie> categories;
     private File selectedImage;
 
+    // Add an EmailService class for sending emails
+    private EmailValidation emailValidation;
+
     public void initialize() {
         // Initialize visibility options
         visibilityComboBox.getItems().addAll("Public", "Private", "Friends");
         visibilityComboBox.getSelectionModel().select("Public");
+
+        // Initialize EmailService
+        emailValidation = new EmailValidation();
 
         // Setup browse button action
         browseButton.setOnAction(e -> browseForImage());
@@ -149,6 +155,13 @@ public class CreatePublicationController {
             int result = publicationService.insert(publication);
 
             if (result > 0) {
+                // Send email after publication is saved
+                String recipientEmail = "yagamilight839@gmail.com";  // Replace with actual recipient email
+                String subject = "New Publication Created";
+                String message = "A new publication has been created:\n\nTitle: " + publication.getTitle() + "\n\nContent: " + publication.getContenu();
+
+                emailValidation.sendEmail(recipientEmail, subject, message);
+
                 // Success, close the window
                 closeWindow();
             } else {
