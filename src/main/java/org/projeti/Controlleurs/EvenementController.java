@@ -248,7 +248,6 @@ public class EvenementController {
             Parent root = loader.load();
 
             ReservationController reservationController = loader.getController();
-            reservationController.setEventId(selectedEvent.getId_Evenement());
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

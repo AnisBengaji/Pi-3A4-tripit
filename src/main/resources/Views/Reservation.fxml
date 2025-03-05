@@ -1,57 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-
-<?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<?import javafx.scene.web.WebView?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.Controlleurs.ReservationController" stylesheets="@style.css">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projeti.Controlleurs.ReservationController">
     <children>
-        <!-- Titre -->
-        <Label text="Réservation" layoutX="20" layoutY="20" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Label layoutX="20" layoutY="20" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Réservation" />
 
-        <!-- Label et champ ID Réservation -->
-
-        <!-- Label et ComboBox pour Status -->
-        <Label text="Statut:" layoutX="20" layoutY="100"/>
+        <Label layoutX="20" layoutY="100" text="Statut:" />
         <ComboBox fx:id="statusComboBox" layoutX="150" layoutY="100">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="EN_ATTENTE"/>
-                    <String fx:value="CONFIRMEE"/>
-                    <String fx:value="ANNULEE"/>
+                    <String fx:value="EN_ATTENTE" />
+                    <String fx:value="CONFIRMEE" />
+                    <String fx:value="ANNULEE" />
                 </FXCollections>
             </items>
         </ComboBox>
 
-        <!-- Label et champ Prix -->
-        <Label text="Prix total:" layoutX="20" layoutY="140"/>
-        <TextField fx:id="priceField" layoutX="150" layoutY="140" promptText="Prix total"/>
+        <Label layoutX="20" layoutY="140" text="Prix total:" />
+        <TextField fx:id="priceField" layoutX="150" layoutY="140" promptText="Prix total" />
 
-        <!-- Label et ComboBox pour Mode de Paiement -->
-        <Label text="Mode de paiement:" layoutX="20" layoutY="180"/>
+        <Label layoutX="20" layoutY="180" text="Mode de paiement:" />
         <ComboBox fx:id="modePaiementComboBox" layoutX="150" layoutY="180">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="CARTE"/>
-                    <String fx:value="ESPECES"/>
-                    <String fx:value="VIREMENT"/>
-                    <String fx:value="PAYPAL"/>
-                    <String fx:value="CHEQUE"/>
+                    <String fx:value="CARTE" />
+                    <String fx:value="ESPECES" />
+                    <String fx:value="VIREMENT" />
+                    <String fx:value="PAYPAL" />
+                    <String fx:value="CHEQUE" />
                 </FXCollections>
             </items>
         </ComboBox>
 
-        <!-- Boutons d'action -->
-        <HBox spacing="10" layoutX="150" layoutY="220">
-            <Button text="Ajouter" onAction="#handleAddReservation" styleClass="action-button"/>
-            <Button text="Mettre à jour" onAction="#handleUpdateReservation" styleClass="action-button"/>
-            <Button text="Supprimer" onAction="#handleDeleteReservation" styleClass="delete-button"/>
-            <!-- Bouton de paiement Stripe -->
+        <!-- Éléments du wallet -->
+        <HBox layoutX="411.0" layoutY="30.0" prefHeight="24.0" prefWidth="94.0" spacing="5">
+            <ImageView fitHeight="24.0" fitWidth="30.0">
+                <image>
+                    <Image url="@icons/wallet.png" /> <!-- Icône portefeuille -->
+                </image>
+            </ImageView>
+            <Label fx:id="walletScoreLabel" prefHeight="20.0" prefWidth="56.0" style="-fx-font-size: 14px;" text="0.00€" />
+        </HBox>
+        <CheckBox fx:id="useScoreCheckBox" layoutX="150.0" layoutY="220.0" text="Utiliser score pour discount" />
+
+        <!-- Contrôles de score à utiliser avec icônes -->
+        <HBox layoutX="181.0" layoutY="253.0" spacing="2">
+            <ImageView fitHeight="16" fitWidth="16">
+                <image>
+                    <Image url="@icons/wallet.png" /> <!-- Icône portefeuille -->
+                </image>
+            </ImageView>
+            <Label fx:id="scoreToUseLabel" minWidth="50" style="-fx-font-size: 14px;" text="0.00€" />
+            <ImageView fx:id="increaseScoreIcon" fitHeight="16" fitWidth="16" onMouseClicked="#increaseScore">
+                <image>
+                    <Image url="@icons/plus.png" /> <!-- Icône "+" -->
+                </image>
+            </ImageView>
+            <ImageView fx:id="decreaseScoreIcon" fitHeight="16" fitWidth="16" onMouseClicked="#decreaseScore">
+                <image>
+                    <Image url="@icons/delete.png" /> <!-- Icône "-" -->
+                </image>
+            </ImageView>
+        </HBox>
+
+        <HBox layoutX="150" layoutY="290" spacing="10">
+            <Button onAction="#handleAddReservation" styleClass="action-button" text="Ajouter" />
+            <Button onAction="#handleUpdateReservation" styleClass="action-button" text="Mettre à jour" />
+            <Button onAction="#handleDeleteReservation" styleClass="delete-button" text="Supprimer" />
             <Button text="Payer avec Stripe" layoutX="150" layoutY="260" onAction="#handlePayButton" styleClass="payment-button"/>
             <Button text="Email" layoutX="150" layoutY="260" onAction="#handleEmailButton" styleClass="action-button">
                 <graphic>
@@ -62,12 +89,8 @@
                     </ImageView>
                 </graphic>
             </Button>
-
         </HBox>
 
-        <!-- ListView pour afficher les réservations -->
-        <ListView fx:id="reservationListView" layoutX="20" layoutY="260" prefHeight="200" prefWidth="500"/>
+        <ListView fx:id="reservationListView" layoutX="20" layoutY="330" prefHeight="200" prefWidth="500" />
     </children>
-
 </AnchorPane>
-

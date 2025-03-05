@@ -7,7 +7,15 @@
     -fx-border-width: 0 0 2 0;
     -fx-border-color: #6DBF8E;
 }
-
+.score-button {
+    -fx-font-size: 12px;
+    -fx-padding: 2 5 2 5;
+    -fx-background-color: #e0e0e0;
+    -fx-border-radius: 5;
+}
+.score-button:hover {
+    -fx-background-color: #d0d0d0;
+}
 .button-main{
     -fx-background-color: #1E8E6F;
     -fx-background-radius: 30;
